@@ -508,6 +508,13 @@
   </url>
   
   <url>
+    <loc>https://freelaeder.github.io/tags/css/</loc>
+    <lastmod>2022-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://freelaeder.github.io/tags/array-api/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -516,13 +523,6 @@
   
   <url>
     <loc>https://freelaeder.github.io/tags/bind-call-apply/</loc>
-    <lastmod>2022-06-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freelaeder.github.io/tags/css/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -669,14 +669,14 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/sass-less-stylus/</loc>
+    <loc>https://freelaeder.github.io/tags/responsive-layout/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/responsive-layout/</loc>
+    <loc>https://freelaeder.github.io/tags/sass-less-stylus/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
