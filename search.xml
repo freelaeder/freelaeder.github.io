@@ -1,80 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>== 和 ===</title>
-    <url>/archives/93ae9a14.html</url>
-    <content><![CDATA[<h1 id="面试官：-和-区别，分别在什么情况使用"><a href="#面试官：-和-区别，分别在什么情况使用" class="headerlink" title="面试官：== 和 ===区别，分别在什么情况使用"></a>面试官：== 和 ===区别，分别在什么情况使用</h1><p> <img src="https://static.vue-js.com/51b208f0-68df-11eb-85f6-6fac77c0c9b3.png"></p>
-<h2 id="一、等于操作符"><a href="#一、等于操作符" class="headerlink" title="一、等于操作符"></a>一、等于操作符</h2><p>等于操作符用两个等于号（ == ）表示，如果操作数相等，则会返回 <code>true</code></p>
-<p>前面文章，我们提到在<code>JavaScript</code>中存在隐式转换。等于操作符（==）在比较中会先进行类型转换，再确定操作数是否相等</p>
-<p>遵循以下规则：</p>
-<p>如果任一操作数是布尔值，则将其转换为数值再比较是否相等</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">true</span> == <span class="number">1</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>如果一个操作数是字符串，另一个操作数是数值，则尝试将字符串转换为数值，再比较是否相等</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="string">&quot;55&quot;</span> == <span class="number">55</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>如果一个操作数是对象，另一个操作数不是，则调用对象的 <code>valueOf() </code>方法取得其原始值，再根据前面的规则进行比较</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">valueOf</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="number">1</span>&#125;&#125;</span><br><span class="line"><span class="keyword">let</span> result1 = (obj == <span class="number">1</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p><code>null </code>和<code>undefined</code>相等</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">null</span> == <span class="literal">undefined</span> ); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>如果有任一操作数是 <code>NaN</code> ，则相等操作符返回 <code>false</code> </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">NaN</span> == <span class="literal">NaN</span> ); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>如果两个操作数都是对象，则比较它们是不是同一个对象。如果两个操作数都指向同一个对象，则相等操作符返回<code>true</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let obj1 = &#123;name:&quot;xxx&quot;&#125;</span><br><span class="line">let obj2 = &#123;name:&quot;xxx&quot;&#125;</span><br><span class="line">let result1 = (obj1 == obj2 ); // false</span><br></pre></td></tr></table></figure>
-
-<p>下面进一步做个小结：</p>
-<ul>
-<li><p>两个都为简单类型，字符串和布尔值都会转换成数值，再比较</p>
-</li>
-<li><p>简单类型与引用类型比较，对象转化成其原始类型的值，再比较</p>
-</li>
-<li><p>两个都为引用类型，则比较它们是否指向同一个对象</p>
-</li>
-<li><p>null 和 undefined 相等</p>
-</li>
-<li><p>存在 NaN 则返回 false</p>
-</li>
-</ul>
-<h2 id="二、全等操作符"><a href="#二、全等操作符" class="headerlink" title="二、全等操作符"></a>二、全等操作符</h2><p>全等操作符由 3 个等于号（ === ）表示，只有两个操作数在不转换的前提下相等才返回 <code>true</code>。即类型相同，值也需相同</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="string">&quot;55&quot;</span> === <span class="number">55</span>); <span class="comment">// false，不相等，因为数据类型不同</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="number">55</span> === <span class="number">55</span>); <span class="comment">// true，相等，因为数据类型相同值也相同</span></span><br></pre></td></tr></table></figure>
-
-<p><code>undefined</code> 和 <code>null</code> 与自身严格相等</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">null</span> === <span class="literal">null</span>)  <span class="comment">//true</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="literal">undefined</span> === <span class="literal">undefined</span>)  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="三、区别"><a href="#三、区别" class="headerlink" title="三、区别"></a>三、区别</h2><p>相等操作符（==）会做类型转换，再进行值的比较，全等运算符不会做类型转换</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="string">&quot;55&quot;</span> === <span class="number">55</span>); <span class="comment">// false，不相等，因为数据类型不同</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="number">55</span> === <span class="number">55</span>); <span class="comment">// true，相等，因为数据类型相同值也相同</span></span><br></pre></td></tr></table></figure>
-
-<p><code>null</code> 和 <code>undefined</code> 比较，相等操作符（==）为<code>true</code>，全等为<code>false</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">null</span> == <span class="literal">undefined</span> ); <span class="comment">// true</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="literal">null</span>  === <span class="literal">undefined</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>相等运算符隐藏的类型转换，会带来一些违反直觉的结果</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span> == <span class="string">&#x27;0&#x27;</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;&#x27;</span> <span class="comment">// true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;0&#x27;</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">false</span> == <span class="string">&#x27;false&#x27;</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">&#x27;0&#x27;</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">false</span> == <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; \t\r\n&#x27;</span> == <span class="number">0</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>但在比较<code>null</code>的情况的时候，我们一般使用相等操作符<code>==</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(obj.x == <span class="literal">null</span>)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;1&quot;</span>);  <span class="comment">//执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>等同于下面写法</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(obj.x === <span class="literal">null</span> || obj.x === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用相等操作符（==）的写法明显更加简洁了</p>
-<p>所以，除了在比较对象属性为<code>null</code>或者<code>undefined</code>的情况下，我们可以使用相等操作符（==），其他情况建议一律使用全等操作符（===）</p>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>== 和 ===</tag>
-        <tag>js面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BFC</title>
     <url>/archives/c5a97815.html</url>
     <content><![CDATA[<h1 id="面试官：谈谈你对BFC的理解？"><a href="#面试官：谈谈你对BFC的理解？" class="headerlink" title="面试官：谈谈你对BFC的理解？"></a>面试官：谈谈你对BFC的理解？</h1><p><img src="https://static.vue-js.com/c3d68290-9511-11eb-85f6-6fac77c0c9b3.png"></p>
@@ -151,6 +77,80 @@
       <tags>
         <tag>BTC</tag>
         <tag>css面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>== 和 ===</title>
+    <url>/archives/93ae9a14.html</url>
+    <content><![CDATA[<h1 id="面试官：-和-区别，分别在什么情况使用"><a href="#面试官：-和-区别，分别在什么情况使用" class="headerlink" title="面试官：== 和 ===区别，分别在什么情况使用"></a>面试官：== 和 ===区别，分别在什么情况使用</h1><p> <img src="https://static.vue-js.com/51b208f0-68df-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、等于操作符"><a href="#一、等于操作符" class="headerlink" title="一、等于操作符"></a>一、等于操作符</h2><p>等于操作符用两个等于号（ == ）表示，如果操作数相等，则会返回 <code>true</code></p>
+<p>前面文章，我们提到在<code>JavaScript</code>中存在隐式转换。等于操作符（==）在比较中会先进行类型转换，再确定操作数是否相等</p>
+<p>遵循以下规则：</p>
+<p>如果任一操作数是布尔值，则将其转换为数值再比较是否相等</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">true</span> == <span class="number">1</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一个操作数是字符串，另一个操作数是数值，则尝试将字符串转换为数值，再比较是否相等</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="string">&quot;55&quot;</span> == <span class="number">55</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一个操作数是对象，另一个操作数不是，则调用对象的 <code>valueOf() </code>方法取得其原始值，再根据前面的规则进行比较</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">valueOf</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="number">1</span>&#125;&#125;</span><br><span class="line"><span class="keyword">let</span> result1 = (obj == <span class="number">1</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><code>null </code>和<code>undefined</code>相等</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">null</span> == <span class="literal">undefined</span> ); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>如果有任一操作数是 <code>NaN</code> ，则相等操作符返回 <code>false</code> </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">NaN</span> == <span class="literal">NaN</span> ); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>如果两个操作数都是对象，则比较它们是不是同一个对象。如果两个操作数都指向同一个对象，则相等操作符返回<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let obj1 = &#123;name:&quot;xxx&quot;&#125;</span><br><span class="line">let obj2 = &#123;name:&quot;xxx&quot;&#125;</span><br><span class="line">let result1 = (obj1 == obj2 ); // false</span><br></pre></td></tr></table></figure>
+
+<p>下面进一步做个小结：</p>
+<ul>
+<li><p>两个都为简单类型，字符串和布尔值都会转换成数值，再比较</p>
+</li>
+<li><p>简单类型与引用类型比较，对象转化成其原始类型的值，再比较</p>
+</li>
+<li><p>两个都为引用类型，则比较它们是否指向同一个对象</p>
+</li>
+<li><p>null 和 undefined 相等</p>
+</li>
+<li><p>存在 NaN 则返回 false</p>
+</li>
+</ul>
+<h2 id="二、全等操作符"><a href="#二、全等操作符" class="headerlink" title="二、全等操作符"></a>二、全等操作符</h2><p>全等操作符由 3 个等于号（ === ）表示，只有两个操作数在不转换的前提下相等才返回 <code>true</code>。即类型相同，值也需相同</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="string">&quot;55&quot;</span> === <span class="number">55</span>); <span class="comment">// false，不相等，因为数据类型不同</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="number">55</span> === <span class="number">55</span>); <span class="comment">// true，相等，因为数据类型相同值也相同</span></span><br></pre></td></tr></table></figure>
+
+<p><code>undefined</code> 和 <code>null</code> 与自身严格相等</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">null</span> === <span class="literal">null</span>)  <span class="comment">//true</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="literal">undefined</span> === <span class="literal">undefined</span>)  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、区别"><a href="#三、区别" class="headerlink" title="三、区别"></a>三、区别</h2><p>相等操作符（==）会做类型转换，再进行值的比较，全等运算符不会做类型转换</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="string">&quot;55&quot;</span> === <span class="number">55</span>); <span class="comment">// false，不相等，因为数据类型不同</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="number">55</span> === <span class="number">55</span>); <span class="comment">// true，相等，因为数据类型相同值也相同</span></span><br></pre></td></tr></table></figure>
+
+<p><code>null</code> 和 <code>undefined</code> 比较，相等操作符（==）为<code>true</code>，全等为<code>false</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> result1 = (<span class="literal">null</span> == <span class="literal">undefined</span> ); <span class="comment">// true</span></span><br><span class="line"><span class="keyword">let</span> result2 = (<span class="literal">null</span>  === <span class="literal">undefined</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>相等运算符隐藏的类型转换，会带来一些违反直觉的结果</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span> == <span class="string">&#x27;0&#x27;</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;&#x27;</span> <span class="comment">// true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;0&#x27;</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">false</span> == <span class="string">&#x27;false&#x27;</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">&#x27;0&#x27;</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">false</span> == <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; \t\r\n&#x27;</span> == <span class="number">0</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>但在比较<code>null</code>的情况的时候，我们一般使用相等操作符<code>==</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(obj.x == <span class="literal">null</span>)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;1&quot;</span>);  <span class="comment">//执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>等同于下面写法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(obj.x === <span class="literal">null</span> || obj.x === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用相等操作符（==）的写法明显更加简洁了</p>
+<p>所以，除了在比较对象属性为<code>null</code>或者<code>undefined</code>的情况下，我们可以使用相等操作符（==），其他情况建议一律使用全等操作符（===）</p>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>== 和 ===</tag>
+        <tag>js面试</tag>
       </tags>
   </entry>
   <entry>
@@ -552,6 +552,72 @@
       </tags>
   </entry>
   <entry>
+    <title>bind_call_apply</title>
+    <url>/archives/17a85756.html</url>
+    <content><![CDATA[<h1 id="面试官：bind、call、apply-区别？如何实现一个bind"><a href="#面试官：bind、call、apply-区别？如何实现一个bind" class="headerlink" title="面试官：bind、call、apply 区别？如何实现一个bind?"></a>面试官：bind、call、apply 区别？如何实现一个bind?</h1><p> <img src="https://static.vue-js.com/a900e460-7be4-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><code>call </code>、<code>apply </code>、<code>bind </code>作用是改变函数执行时的上下文，简而言之就是改变函数运行时的<code>this</code>指向</p>
+<p>那么什么情况下需要改变<code>this</code>的指向呢？下面举个例子</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;lucy&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;martin&quot;</span>,</span><br><span class="line">    <span class="attr">say</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.say(); <span class="comment">// martin，this 指向 obj 对象</span></span><br><span class="line"><span class="built_in">setTimeout</span>(obj.say,<span class="number">0</span>); <span class="comment">// lucy，this 指向 window 对象</span></span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看到，正常情况<code>say</code>方法输出<code>martin</code></p>
+<p>但是我们把<code>say</code>放在<code>setTimeout</code>方法中，在定时器中是作为回调函数来执行的，因此回到主栈执行时是在全局执行上下文的环境中执行的，这时候<code>this</code>指向<code>window</code>，所以输出<code>lucy</code></p>
+<p>我们实际需要的是<code>this</code>指向<code>obj</code>对象，这时候就需要该改变<code>this</code>指向了</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(obj.say.bind(obj),<span class="number">0</span>); <span class="comment">//martin，this指向obj对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、区别"><a href="#二、区别" class="headerlink" title="二、区别"></a>二、区别</h2><p>下面再来看看<code>apply</code>、<code>call</code>、<code>bind</code>的使用</p>
+<h3 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h3><p><code>apply</code>接受两个参数，第一个参数是<code>this</code>的指向，第二个参数是函数接受的参数，以数组的形式传入</p>
+<p>改变<code>this</code>指向后原函数会立即执行，且此方法只是临时改变<code>this</code>指向一次</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">myname</span>:<span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn.apply(obj,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this会变成传入的obj，传入的参数必须是一个数组；</span></span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
+
+<p>当第一个参数为<code>null</code>、<code>undefined</code>的时候，默认指向<code>window</code>(在浏览器中)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fn.apply(<span class="literal">null</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br><span class="line">fn.apply(<span class="literal">undefined</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="call"><a href="#call" class="headerlink" title="call"></a>call</h3><p><code>call</code>方法的第一个参数也是<code>this</code>的指向，后面传入的是一个参数列表</p>
+<p>跟<code>apply</code>一样，改变<code>this</code>指向后原函数会立即执行，且此方法只是临时改变<code>this</code>指向一次</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">myname</span>:<span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn.call(obj,<span class="number">1</span>,<span class="number">2</span>); <span class="comment">// this会变成传入的obj，传入的参数必须是一个数组；</span></span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
+
+<p>同样的，当第一个参数为<code>null</code>、<code>undefined</code>的时候，默认指向<code>window</code>(在浏览器中)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fn.call(<span class="literal">null</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><p>bind方法和call很相似，第一参数也是<code>this</code>的指向，后面传入的也是一个参数列表(但是这个参数列表可以分多次传入)</p>
+<p>改变<code>this</code>指向后不会立即执行，而是返回一个永久改变<code>this</code>指向的函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">myname</span>:<span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bindFn = fn.bind(obj); <span class="comment">// this 也会变成传入的obj ，bind不是立即执行需要执行一次</span></span><br><span class="line">bindFn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向obj</span></span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上面可以看到，<code>apply</code>、<code>call</code>、<code>bind</code>三者的区别在于：</p>
+<ul>
+<li>三者都可以改变函数的<code>this</code>对象指向</li>
+<li>三者第一个参数都是<code>this</code>要指向的对象，如果如果没有这个参数或参数为<code>undefined</code>或<code>null</code>，则默认指向全局<code>window</code></li>
+<li>三者都可以传参，但是<code>apply</code>是数组，而<code>call</code>是参数列表，且<code>apply</code>和<code>call</code>是一次性传入参数，而<code>bind</code>可以分为多次传入</li>
+<li><code>bind </code>是返回绑定this之后的函数，<code>apply </code>、<code>call</code> 则是立即执行 </li>
+</ul>
+<h2 id="三、实现"><a href="#三、实现" class="headerlink" title="三、实现"></a>三、实现</h2><p>实现<code>bind</code>的步骤，我们可以分解成为三部分：</p>
+<ul>
+<li>修改<code>this</code>指向</li>
+<li>动态传递参数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 方式一：只在bind中传递函数参数</span></span><br><span class="line">fn.bind(obj,<span class="number">1</span>,<span class="number">2</span>)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二：在bind中传递函数参数，也在返回函数中传递参数</span></span><br><span class="line">fn.bind(obj,<span class="number">1</span>)(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>兼容<code>new</code>关键字</li>
+</ul>
+<p>整体实现代码如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断调用对象是否为函数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">this</span> !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&quot;Error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取参数</span></span><br><span class="line">    <span class="keyword">const</span> args = [...arguments].slice(<span class="number">1</span>),</span><br><span class="line">          fn = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据调用方式，传入不同绑定值</span></span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span> <span class="keyword">instanceof</span> Fn ? <span class="keyword">new</span> fn(...arguments) : context, args.concat(...arguments)); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js面试</tag>
+        <tag>bind_call_apply</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>array_api</title>
     <url>/archives/ced3960e.html</url>
     <content><![CDATA[<h1 id="面试官：数组的常用方法有哪些？"><a href="#面试官：数组的常用方法有哪些？" class="headerlink" title="面试官：数组的常用方法有哪些？"></a>面试官：数组的常用方法有哪些？</h1><p><img src="https://static.vue-js.com/5842e560-67b6-11eb-85f6-6fac77c0c9b3.png"></p>
@@ -658,72 +724,6 @@
       <tags>
         <tag>js面试</tag>
         <tag>array_api</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>bind_call_apply</title>
-    <url>/archives/17a85756.html</url>
-    <content><![CDATA[<h1 id="面试官：bind、call、apply-区别？如何实现一个bind"><a href="#面试官：bind、call、apply-区别？如何实现一个bind" class="headerlink" title="面试官：bind、call、apply 区别？如何实现一个bind?"></a>面试官：bind、call、apply 区别？如何实现一个bind?</h1><p> <img src="https://static.vue-js.com/a900e460-7be4-11eb-ab90-d9ae814b240d.png"></p>
-<h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><code>call </code>、<code>apply </code>、<code>bind </code>作用是改变函数执行时的上下文，简而言之就是改变函数运行时的<code>this</code>指向</p>
-<p>那么什么情况下需要改变<code>this</code>的指向呢？下面举个例子</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;lucy&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;martin&quot;</span>,</span><br><span class="line">    <span class="attr">say</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.say(); <span class="comment">// martin，this 指向 obj 对象</span></span><br><span class="line"><span class="built_in">setTimeout</span>(obj.say,<span class="number">0</span>); <span class="comment">// lucy，this 指向 window 对象</span></span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看到，正常情况<code>say</code>方法输出<code>martin</code></p>
-<p>但是我们把<code>say</code>放在<code>setTimeout</code>方法中，在定时器中是作为回调函数来执行的，因此回到主栈执行时是在全局执行上下文的环境中执行的，这时候<code>this</code>指向<code>window</code>，所以输出<code>lucy</code></p>
-<p>我们实际需要的是<code>this</code>指向<code>obj</code>对象，这时候就需要该改变<code>this</code>指向了</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(obj.say.bind(obj),<span class="number">0</span>); <span class="comment">//martin，this指向obj对象</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="二、区别"><a href="#二、区别" class="headerlink" title="二、区别"></a>二、区别</h2><p>下面再来看看<code>apply</code>、<code>call</code>、<code>bind</code>的使用</p>
-<h3 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h3><p><code>apply</code>接受两个参数，第一个参数是<code>this</code>的指向，第二个参数是函数接受的参数，以数组的形式传入</p>
-<p>改变<code>this</code>指向后原函数会立即执行，且此方法只是临时改变<code>this</code>指向一次</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">myname</span>:<span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn.apply(obj,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this会变成传入的obj，传入的参数必须是一个数组；</span></span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
-
-<p>当第一个参数为<code>null</code>、<code>undefined</code>的时候，默认指向<code>window</code>(在浏览器中)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fn.apply(<span class="literal">null</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br><span class="line">fn.apply(<span class="literal">undefined</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="call"><a href="#call" class="headerlink" title="call"></a>call</h3><p><code>call</code>方法的第一个参数也是<code>this</code>的指向，后面传入的是一个参数列表</p>
-<p>跟<code>apply</code>一样，改变<code>this</code>指向后原函数会立即执行，且此方法只是临时改变<code>this</code>指向一次</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">myname</span>:<span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn.call(obj,<span class="number">1</span>,<span class="number">2</span>); <span class="comment">// this会变成传入的obj，传入的参数必须是一个数组；</span></span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
-
-<p>同样的，当第一个参数为<code>null</code>、<code>undefined</code>的时候，默认指向<code>window</code>(在浏览器中)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fn.call(<span class="literal">null</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><p>bind方法和call很相似，第一参数也是<code>this</code>的指向，后面传入的也是一个参数列表(但是这个参数列表可以分多次传入)</p>
-<p>改变<code>this</code>指向后不会立即执行，而是返回一个永久改变<code>this</code>指向的函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">myname</span>:<span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bindFn = fn.bind(obj); <span class="comment">// this 也会变成传入的obj ，bind不是立即执行需要执行一次</span></span><br><span class="line">bindFn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向obj</span></span><br><span class="line">fn(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// this指向window</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上面可以看到，<code>apply</code>、<code>call</code>、<code>bind</code>三者的区别在于：</p>
-<ul>
-<li>三者都可以改变函数的<code>this</code>对象指向</li>
-<li>三者第一个参数都是<code>this</code>要指向的对象，如果如果没有这个参数或参数为<code>undefined</code>或<code>null</code>，则默认指向全局<code>window</code></li>
-<li>三者都可以传参，但是<code>apply</code>是数组，而<code>call</code>是参数列表，且<code>apply</code>和<code>call</code>是一次性传入参数，而<code>bind</code>可以分为多次传入</li>
-<li><code>bind </code>是返回绑定this之后的函数，<code>apply </code>、<code>call</code> 则是立即执行 </li>
-</ul>
-<h2 id="三、实现"><a href="#三、实现" class="headerlink" title="三、实现"></a>三、实现</h2><p>实现<code>bind</code>的步骤，我们可以分解成为三部分：</p>
-<ul>
-<li>修改<code>this</code>指向</li>
-<li>动态传递参数</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 方式一：只在bind中传递函数参数</span></span><br><span class="line">fn.bind(obj,<span class="number">1</span>,<span class="number">2</span>)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二：在bind中传递函数参数，也在返回函数中传递参数</span></span><br><span class="line">fn.bind(obj,<span class="number">1</span>)(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>兼容<code>new</code>关键字</li>
-</ul>
-<p>整体实现代码如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断调用对象是否为函数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">this</span> !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&quot;Error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取参数</span></span><br><span class="line">    <span class="keyword">const</span> args = [...arguments].slice(<span class="number">1</span>),</span><br><span class="line">          fn = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据调用方式，传入不同绑定值</span></span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span> <span class="keyword">instanceof</span> Fn ? <span class="keyword">new</span> fn(...arguments) : context, args.concat(...arguments)); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js面试</tag>
-        <tag>bind_call_apply</tag>
       </tags>
   </entry>
   <entry>
@@ -2839,6 +2839,98 @@
       </tags>
   </entry>
   <entry>
+    <title>node</title>
+    <url>/archives/857fe845.html</url>
+    <content><![CDATA[<p>你好</p>
+<p> node.js是什么？</p>
+<ul>
+<li>node.js不是一门语言，不是库，不是框架，node.js是一个运行javaScript运行时的环境。</li>
+<li>node.js没有Bom，Dom；</li>
+<li>作用：文件读写，网络服务的构建，网络通信，HTTP服务器等</li>
+<li>特性：event.driven事件驱动，ligtweight and efficient 轻量和高效，non-blocking I/o非阻塞io模型</li>
+</ul>
+<p> 浏览器中的JavaScript组成</p>
+<ul>
+<li>Chrome 浏览器 =&gt; V8 </li>
+<li>Firefox 浏览器=&gt; OdinMonkey(奥丁猴)</li>
+<li>Safri 浏览器=&gt; JSCore</li>
+<li>IE 浏览器=&gt; Chakra(查克拉) </li>
+<li>etc… 其中，Chrome 浏览器的 V8 解析引擎性能最好! </li>
+</ul>
+<p> 注意</p>
+<ul>
+<li>运行环境，指 代码能够正常执行，所必须的条件浏览器，就是 JS 代码的 运行环境。（包括解析引擎、窗口显示结果……）脱离运行环境，JS 代码将会失去作用。</li>
+<li>浏览器运行环境中，能够执行的 JS 代码包括（ECMAScript、WebAPI）ECMAScript 肯定能够运行，因为它是核心语法<br>WebAPI 是浏览器环境特有的，只能在浏览器环境中才能使用。</li>
+</ul>
+<hr>
+<ul>
+<li><em>交互模式(了解)</em> </li>
+<li>REPL(Read-Eval -Print-Loop)交互模式指的是在终端窗口中，执行简单的JavaScript代码</li>
+<li>操作步骤：打开任意终端，直接输入 node 命令并回车执行你的JS代码，按回车表示执行按两次“Ctrl+C”退出</li>
+<li>只适合少量js代码<br>[tag type=”success” outline=”1”]脚本模式(重要哦)[/tag]</li>
+<li>如果有大段的JS代码需要在Node环境中运行，可以把JS代码写到JS文件中终端中，使用 node xxx.js 命令即可运行文件中的代码</li>
+<li><strong>注意哟：两种模式不能混用，如果使用第一种模式，必须先退出，然后才能用第二种</strong><br>[tag type=”primary” outline]node中的模块化[/tag]</li>
+<li>Node中的模块化，就是把一个大的JS文件拆分成若干个小文件，还能按照一定的语法组装到一起。</li>
+<li>规定，用户创建的每个JS文件，就是一个小模块，叫做自定义模块</li>
+<li>我们可以按照一定的语法将这些小模块组合到一起，形成一个完整的项目<br>[tag type=”success” outline=”1”]Node中的模块分类[/tag]</li>
+<li>内置模块（核心模块）：Node安装后，即可使用的模块，Node环境自带。</li>
+<li>自定义模块：用户自己创建的每个JS文件，都是自定义模块</li>
+<li>第三方模块：其他人或公司、组织开发的模块，发布到 npm 网站，我们需要下载使用的模块<br>[tag type=”primary” outline]加载模块的语法[/tag]</li>
+</ul>
+<p>  <em>1.1加载自定义模块</em></p>
+<ul>
+<li>a 文件，必须通过 module.exports 共享（导出、暴露）当前模块中的变量</li>
+<li>b 文件，需要通过 require() 加载（导入）。（a 文件导出什么，b 文件就得到什么）</li>
+<li>加载自定义模块时，必须要带路径 （相对路径、绝对路径都可以；但必须带路径，哪怕是 ./ 也不能省略）</li>
+<li>加载自定义模块时，可以省略后缀</li>
+</ul>
+<p><em>1.2加载内置模块</em></p>
+<ul>
+<li>直接使用 require() 加载即可。</li>
+<li>加载模块时，无需带路径，比如 require(‘fs’)</li>
+<li>加载内置模块，得到对象类型，对象中内置了很多API方法</li>
+</ul>
+<p><em>1.3加载第三方模块</em></p>
+<ul>
+<li>// npm （node package manager）,npm包管理器</li>
+<li>第三方模块，发布在https：//<a href="http://www.npm.js.com/">www.npm.js.com</a></li>
+<li>1,npm init 初始化package.json  || npm  init  -y</li>
+<li>2,安装npm install 包名   || npm i 模块名</li>
+<li>3,卸载npm uninstall 包名   || npm un  模块名</li>
+<li>可以在文件package.json中的dependencied查看安装的模块</li>
+</ul>
+<hr>
+<p>数组排序模块化</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组第一个转大写，其余小写</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + str.slice(<span class="number">1</span>).toLowerCase()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;asdfaknfsakfnaksd&#x27;</span></span><br><span class="line">change(str)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组排序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortBy</span>(<span class="params">pro</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">item1, item2</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item1[pro] - item2[pro]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对外暴露</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">change</span>: change,</span><br><span class="line">    <span class="attr">sortBy</span>: sortBy</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  接受数据</span></span><br><span class="line"><span class="keyword">var</span> &#123; change, sortBy &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib.js&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> r = change(<span class="string">&#x27;adfna&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(r);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(change(<span class="string">&#x27;asdkfksfn&#x27;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AS&#x27;</span>, <span class="attr">age</span>: <span class="number">12</span>, <span class="attr">score</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;DS&#x27;</span>, <span class="attr">age</span>: <span class="number">13</span>, <span class="attr">score</span>: <span class="number">10</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AE&#x27;</span>, <span class="attr">age</span>: <span class="number">11</span>, <span class="attr">score</span>: <span class="number">9</span> &#125;,</span><br><span class="line">]</span><br><span class="line"><span class="keyword">var</span> res = arr.sort(sortBy(<span class="string">&#x27;score&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<p>[tag type=”primary” outline]文件操作[/tag]</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// fs 是file-system 的简写，文件系统的意思</span></span><br><span class="line"><span class="comment">// 在node 中如果想进行文件操作，就必须引入 fs 这个核心模块</span></span><br><span class="line"><span class="comment">// fs.readFine 用来读取文件</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 读取文件 第一个参数要读取的文件路径，第二个是回调函数</span></span><br><span class="line"><span class="comment">// 成功 data 数据  error null</span></span><br><span class="line"><span class="comment">// 失败 data null  error  错误对象</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./1.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写文件第一个参数，路径 ；第二个参数，文件的内容；第三个参数，回调函数</span></span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./data.md&#x27;</span>,<span class="string">&#x27;大家好&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">[/collapse]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Path 模块</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// path 模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;a/b/c/index.js&#x27;</span></span><br><span class="line"><span class="comment">// 获取路径文件后缀名</span></span><br><span class="line"><span class="comment">// console.log(path.extname(url));</span></span><br><span class="line"><span class="comment">// 拼接给出的路径</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;a/b/c&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">&#x27;d/e/index.html&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log(path.join(a,b));</span></span><br><span class="line"><span class="comment">// 全局变量，表示当前的js的绝对路径</span></span><br><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>querystring 模块</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// querystring 模块</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>);</span><br><span class="line"><span class="comment">// 定义变量，查询字符串</span></span><br><span class="line"><span class="keyword">let</span> urls = <span class="string">&#x27;uname= zhangsan&amp;age=20&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> obj = querystring.parse(urls);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// 将对象转化成字符串</span></span><br><span class="line"><span class="keyword">let</span> os = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;grils&#x27;</span>,</span><br><span class="line">    <span class="attr">lova</span>: <span class="number">5000</span>,</span><br><span class="line">    <span class="attr">moeny</span>: <span class="number">12202</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = querystring.stringify(os);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p>http</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 服务器要干嘛  提供服务：对，数据服务发请求  接受请求  处理请求给个反馈（发送相应） 注册request 请求事件*/</span></span><br><span class="line"><span class="comment">// 1 http 加载http 模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2创建web服务器</span></span><br><span class="line"><span class="comment">// 使用http.createServer()创建web服务器 返回Server实列</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3监听request请求事件        /* req请求，res响应 */</span></span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 简化2 3 步骤</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>responsive_layout</title>
     <url>/archives/203410a2.html</url>
     <content><![CDATA[<h3 id="1-什么是响应式设计"><a href="#1-什么是响应式设计" class="headerlink" title="1.什么是响应式设计"></a>1.什么是响应式设计</h3><p>响应式网站设计（Responsive Web design）是一种网络页面设计布局，页面的设计与开发应当根据用户行为以及设备环境(系统平台、屏幕尺寸、屏幕定向等)进行相应的响应和调整</p>
@@ -2936,98 +3028,6 @@
       <tags>
         <tag>css面试</tag>
         <tag>responsive_layout</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>node</title>
-    <url>/archives/857fe845.html</url>
-    <content><![CDATA[<p>你好</p>
-<p> node.js是什么？</p>
-<ul>
-<li>node.js不是一门语言，不是库，不是框架，node.js是一个运行javaScript运行时的环境。</li>
-<li>node.js没有Bom，Dom；</li>
-<li>作用：文件读写，网络服务的构建，网络通信，HTTP服务器等</li>
-<li>特性：event.driven事件驱动，ligtweight and efficient 轻量和高效，non-blocking I/o非阻塞io模型</li>
-</ul>
-<p> 浏览器中的JavaScript组成</p>
-<ul>
-<li>Chrome 浏览器 =&gt; V8 </li>
-<li>Firefox 浏览器=&gt; OdinMonkey(奥丁猴)</li>
-<li>Safri 浏览器=&gt; JSCore</li>
-<li>IE 浏览器=&gt; Chakra(查克拉) </li>
-<li>etc… 其中，Chrome 浏览器的 V8 解析引擎性能最好! </li>
-</ul>
-<p> 注意</p>
-<ul>
-<li>运行环境，指 代码能够正常执行，所必须的条件浏览器，就是 JS 代码的 运行环境。（包括解析引擎、窗口显示结果……）脱离运行环境，JS 代码将会失去作用。</li>
-<li>浏览器运行环境中，能够执行的 JS 代码包括（ECMAScript、WebAPI）ECMAScript 肯定能够运行，因为它是核心语法<br>WebAPI 是浏览器环境特有的，只能在浏览器环境中才能使用。</li>
-</ul>
-<hr>
-<ul>
-<li><em>交互模式(了解)</em> </li>
-<li>REPL(Read-Eval -Print-Loop)交互模式指的是在终端窗口中，执行简单的JavaScript代码</li>
-<li>操作步骤：打开任意终端，直接输入 node 命令并回车执行你的JS代码，按回车表示执行按两次“Ctrl+C”退出</li>
-<li>只适合少量js代码<br>[tag type=”success” outline=”1”]脚本模式(重要哦)[/tag]</li>
-<li>如果有大段的JS代码需要在Node环境中运行，可以把JS代码写到JS文件中终端中，使用 node xxx.js 命令即可运行文件中的代码</li>
-<li><strong>注意哟：两种模式不能混用，如果使用第一种模式，必须先退出，然后才能用第二种</strong><br>[tag type=”primary” outline]node中的模块化[/tag]</li>
-<li>Node中的模块化，就是把一个大的JS文件拆分成若干个小文件，还能按照一定的语法组装到一起。</li>
-<li>规定，用户创建的每个JS文件，就是一个小模块，叫做自定义模块</li>
-<li>我们可以按照一定的语法将这些小模块组合到一起，形成一个完整的项目<br>[tag type=”success” outline=”1”]Node中的模块分类[/tag]</li>
-<li>内置模块（核心模块）：Node安装后，即可使用的模块，Node环境自带。</li>
-<li>自定义模块：用户自己创建的每个JS文件，都是自定义模块</li>
-<li>第三方模块：其他人或公司、组织开发的模块，发布到 npm 网站，我们需要下载使用的模块<br>[tag type=”primary” outline]加载模块的语法[/tag]</li>
-</ul>
-<p>  <em>1.1加载自定义模块</em></p>
-<ul>
-<li>a 文件，必须通过 module.exports 共享（导出、暴露）当前模块中的变量</li>
-<li>b 文件，需要通过 require() 加载（导入）。（a 文件导出什么，b 文件就得到什么）</li>
-<li>加载自定义模块时，必须要带路径 （相对路径、绝对路径都可以；但必须带路径，哪怕是 ./ 也不能省略）</li>
-<li>加载自定义模块时，可以省略后缀</li>
-</ul>
-<p><em>1.2加载内置模块</em></p>
-<ul>
-<li>直接使用 require() 加载即可。</li>
-<li>加载模块时，无需带路径，比如 require(‘fs’)</li>
-<li>加载内置模块，得到对象类型，对象中内置了很多API方法</li>
-</ul>
-<p><em>1.3加载第三方模块</em></p>
-<ul>
-<li>// npm （node package manager）,npm包管理器</li>
-<li>第三方模块，发布在https：//<a href="http://www.npm.js.com/">www.npm.js.com</a></li>
-<li>1,npm init 初始化package.json  || npm  init  -y</li>
-<li>2,安装npm install 包名   || npm i 模块名</li>
-<li>3,卸载npm uninstall 包名   || npm un  模块名</li>
-<li>可以在文件package.json中的dependencied查看安装的模块</li>
-</ul>
-<hr>
-<p>数组排序模块化</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组第一个转大写，其余小写</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + str.slice(<span class="number">1</span>).toLowerCase()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;asdfaknfsakfnaksd&#x27;</span></span><br><span class="line">change(str)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组排序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortBy</span>(<span class="params">pro</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">item1, item2</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item1[pro] - item2[pro]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对外暴露</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">change</span>: change,</span><br><span class="line">    <span class="attr">sortBy</span>: sortBy</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  接受数据</span></span><br><span class="line"><span class="keyword">var</span> &#123; change, sortBy &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib.js&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> r = change(<span class="string">&#x27;adfna&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(r);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(change(<span class="string">&#x27;asdkfksfn&#x27;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AS&#x27;</span>, <span class="attr">age</span>: <span class="number">12</span>, <span class="attr">score</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;DS&#x27;</span>, <span class="attr">age</span>: <span class="number">13</span>, <span class="attr">score</span>: <span class="number">10</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AE&#x27;</span>, <span class="attr">age</span>: <span class="number">11</span>, <span class="attr">score</span>: <span class="number">9</span> &#125;,</span><br><span class="line">]</span><br><span class="line"><span class="keyword">var</span> res = arr.sort(sortBy(<span class="string">&#x27;score&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<p>[tag type=”primary” outline]文件操作[/tag]</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// fs 是file-system 的简写，文件系统的意思</span></span><br><span class="line"><span class="comment">// 在node 中如果想进行文件操作，就必须引入 fs 这个核心模块</span></span><br><span class="line"><span class="comment">// fs.readFine 用来读取文件</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 读取文件 第一个参数要读取的文件路径，第二个是回调函数</span></span><br><span class="line"><span class="comment">// 成功 data 数据  error null</span></span><br><span class="line"><span class="comment">// 失败 data null  error  错误对象</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./1.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写文件第一个参数，路径 ；第二个参数，文件的内容；第三个参数，回调函数</span></span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./data.md&#x27;</span>,<span class="string">&#x27;大家好&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">[/collapse]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>Path 模块</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// path 模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;a/b/c/index.js&#x27;</span></span><br><span class="line"><span class="comment">// 获取路径文件后缀名</span></span><br><span class="line"><span class="comment">// console.log(path.extname(url));</span></span><br><span class="line"><span class="comment">// 拼接给出的路径</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;a/b/c&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">&#x27;d/e/index.html&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log(path.join(a,b));</span></span><br><span class="line"><span class="comment">// 全局变量，表示当前的js的绝对路径</span></span><br><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>querystring 模块</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// querystring 模块</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>);</span><br><span class="line"><span class="comment">// 定义变量，查询字符串</span></span><br><span class="line"><span class="keyword">let</span> urls = <span class="string">&#x27;uname= zhangsan&amp;age=20&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> obj = querystring.parse(urls);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// 将对象转化成字符串</span></span><br><span class="line"><span class="keyword">let</span> os = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;grils&#x27;</span>,</span><br><span class="line">    <span class="attr">lova</span>: <span class="number">5000</span>,</span><br><span class="line">    <span class="attr">moeny</span>: <span class="number">12202</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = querystring.stringify(os);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p>http</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 服务器要干嘛  提供服务：对，数据服务发请求  接受请求  处理请求给个反馈（发送相应） 注册request 请求事件*/</span></span><br><span class="line"><span class="comment">// 1 http 加载http 模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2创建web服务器</span></span><br><span class="line"><span class="comment">// 使用http.createServer()创建web服务器 返回Server实列</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3监听request请求事件        /* req请求，res响应 */</span></span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 简化2 3 步骤</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
       </tags>
   </entry>
   <entry>
@@ -4225,7 +4225,7 @@
 <li>初始化</li>
 <li>git init    初始化配置，此时会出现一个隐藏的文件（.git）</li>
 <li>git config –global user.name “xxx”    配置用户名</li>
-<li>git config –global user.email “<a href="mailto:&#x78;&#120;&#120;&#x40;&#x58;&#88;&#88;&#46;&#99;&#111;&#109;">&#x78;&#120;&#120;&#x40;&#x58;&#88;&#88;&#46;&#99;&#111;&#109;</a>“   配置邮箱<br>[tag type=”info” outline]查看状态[/tag]</li>
+<li>git config –global user.email “<a href="mailto:&#120;&#x78;&#x78;&#x40;&#x58;&#88;&#88;&#46;&#99;&#x6f;&#x6d;">&#120;&#x78;&#x78;&#x40;&#x58;&#88;&#88;&#46;&#99;&#x6f;&#x6d;</a>“   配置邮箱<br>[tag type=”info” outline]查看状态[/tag]</li>
 <li>git status    查看当前版本状态（是否修改）</li>
 <li>git add .    增加当前的更改过的文件   提交到暂存区</li>
 <li>git commit -m  “提交仓库”  并加以注释</li>
@@ -4252,7 +4252,7 @@
 <li> 1.01 在Enter file in which to save the key (中时配置好的文件地址);</li>
 <li> 1.02 后缀为.pub 是生成后的密钥；</li>
 <li> 1.03打开github 点击头像选择Settings， 点击 SSH and GPG keys，在key中输入生成的密钥，</li>
-<li> 1.1  输入  $ ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>  注意不是你的邮箱    在输入 yes </li>
+<li> 1.1  输入  $ ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>  注意不是你的邮箱    在输入 yes </li>
 <li> 1.2 若出现 Hi freeXXXXX! You’ve successfully authenticated, but GitHub does not provide shell access.</li>
 <li> 1.3 证明成功</li>
 <li> 1.4 若出现 Hi “用户名” You’ve successfully ‘github.com does not provide shell access.</li>
