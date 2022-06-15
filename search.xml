@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>== 和 ===</title>
-    <url>/2022/05/20/==%20_===/</url>
+    <url>/archives/93ae9a14.html</url>
     <content><![CDATA[<h1 id="面试官：-和-区别，分别在什么情况使用"><a href="#面试官：-和-区别，分别在什么情况使用" class="headerlink" title="面试官：== 和 ===区别，分别在什么情况使用"></a>面试官：== 和 ===区别，分别在什么情况使用</h1><p> <img src="https://static.vue-js.com/51b208f0-68df-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、等于操作符"><a href="#一、等于操作符" class="headerlink" title="一、等于操作符"></a>一、等于操作符</h2><p>等于操作符用两个等于号（ == ）表示，如果操作数相等，则会返回 <code>true</code></p>
 <p>前面文章，我们提到在<code>JavaScript</code>中存在隐式转换。等于操作符（==）在比较中会先进行类型转换，再确定操作数是否相等</p>
@@ -75,8 +75,87 @@
       </tags>
   </entry>
   <entry>
+    <title>BFC</title>
+    <url>/archives/c5a97815.html</url>
+    <content><![CDATA[<h1 id="面试官：谈谈你对BFC的理解？"><a href="#面试官：谈谈你对BFC的理解？" class="headerlink" title="面试官：谈谈你对BFC的理解？"></a>面试官：谈谈你对BFC的理解？</h1><p><img src="https://static.vue-js.com/c3d68290-9511-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>我们在页面布局的时候，经常出现以下情况：</p>
+<ul>
+<li>这个元素高度怎么没了？</li>
+<li>这两栏布局怎么没法自适应？</li>
+<li>这两个元素的间距怎么有点奇怪的样子？</li>
+<li>……</li>
+</ul>
+<p>原因是元素之间相互的影响，导致了意料之外的情况，这里就涉及到<code>BFC</code>概念</p>
+<p><code>BFC</code>（Block Formatting Context），即块级格式化上下文，它是页面中的一块渲染区域，并且有一套属于自己的渲染规则：</p>
+<ul>
+<li>内部的盒子会在垂直方向上一个接一个的放置</li>
+<li>对于同一个BFC的俩个相邻的盒子的margin会发生重叠，与方向无关。</li>
+<li>每个元素的左外边距与包含块的左边界相接触（从左到右），即使浮动元素也是如此</li>
+<li>BFC的区域不会与float的元素区域重叠</li>
+<li>计算BFC的高度时，浮动子元素也参与计算</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然</li>
+</ul>
+<p><code>BFC</code>目的是形成一个相对于外界完全独立的空间，让内部的子元素不会影响到外部的元素</p>
+<h2 id="二、触发条件"><a href="#二、触发条件" class="headerlink" title="二、触发条件"></a>二、触发条件</h2><p>触发<code>BFC</code>的条件包含不限于：</p>
+<ul>
+<li>根元素，即HTML元素</li>
+<li>浮动元素：float值为left、right</li>
+<li>overflow值不为 visible，为 auto、scroll、hidden</li>
+<li>display的值为inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid</li>
+<li>position的值为absolute或fixed</li>
+</ul>
+<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>利用<code>BFC</code>的特性，我们将<code>BFC</code>应用在以下场景：</p>
+<h4 id="防止margin重叠（塌陷）"><a href="#防止margin重叠（塌陷）" class="headerlink" title="防止margin重叠（塌陷）"></a>防止margin重叠（塌陷）</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>页面显示如下：</p>
+<p> <img src="https://static.vue-js.com/d0ce3650-9511-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>两个<code>p</code>元素之间的距离为<code>100px</code>，发生了<code>margin</code>重叠（塌陷），以最大的为准，如果第一个P的<code>margin</code>为80的话，两个P之间的距离还是100，以最大的为准。</p>
+<p>前面讲到，同一个<code>BFC</code>的俩个相邻的盒子的<code>margin</code>会发生重叠</p>
+<p>可以在<code>p</code>外面包裹一层容器，并触发这个容器生成一个<code>BFC</code>，那么两个<code>p</code>就不属于同一个<code>BFC</code>，则不会出现<code>margin</code>重叠</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.wrap</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">overflow</span>: hidden;// 新的BFC</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrap&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这时候，边距则不会重叠：</p>
+<p> <img src="https://static.vue-js.com/dec44740-9511-11eb-85f6-6fac77c0c9b3.png"></p>
+<h4 id="清除内部浮动"><a href="#清除内部浮动" class="headerlink" title="清除内部浮动"></a>清除内部浮动</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.par</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;par&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>页面显示如下：</p>
+<p> <img src="https://static.vue-js.com/ec5d4410-9511-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>而<code>BFC</code>在计算高度时，浮动元素也会参与，所以我们可以触发<code>.par</code>元素生活才能<code>BFC</code>，则内部浮动元素计算高度时候也会计算</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.par</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现效果如下：</p>
+<p> <img src="https://static.vue-js.com/f6487b20-9511-11eb-ab90-d9ae814b240d.png"></p>
+<h4 id="自适应多栏布局"><a href="#自适应多栏布局" class="headerlink" title="自适应多栏布局"></a>自适应多栏布局</h4><p>这里举个两栏的布局</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.aside</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.main</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;aside&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果图如下：</p>
+<p> <img src="https://static.vue-js.com/ffb95210-9511-11eb-ab90-d9ae814b240d.png"></p>
+<p>前面讲到，每个元素的左外边距与包含块的左边界相接触</p>
+<p>因此，虽然<code>.aslide</code>为浮动元素，但是<code>main</code>的左边依然会与包含块的左边相接触</p>
+<p>而<code>BFC</code>的区域不会与浮动盒子重叠</p>
+<p>所以我们可以通过触发<code>main</code>生成<code>BFC</code>，以此适应两栏布局</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候，新的<code>BFC</code>不会与浮动的<code>.aside</code>元素重叠。因此会根据包含块的宽度，和<code>.aside</code>的宽度，自动变窄</p>
+<p>效果如下：</p>
+<p> <img src="https://static.vue-js.com/0a5f2690-9512-11eb-ab90-d9ae814b240d.png"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>可以看到上面几个案例，都体现了<code>BFC</code>实际就是页面一个独立的容器，里面的子元素不影响外面的元素</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context</a></li>
+<li><a href="https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md">https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>BTC</tag>
+        <tag>css面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BOM</title>
-    <url>/2022/05/25/BOM/</url>
+    <url>/archives/f3d3ee5b.html</url>
     <content><![CDATA[<h1 id="面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？"><a href="#面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？" class="headerlink" title="面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？"></a>面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？</h1><p> <img src="https://static.vue-js.com/3e191c40-8089-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>BOM</code> (Browser Object Model)，浏览器对象模型，提供了独立于内容与浏览器窗口进行交互的对象</p>
 <p>其作用就是跟浏览器做一些交互效果,比如如何进行页面的后退，前进，刷新，浏览器的窗口发生变化，滚动条的滚动，以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率</p>
@@ -193,87 +272,8 @@
       </tags>
   </entry>
   <entry>
-    <title>BFC</title>
-    <url>/2022/05/01/BFC/</url>
-    <content><![CDATA[<h1 id="面试官：谈谈你对BFC的理解？"><a href="#面试官：谈谈你对BFC的理解？" class="headerlink" title="面试官：谈谈你对BFC的理解？"></a>面试官：谈谈你对BFC的理解？</h1><p><img src="https://static.vue-js.com/c3d68290-9511-11eb-85f6-6fac77c0c9b3.png"></p>
-<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>我们在页面布局的时候，经常出现以下情况：</p>
-<ul>
-<li>这个元素高度怎么没了？</li>
-<li>这两栏布局怎么没法自适应？</li>
-<li>这两个元素的间距怎么有点奇怪的样子？</li>
-<li>……</li>
-</ul>
-<p>原因是元素之间相互的影响，导致了意料之外的情况，这里就涉及到<code>BFC</code>概念</p>
-<p><code>BFC</code>（Block Formatting Context），即块级格式化上下文，它是页面中的一块渲染区域，并且有一套属于自己的渲染规则：</p>
-<ul>
-<li>内部的盒子会在垂直方向上一个接一个的放置</li>
-<li>对于同一个BFC的俩个相邻的盒子的margin会发生重叠，与方向无关。</li>
-<li>每个元素的左外边距与包含块的左边界相接触（从左到右），即使浮动元素也是如此</li>
-<li>BFC的区域不会与float的元素区域重叠</li>
-<li>计算BFC的高度时，浮动子元素也参与计算</li>
-<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然</li>
-</ul>
-<p><code>BFC</code>目的是形成一个相对于外界完全独立的空间，让内部的子元素不会影响到外部的元素</p>
-<h2 id="二、触发条件"><a href="#二、触发条件" class="headerlink" title="二、触发条件"></a>二、触发条件</h2><p>触发<code>BFC</code>的条件包含不限于：</p>
-<ul>
-<li>根元素，即HTML元素</li>
-<li>浮动元素：float值为left、right</li>
-<li>overflow值不为 visible，为 auto、scroll、hidden</li>
-<li>display的值为inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid</li>
-<li>position的值为absolute或fixed</li>
-</ul>
-<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>利用<code>BFC</code>的特性，我们将<code>BFC</code>应用在以下场景：</p>
-<h4 id="防止margin重叠（塌陷）"><a href="#防止margin重叠（塌陷）" class="headerlink" title="防止margin重叠（塌陷）"></a>防止margin重叠（塌陷）</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>页面显示如下：</p>
-<p> <img src="https://static.vue-js.com/d0ce3650-9511-11eb-85f6-6fac77c0c9b3.png"></p>
-<p>两个<code>p</code>元素之间的距离为<code>100px</code>，发生了<code>margin</code>重叠（塌陷），以最大的为准，如果第一个P的<code>margin</code>为80的话，两个P之间的距离还是100，以最大的为准。</p>
-<p>前面讲到，同一个<code>BFC</code>的俩个相邻的盒子的<code>margin</code>会发生重叠</p>
-<p>可以在<code>p</code>外面包裹一层容器，并触发这个容器生成一个<code>BFC</code>，那么两个<code>p</code>就不属于同一个<code>BFC</code>，则不会出现<code>margin</code>重叠</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.wrap</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">overflow</span>: hidden;// 新的BFC</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrap&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这时候，边距则不会重叠：</p>
-<p> <img src="https://static.vue-js.com/dec44740-9511-11eb-85f6-6fac77c0c9b3.png"></p>
-<h4 id="清除内部浮动"><a href="#清除内部浮动" class="headerlink" title="清除内部浮动"></a>清除内部浮动</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.par</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;par&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>页面显示如下：</p>
-<p> <img src="https://static.vue-js.com/ec5d4410-9511-11eb-85f6-6fac77c0c9b3.png"></p>
-<p>而<code>BFC</code>在计算高度时，浮动元素也会参与，所以我们可以触发<code>.par</code>元素生活才能<code>BFC</code>，则内部浮动元素计算高度时候也会计算</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.par</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实现效果如下：</p>
-<p> <img src="https://static.vue-js.com/f6487b20-9511-11eb-ab90-d9ae814b240d.png"></p>
-<h4 id="自适应多栏布局"><a href="#自适应多栏布局" class="headerlink" title="自适应多栏布局"></a>自适应多栏布局</h4><p>这里举个两栏的布局</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.aside</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.main</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;aside&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果图如下：</p>
-<p> <img src="https://static.vue-js.com/ffb95210-9511-11eb-ab90-d9ae814b240d.png"></p>
-<p>前面讲到，每个元素的左外边距与包含块的左边界相接触</p>
-<p>因此，虽然<code>.aslide</code>为浮动元素，但是<code>main</code>的左边依然会与包含块的左边相接触</p>
-<p>而<code>BFC</code>的区域不会与浮动盒子重叠</p>
-<p>所以我们可以通过触发<code>main</code>生成<code>BFC</code>，以此适应两栏布局</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时候，新的<code>BFC</code>不会与浮动的<code>.aside</code>元素重叠。因此会根据包含块的宽度，和<code>.aside</code>的宽度，自动变窄</p>
-<p>效果如下：</p>
-<p> <img src="https://static.vue-js.com/0a5f2690-9512-11eb-ab90-d9ae814b240d.png"></p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>可以看到上面几个案例，都体现了<code>BFC</code>实际就是页面一个独立的容器，里面的子元素不影响外面的元素</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context</a></li>
-<li><a href="https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md">https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>BTC</tag>
-        <tag>css面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>about us 2021</title>
-    <url>/2022/01/05/about-us-2021/</url>
+    <url>/archives/afcd4575.html</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
   <script id="hbeData" type="hbeData" data-hmacdigest="fff96c359f7638c71a46aa2e56994d6fb8cbb9236929c47c94ce42211843c380">7a13521b6242615d832816f422e7dfef73da25fdbdf3b6222d8a59b6468cf1af43f41c56cd77ce14167e0f47abb820f3b30907a60039d37ff17b59d57fe34743842ccb0d9384c989a69e8e7cdf1c7ef60db4d200d78b42a3b4723dd629cf5e2f7cc4a2706e193a5c80750d76129251512268f46f459ad01fd03b9f749a9bffb4f85d24a6d37df1b5e2dcb2e0059afb240dcd607e6c6c2d89ffc9dcbfaebd8bd0b5669189c24c4e991018c04055be3173d83dc8ffbffa92a72024a5b313ac213026ae571261cecf38ebdf6a1a67330bb222a778afafaaadcd3454403d5d0167e30d61a1d34ec44bf116ce09a42ce7a79312a2015918a13b93cad06387d6821c550637f665360a4b7a3c2eaac0f833b5a3443724186d1d0786929cb57ff9139905d1a81f2feeb7c8b942de492c97362f1d59d3072de91baeddedf36f0c6b947595fd1cedb65dbc03f7d2d0014dc205afc90dfe9292cdbb0ed425a46f2e0d5c152933e0ca62ede3b8d5874be034d4cf89823390f656c100792ac2ca272707ca5de1fc85a059e25cb2604a035f2177b7580f36978e2129156ec8bbb7cd70ad9e01a9b6fe974214a40df8299a74c92b72d3a49430e50598ed6ba3f07dc93a9334a7313900e10aa3fa9778a94676d4b53b280178d5aa506a526a4c9151244f4fb9abe0f7b8f8e46540adf13eb72900fa3b4a33075bffb843956d69b21e7092152b5b5c665401215ccc521f9f3faddf9f90e894b4478f951c1089f663650cde8d321227f78f11e5d6f7e7c7bfece80e08fd3846701fd018bec4dd849b8a80248418effcc8c97c81660c528cb716fb7c55583efee30620acba057fa86dac27ded47d83d8491b035818c16fc11220cc055b7619fe3a8791659824c0e41765301845a11570e9ca6f3e509e1be1ff31f656a10b8b3631cdae6bb83aa09ef2a32c224f85066db880cd3b4f6c87b9f75d64162522c864d0376ed7c0376f0c683a5df81e9f86ac607d463c31aed5dd74c09a7d74ab05df50622be84b70be065a13e7d6a9f4f89d23b8809139a23105501d0cd6b723f2c8b3b539f513bcb410b3cc38bc32922924d99d54dfeab46e2474101519f09f87899a9c8fe6d9a64d9654c9ca6b465c9d6ea2fdba37dff3b77ad65c64c6795a0973639747af545a85b9b34fc9d0b733967c29a6908c8b6c63ed242b12e430faf2a073f4620ebba1d0e8d0e9343e9cf49dce50458c30183ba037e964f2d29b247641e892d3fa5fafbef3da2806cfeeca8e531ce25c0238cf9c674a83c61ddbbfba1580f765e1f2f757fa639c6e9e8b2e46b6866e7cc5e4e64441652de50492ccdfb0e4fde7bf8a34eb7a7c19715f9fbc7add5b79be916c6fc9af7f7274a2a8ce592a4cdebd90dd35236e5fd662d11183cb850c005c902cf3c3eb1fbf6d2e0cd90154816a02b82ad5386c6bd176ad5392a3a455459907032a450440e34ad12b06be1c297adc27c2a2e314ebde790c1a3f194f1033ebc6dde7a8e10b9699e2f7f623ca685175d0b384d15bbec2a767d0c270d2c9941217268d89bc0b9a4e443c268764bf601b67d4d380ff94a3c6975b1b8375de834f0cef033d72fb04f8931c3e47d7b6135feac8c69f7bdbb9be4c3234ad264b7226a0d304305beddc9be96af2713a71bec0c377145da2118b5c0f34038249141a3246e589e69c7d5f74d572f32386fa144023e345fa6ff9364f7a3ade18ef79994124b1aa692e2b790c5da743d2fb4f275f368cdc7844c78c368805b84c91a68a178488b2cb517bfd67e489bbdbb277b97b7195a1bd00e76430120aec1f60c8e4ddbfa4422c96bbb5f8190fd2ff3a9d342db34544dc1130fb42f2d6a9971d51e98b4273f2354fcd5ef4b507151810116e07c3db9f479b4582cbde23beec7e855d49a930c4426459424ac832ff29473888e4a2d46f31fd58eee3dff95826d24dad1f69ab64b28d81cd2a7ba4cf100a0b597163bf0d4c1e1d6ba98c5f532b7ad3960884361fb68d417bc6283cdcf9849fe29634f9be1145eaf43c8a4cf17f5e171cd28a024320a95e9c912c1386a1c9f25959e5ffc3de3a4b6c557d54fde500505098b8ce818bef65d1b51c4b185648d73ba410302fb574f0392c896225c41e114e9ec1bf007b8956bd4dcd778e41bc63eeb4e8cf1c4a3e78c70193a9a7228289fefe6860ba011d0b6d3fda88a030e2f042efb7d0dfb9dd9cc33162ab277c4e9c717b186c4aceb250942b040733b4df49dd1e379b5fb9c35fe079f4da1ca600a568d7534d6597cb725010f6c26e041943717e2745acef4ec56013d08c4c91a58434136e96d74cf973410b8cf408f0f855113ef97181688103fff12dfe96f52e7e459bd7953cd488d4edcc2532495709a5fac90079eaa0cbb8f98fdde3928a11c838d2dfe2259e9cbed5a9a0e435cf7b0017c9612c462c43b8c179fc3198793447fc7159922defc9d3c84f6f6854a2fbb5d0508e752d14f9ab78d0493bb22384b1a8a4df92e868680ae7662fd9c2b4961ba2b80839def458dac2d583a82ea347401e30aac3d1f6dfc6de5c73803d07735fff106be5d1260993accd390d9aaa718266e04f9b5871b6021dce99ae8038ac95656f64c7e2bdfbae0bfb02b28437ddd65c9564617dc6ef377db36b3a1cf2b8cd2a0be66ceaddb5da4f9153f96f4af88a8b96c4424e26a00d7da8d0a914ff24377ffa5edbbb42a2287fadd58d865dd792e23e2c2d9741c215791f72939434b3e6fd57a643a772d78793f3532c9d5a1c456873db15f2dd3692ab5c84d2e17d1a36735f610d1d0bfa722a54b0a2ae8e234c7c8f5b5d5ab8e4bc4b6805986be48903ae3caa89645bc8ad3840ea67fc1425ab663979fba29c38023c8528d3b92f2c13035cabc1a6d3d5553c580c6f55288c35d6269e82fb337daed881371dbfa6293b2ebba3bd72d9741aefffecb878bb198680f19d0892b39fdd53bc144483692ad9070bb6ead21ef4da1c3788d9ee0207ff75a60412f6d4961736ac6f67f7345eee90b51f88818750d91e33bd985a21d64fd7184f7245f66728d2cf99050f422c4d3ccc8bc8a0ff0d6be20d32f1380356d654b64b7667b63e9922036ea1c1a61596dc5076a5c0d46b18962d1a29c3e4780528df8e82f85e49b089e7f89a31a76049e63d291bbcec90fefd4b958d99954f8ef72693a78935f17078faf7f9bced734ab9d20bf5ec6b8edadef2b97323cdded4f5b0badcc8e6b829420a28d8d86b898740f7ca982b0a29dac184811554600306cef9b8af87c2cf298dda22742f111a6388b85071fd5dc9d15f4f2522271e2beb91363cc9cf068d75e4f22b1a5331ef42a1b7b07b6b55720f528be40ec49af823651b1a6aa58ecf240204438d21bed386f7ce73ef7f7e3fb1170063a94b233814c9c3e5e2372f6b68c3f6d9146269486ab8b88c2609d407172e27918a9d978512d2e2be56c9478072174cc906a936e24a3a3123a5034cb36fc6f04fb928dcdc65c67617425805748742a1307cd93f04d9e4283566e88058f06fd81a17005291f484c9b293ba376f76c80ecf69155b8e2b8155a21293cd8ad9ec8857dccff7c4838d795ca04a9c88343790c14c522df4a5e2377c5f2e6315853f929ea7a06768ae748129a0d93bbfb44fd27ac37422d1743dc790db977ceb8d3286b7f88f61c3b8c59c7551bdeee90abd2bbc96a42a78594253441e3122a04ae5676a8b575d42be0865393b76fe12a152e16db63a11b4424b6abb87887bb593380a366e8ba26c8e36b433e13fd4e6ec43c4642e1839c2d1cfc0369ab7c180a7a2e27917cd85144896108371493ebcc23481f14eb8b3b27520ff619dc82a33042c872371812b1592e5d5e234242ba0ffb76ff26e4dc0a1605489419bfcdd95e41482e4e0e2114faac1f28dbd96fd064a597420b0766069f83ae6bf5b9f69eb3c64b58a2395fa0efc647f0edcc42a6f7b6fd55b6a0b25c9cf1c7691ebb8e2b4b7c6c800d1fef4eb2e0e82f5de477ab3162ce5d3329af2f79b46a74ae6992538989dac9cfa31ddff46d559a1350b9fe605879eb56c455db22f46e1813b37693845bab880c530d713a31f027f480b338690076f187cdd0b8f4614db8617b53ea81751ea515711ea0534ad06e1487b9368aa228aaf4ce2c87a06b6a5b74afaa0706364a6e82bd620a89e5f75637aac0bfce4a83bd4a0f9076349d85a56bc9ba7d57a01df318cc107bdbc48701b2496941cd1af006ee830e5630dded7c3eacf182ab3c514d985d89f241698ceaa1e8eff0c44717a6cc8a759ae542e8bc68fc61ba9369893b6214ec6f46d2f50c7f827f07f6e0bd604308eb1af5c48baac21252d3fec8960783f919d05f4908328529e89afedfa3076a227290b91bf42ea9ba279a79244bca4a104e5699030a46b73831a0149068c31d04e042f899127e3f74c5201950e6eb4b7c5f5857365497c909f869b253053679089e482402dec672c4061a38648549abfef17cf45627920937d918370f188c97bf712bf886cdf8adb626a105f29abfb1a6283426ced22165427d3d80a487b5ffc9804d3461121e015a8829626734aad1cfd0fc82c93531c737ad0691b6b11db8be74784c90528d214efb511229d0be2b5f9371dae459bb1c47d05c5f06195b94d1e528b</script>
   <div class="hbe hbe-content">
@@ -295,7 +295,7 @@
   </entry>
   <entry>
     <title>ajax2</title>
-    <url>/2022/05/20/ajax2/</url>
+    <url>/archives/50cfbdee.html</url>
     <content><![CDATA[<h1 id="面试官：ajax原理是什么？如何实现？"><a href="#面试官：ajax原理是什么？如何实现？" class="headerlink" title="面试官：ajax原理是什么？如何实现？"></a>面试官：ajax原理是什么？如何实现？</h1><p> <img src="https://static.vue-js.com/a35a2950-7b2a-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>AJAX </code>全称(Async Javascript and XML)</p>
 <p>即异步的<code> JavaScript</code> 和<code> XML</code>，是一种创建交互式网页应用的网页开发技术，可以在不重新加载整个网页的情况下，与服务器交换数据，并且更新部分网页</p>
@@ -379,7 +379,7 @@
   </entry>
   <entry>
     <title>animation</title>
-    <url>/2022/05/19/animation/</url>
+    <url>/archives/8d5284dc.html</url>
     <content><![CDATA[<h1 id="面试官：css3动画有哪些？"><a href="#面试官：css3动画有哪些？" class="headerlink" title="面试官：css3动画有哪些？"></a>面试官：css3动画有哪些？</h1><p> <img src="https://static.vue-js.com/d12e2380-9c0a-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>CSS动画（CSS Animations）是为层叠样式表建议的允许可扩展标记语言（XML）元素使用CSS的动画的模块</p>
 <p>即指元素从一种样式逐渐过渡为另一种样式的过程</p>
@@ -553,7 +553,7 @@
   </entry>
   <entry>
     <title>array_api</title>
-    <url>/2022/05/22/array_api/</url>
+    <url>/archives/ced3960e.html</url>
     <content><![CDATA[<h1 id="面试官：数组的常用方法有哪些？"><a href="#面试官：数组的常用方法有哪些？" class="headerlink" title="面试官：数组的常用方法有哪些？"></a>面试官：数组的常用方法有哪些？</h1><p><img src="https://static.vue-js.com/5842e560-67b6-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、操作方法"><a href="#一、操作方法" class="headerlink" title="一、操作方法"></a>一、操作方法</h2><p>数组基本操作可以归纳为 增、删、改、查，需要留意的是哪些方法会对原数组产生影响，哪些方法不会</p>
 <p>下面对数组常用的操作方法做一个归纳</p>
@@ -662,7 +662,7 @@
   </entry>
   <entry>
     <title>bind_call_apply</title>
-    <url>/2022/05/22/bind_call_apply/</url>
+    <url>/archives/17a85756.html</url>
     <content><![CDATA[<h1 id="面试官：bind、call、apply-区别？如何实现一个bind"><a href="#面试官：bind、call、apply-区别？如何实现一个bind" class="headerlink" title="面试官：bind、call、apply 区别？如何实现一个bind?"></a>面试官：bind、call、apply 区别？如何实现一个bind?</h1><p> <img src="https://static.vue-js.com/a900e460-7be4-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><code>call </code>、<code>apply </code>、<code>bind </code>作用是改变函数执行时的上下文，简而言之就是改变函数运行时的<code>this</code>指向</p>
 <p>那么什么情况下需要改变<code>this</code>的指向呢？下面举个例子</p>
@@ -728,7 +728,7 @@
   </entry>
   <entry>
     <title>box</title>
-    <url>/2022/05/02/box/</url>
+    <url>/archives/8a9483a.html</url>
     <content><![CDATA[<h1 id="CSS面试系列"><a href="#CSS面试系列" class="headerlink" title="CSS面试系列"></a>CSS面试系列</h1><h2 id="1-盒子模型"><a href="#1-盒子模型" class="headerlink" title="1.盒子模型"></a>1.盒子模型</h2><p><img src="https://static.vue-js.com/8d0e9ca0-8f9b-11eb-ab90-d9ae814b240d.png"></p>
 <h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><p>当对一个文档进行布局（layout）的时候，浏览器的渲染引擎会根据标准之一的 CSS 基础框盒模型（CSS basic box model），将所有元素表示为一个个矩形的盒子（box）</p>
 <p>一个盒子由四个部分组成：<code>content</code>、<code>padding</code>、<code>border</code>、<code>margin</code></p>
@@ -785,7 +785,7 @@
   </entry>
   <entry>
     <title>cache</title>
-    <url>/2022/05/22/cache/</url>
+    <url>/archives/41476be7.html</url>
     <content><![CDATA[<h1 id="面试官：Javascript-本地存储的方式有哪些？区别及应用场景？"><a href="#面试官：Javascript-本地存储的方式有哪些？区别及应用场景？" class="headerlink" title="面试官：Javascript 本地存储的方式有哪些？区别及应用场景？"></a>面试官：Javascript 本地存储的方式有哪些？区别及应用场景？</h1><p><img src="https://static.vue-js.com/68dccf20-849f-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、方式"><a href="#一、方式" class="headerlink" title="一、方式"></a>一、方式</h2><p><code>javaScript</code>本地缓存的方法我们主要讲述以下四种：</p>
 <ul>
@@ -915,7 +915,7 @@
   </entry>
   <entry>
     <title>center</title>
-    <url>/2022/05/03/center/</url>
+    <url>/archives/40f0eb24.html</url>
     <content><![CDATA[<h2 id="1-水平垂直居中的方法"><a href="#1-水平垂直居中的方法" class="headerlink" title="1.水平垂直居中的方法"></a>1.水平垂直居中的方法</h2><h3 id="1-元素水平垂直居中"><a href="#1-元素水平垂直居中" class="headerlink" title="1.元素水平垂直居中"></a>1.元素水平垂直居中</h3><ul>
 <li><p>利用定位+margin:auto</p>
 </li>
@@ -1008,7 +1008,7 @@
   </entry>
   <entry>
     <title>closure</title>
-    <url>/2022/05/24/closure/</url>
+    <url>/archives/48078dd1.html</url>
     <content><![CDATA[<h1 id="面试官：说说你对闭包的理解？闭包使用场景"><a href="#面试官：说说你对闭包的理解？闭包使用场景" class="headerlink" title="面试官：说说你对闭包的理解？闭包使用场景"></a>面试官：说说你对闭包的理解？闭包使用场景</h1><p> <img src="https://static.vue-js.com/c141a030-6a7a-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>一个函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包（closure）</p>
 <p>也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域</p>
@@ -1060,7 +1060,7 @@
   </entry>
   <entry>
     <title>column_layout</title>
-    <url>/2022/05/03/column_layout/</url>
+    <url>/archives/9a0dce2d.html</url>
     <content><![CDATA[<h2 id="1-双栏布局"><a href="#1-双栏布局" class="headerlink" title="1.双栏布局"></a>1.双栏布局</h2><h3 id="1-浮动实现"><a href="#1-浮动实现" class="headerlink" title="1.浮动实现"></a>1.浮动实现</h3><p>双栏布局非常常见，往往是以一个定宽栏和一个自适应的栏并排展示存在</p>
 <p>实现思路也非常的简单：</p>
 <ul>
@@ -1163,7 +1163,7 @@
   </entry>
   <entry>
     <title>context_stack</title>
-    <url>/2022/05/24/context_stack/</url>
+    <url>/archives/10bf1714.html</url>
     <content><![CDATA[<h1 id="面试官：JavaScript-中执行上下文和执行栈是什么？"><a href="#面试官：JavaScript-中执行上下文和执行栈是什么？" class="headerlink" title="面试官：JavaScript 中执行上下文和执行栈是什么？"></a>面试官：JavaScript 中执行上下文和执行栈是什么？</h1><p><img src="https://static.vue-js.com/8652b710-74c1-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、执行上下文"><a href="#一、执行上下文" class="headerlink" title="一、执行上下文"></a>一、执行上下文</h2><p>简单的来说，执行上下文是一种对<code>Javascript</code>代码执行环境的抽象概念，也就是说只要有<code>Javascript</code>代码运行，那么它就一定是运行在执行上下文中</p>
 <p>执行上下文的类型分为三种：</p>
@@ -1246,7 +1246,7 @@
   </entry>
   <entry>
     <title>continue_to_upload</title>
-    <url>/2022/05/28/continue_to_upload/</url>
+    <url>/archives/9e5f33b7.html</url>
     <content><![CDATA[<h1 id="面试官：大文件上传如何做断点续传？"><a href="#面试官：大文件上传如何做断点续传？" class="headerlink" title="面试官：大文件上传如何做断点续传？"></a>面试官：大文件上传如何做断点续传？</h1><p> <img src="https://static.vue-js.com/3ccb0e90-8ba4-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>不管怎样简单的需求，在量级达到一定层次时，都会变得异常复杂</p>
 <p>文件上传简单，文件变大就复杂</p>
@@ -1336,7 +1336,7 @@
   </entry>
   <entry>
     <title>copy</title>
-    <url>/2022/05/29/copy/</url>
+    <url>/archives/4dbabb82.html</url>
     <content><![CDATA[<h1 id="面试官：深拷贝浅拷贝的区别？如何实现一个深拷贝？"><a href="#面试官：深拷贝浅拷贝的区别？如何实现一个深拷贝？" class="headerlink" title="面试官：深拷贝浅拷贝的区别？如何实现一个深拷贝？"></a>面试官：深拷贝浅拷贝的区别？如何实现一个深拷贝？</h1><p><img src="https://static.vue-js.com/cdf952e0-69b8-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、数据类型存储"><a href="#一、数据类型存储" class="headerlink" title="一、数据类型存储"></a>一、数据类型存储</h2><p>前面文章我们讲到，<code>JavaScript</code>中存在两大数据类型：</p>
 <ul>
@@ -1415,7 +1415,7 @@
   </entry>
   <entry>
     <title>css</title>
-    <url>/2022/01/10/css/</url>
+    <url>/archives/78cea6d8.html</url>
     <content><![CDATA[<hr>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[tag type=<span class="string">&quot;info&quot;</span>]</span>渐变<span class="selector-attr">[/tag]</span></span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[collapse title=<span class="string">&quot;纯css实现&quot;</span> show=<span class="string">&quot;true&quot;</span>]</span></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="comment">/* 此处可以加入自己的图片 */</span></span><br><span class="line">    <span class="comment">/* background: #000 url(&#x27;../images/5.png&#x27;) no-repeat center; */</span></span><br><span class="line">    <span class="comment">/* background-size: cover;     to之后 可以改变颜色渐变方向 bottom,left,top */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, skyblue, <span class="number">#496eaa</span>, <span class="built_in">rgb</span>(<span class="number">226</span>, <span class="number">111</span>, <span class="number">111</span>), <span class="number">#944fa8</span>, <span class="number">#a8804f</span>, <span class="number">#496eaa</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">1400%</span> <span class="number">300%</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">animation</span>: mymove <span class="number">20s</span> ease infinite;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: flex-start;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> mymove &#123;</span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0%</span> <span class="number">0%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">50%</span> <span class="number">100%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">100%</span> <span class="number">0%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-attr">[/collapse]</span></span><br></pre></td></tr></table></figure>
 
@@ -1544,7 +1544,7 @@
   </entry>
   <entry>
     <title>css3_features</title>
-    <url>/2022/05/04/css3_features/</url>
+    <url>/archives/7c942302.html</url>
     <content><![CDATA[<h1 id="面试官：CSS3新增了哪些新特性？"><a href="#面试官：CSS3新增了哪些新特性？" class="headerlink" title="面试官：CSS3新增了哪些新特性？"></a>面试官：CSS3新增了哪些新特性？</h1><p> <img src="https://static.vue-js.com/d58f6df0-9b5e-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>css</code>，即层叠样式表（Cascading Style Sheets）的简称，是一种标记语言，由浏览器解释执行用来使页面变得更美观</p>
 <p><code>css3</code>是<code>css</code>的最新标准，是向后兼容的，<code>CSS1/2 </code>的特性在<code> CSS3</code> 里都是可以使用的</p>
@@ -1690,7 +1690,7 @@
   </entry>
   <entry>
     <title>css_performance</title>
-    <url>/2022/05/04/css_performance/</url>
+    <url>/archives/b21f48b9.html</url>
     <content><![CDATA[<h1 id="面试官：如果要做优化，CSS提高性能的方法有哪些？"><a href="#面试官：如果要做优化，CSS提高性能的方法有哪些？" class="headerlink" title="面试官：如果要做优化，CSS提高性能的方法有哪些？"></a>面试官：如果要做优化，CSS提高性能的方法有哪些？</h1><p> <img src="https://static.vue-js.com/c071c820-9fa3-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>每一个网页都离不开<code>css</code>，但是很多人又认为，<code>css</code>主要是用来完成页面布局的，像一些细节或者优化，就不需要怎么考虑，实际上这种想法是不正确的</p>
 <p>作为页面渲染和内容展现的重要环节，<code>css</code>影响着用户对整个网站的第一体验</p>
@@ -1771,7 +1771,7 @@
   </entry>
   <entry>
     <title>dp_px_dpr_ppi</title>
-    <url>/2022/05/04/dp_px_dpr_ppi/</url>
+    <url>/archives/14015a55.html</url>
     <content><![CDATA[<h1 id="面试官：说说设备像素、css像素、设备独立像素、dpr、ppi-之间的区别？"><a href="#面试官：说说设备像素、css像素、设备独立像素、dpr、ppi-之间的区别？" class="headerlink" title="面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？"></a>面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？</h1><p> <img src="https://static.vue-js.com/c4d9bfd0-91f2-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>在<code>css</code>中我们通常使用px作为单位，在PC浏览器中<code>css</code>的1个像素都是对应着电脑屏幕的1个物理像素</p>
 <p>这会造成一种错觉，我们会认为<code>css</code>中的像素就是设备的物理像素</p>
@@ -1842,7 +1842,7 @@
   </entry>
   <entry>
     <title>em_px_rem_vh_vw</title>
-    <url>/2022/05/04/em_px_rem_vh_vw/</url>
+    <url>/archives/92004154.html</url>
     <content><![CDATA[<h1 id="面试官：说说em-px-rem-vh-vw区别"><a href="#面试官：说说em-px-rem-vh-vw区别" class="headerlink" title="面试官：说说em/px/rem/vh/vw区别?"></a>面试官：说说em/px/rem/vh/vw区别?</h1><p><img src="https://static.vue-js.com/51b036e0-9131-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>传统的项目开发中，我们只会用到<code>px</code>、<code>%</code>、<code>em</code>这几个单位，它可以适用于大部分的项目开发，且拥有比较良好的兼容性</p>
 <p>从<code>CSS3</code>开始，浏览器对计量单位的支持又提升到了另外一个境界，新增了<code>rem</code>、<code>vh</code>、<code>vw</code>、<code>vm</code>等一些新的计量单位</p>
@@ -1924,7 +1924,7 @@
   </entry>
   <entry>
     <title>flexbox</title>
-    <url>/2022/05/05/flexbox/</url>
+    <url>/archives/28d88e6.html</url>
     <content><![CDATA[<h1 id="面试官：说说flexbox（弹性盒布局模型）-以及适用场景？"><a href="#面试官：说说flexbox（弹性盒布局模型）-以及适用场景？" class="headerlink" title="面试官：说说flexbox（弹性盒布局模型）,以及适用场景？"></a>面试官：说说flexbox（弹性盒布局模型）,以及适用场景？</h1><p> <img src="https://static.vue-js.com/ef25b0a0-9837-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>Flexible Box</code> 简称 <code>flex</code>，意为”弹性布局”，可以简便、完整、响应式地实现各种页面布局</p>
 <p>采用Flex布局的元素，称为<code>flex</code>容器<code>container</code></p>
@@ -2081,7 +2081,7 @@
   </entry>
   <entry>
     <title>grid</title>
-    <url>/2022/05/05/grid/</url>
+    <url>/archives/2e20d937.html</url>
     <content><![CDATA[<h1 id="面试官：介绍一下grid网格布局"><a href="#面试官：介绍一下grid网格布局" class="headerlink" title="面试官：介绍一下grid网格布局"></a>面试官：介绍一下grid网格布局</h1><p> <img src="https://static.vue-js.com/4d73e3d0-9a94-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>Grid</code> 布局即网格布局，是一个二维的布局方式，由纵横相交的两组网格线形成的框架性布局结构，能够同时处理行与列</p>
 <p>擅长将一个页面划分为几个主要区域，以及定义这些区域的大小、位置、层次等关系</p>
@@ -2249,7 +2249,7 @@
   </entry>
   <entry>
     <title>hide_attributes</title>
-    <url>/2022/05/05/hide_attributes/</url>
+    <url>/archives/3f038ede.html</url>
     <content><![CDATA[<h1 id="面试官：css中，有哪些方式可以隐藏页面元素？区别"><a href="#面试官：css中，有哪些方式可以隐藏页面元素？区别" class="headerlink" title="面试官：css中，有哪些方式可以隐藏页面元素？区别?"></a>面试官：css中，有哪些方式可以隐藏页面元素？区别?</h1><p><img src="https://static.vue-js.com/ccf96f50-929a-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在平常的样式排版中，我们经常遇到将某个模块隐藏的场景</p>
 <p>通过<code>css</code>隐藏元素的方法有很多种，它们看起来实现的效果是一致的</p>
@@ -2366,7 +2366,7 @@
   </entry>
   <entry>
     <title>hots</title>
-    <url>/2022/03/21/hots/</url>
+    <url>/archives/1e021099.html</url>
     <content><![CDATA[<p>[hint]你的无畏，来自你的未知[/hint]</p>
 <hr>
 <ol>
@@ -2406,7 +2406,7 @@
   </entry>
   <entry>
     <title>html</title>
-    <url>/2021/06/22/index/</url>
+    <url>/archives/1879f8e5.html</url>
     <content><![CDATA[<h2 id="html语法"><a href="#html语法" class="headerlink" title="html语法"></a>html语法</h2><div id="chakhsu" class="blog-title"></div> <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } /*以下内容自定义修改*/ var l = "这孩子，", o = ["或许可以用来煲汤。", ].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); </script> <div>
 
 
@@ -2481,7 +2481,7 @@
   </entry>
   <entry>
     <title>layout_painting</title>
-    <url>/2022/05/09/layout_painting/</url>
+    <url>/archives/78ca6597.html</url>
     <content><![CDATA[<h1 id="面试官：怎么理解回流跟重绘？什么场景下会触发？"><a href="#面试官：怎么理解回流跟重绘？什么场景下会触发？" class="headerlink" title="面试官：怎么理解回流跟重绘？什么场景下会触发？"></a>面试官：怎么理解回流跟重绘？什么场景下会触发？</h1><p> <img src="https://static.vue-js.com/1ed5d340-9cdc-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>在<code>HTML</code>中，每个元素都可以理解成一个盒子，在浏览器解析过程中，会涉及到回流与重绘：</p>
 <ul>
@@ -2589,7 +2589,7 @@
   </entry>
   <entry>
     <title>less</title>
-    <url>/2022/03/21/less/</url>
+    <url>/archives/d3b694df.html</url>
     <content><![CDATA[<p>[tag type=”primary” outline]官方介绍[/tag]</p>
 <ul>
 <li><strong>Less 是一门 CSS 预处理语言，</strong>它扩充了 CSS 语言，增加了诸如变量、混合（mixin）、函数等功能，让 CSS 更易维护、方便制作主题、扩充。Less 可以运行在 Node 或浏览器端。</li>
@@ -2719,7 +2719,7 @@
   </entry>
   <entry>
     <title>less_12px</title>
-    <url>/2022/05/09/less_12px/</url>
+    <url>/archives/30b90bc0.html</url>
     <content><![CDATA[<h1 id="面试官：让Chrome支持小于12px-的文字方式有哪些？区别？"><a href="#面试官：让Chrome支持小于12px-的文字方式有哪些？区别？" class="headerlink" title="面试官：让Chrome支持小于12px 的文字方式有哪些？区别？"></a>面试官：让Chrome支持小于12px 的文字方式有哪些？区别？</h1><p><img src="https://static.vue-js.com/62945fd0-a334-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>Chrome 中文版浏览器会默认设定页面的最小字号是12px，英文版没有限制</p>
 <p>原由 Chrome 团队认为汉字小于12px就会增加识别难度</p>
@@ -2794,7 +2794,7 @@
   </entry>
   <entry>
     <title>me</title>
-    <url>/2021/06/22/me/</url>
+    <url>/archives/ac5292c2.html</url>
     <content><![CDATA[<p>
   <span class='green'>me -</span>
 </p>
@@ -2839,100 +2839,8 @@
       </tags>
   </entry>
   <entry>
-    <title>node</title>
-    <url>/2022/01/10/node/</url>
-    <content><![CDATA[<p>你好</p>
-<p> node.js是什么？</p>
-<ul>
-<li>node.js不是一门语言，不是库，不是框架，node.js是一个运行javaScript运行时的环境。</li>
-<li>node.js没有Bom，Dom；</li>
-<li>作用：文件读写，网络服务的构建，网络通信，HTTP服务器等</li>
-<li>特性：event.driven事件驱动，ligtweight and efficient 轻量和高效，non-blocking I/o非阻塞io模型</li>
-</ul>
-<p> 浏览器中的JavaScript组成</p>
-<ul>
-<li>Chrome 浏览器 =&gt; V8 </li>
-<li>Firefox 浏览器=&gt; OdinMonkey(奥丁猴)</li>
-<li>Safri 浏览器=&gt; JSCore</li>
-<li>IE 浏览器=&gt; Chakra(查克拉) </li>
-<li>etc… 其中，Chrome 浏览器的 V8 解析引擎性能最好! </li>
-</ul>
-<p> 注意</p>
-<ul>
-<li>运行环境，指 代码能够正常执行，所必须的条件浏览器，就是 JS 代码的 运行环境。（包括解析引擎、窗口显示结果……）脱离运行环境，JS 代码将会失去作用。</li>
-<li>浏览器运行环境中，能够执行的 JS 代码包括（ECMAScript、WebAPI）ECMAScript 肯定能够运行，因为它是核心语法<br>WebAPI 是浏览器环境特有的，只能在浏览器环境中才能使用。</li>
-</ul>
-<hr>
-<ul>
-<li><em>交互模式(了解)</em> </li>
-<li>REPL(Read-Eval -Print-Loop)交互模式指的是在终端窗口中，执行简单的JavaScript代码</li>
-<li>操作步骤：打开任意终端，直接输入 node 命令并回车执行你的JS代码，按回车表示执行按两次“Ctrl+C”退出</li>
-<li>只适合少量js代码<br>[tag type=”success” outline=”1”]脚本模式(重要哦)[/tag]</li>
-<li>如果有大段的JS代码需要在Node环境中运行，可以把JS代码写到JS文件中终端中，使用 node xxx.js 命令即可运行文件中的代码</li>
-<li><strong>注意哟：两种模式不能混用，如果使用第一种模式，必须先退出，然后才能用第二种</strong><br>[tag type=”primary” outline]node中的模块化[/tag]</li>
-<li>Node中的模块化，就是把一个大的JS文件拆分成若干个小文件，还能按照一定的语法组装到一起。</li>
-<li>规定，用户创建的每个JS文件，就是一个小模块，叫做自定义模块</li>
-<li>我们可以按照一定的语法将这些小模块组合到一起，形成一个完整的项目<br>[tag type=”success” outline=”1”]Node中的模块分类[/tag]</li>
-<li>内置模块（核心模块）：Node安装后，即可使用的模块，Node环境自带。</li>
-<li>自定义模块：用户自己创建的每个JS文件，都是自定义模块</li>
-<li>第三方模块：其他人或公司、组织开发的模块，发布到 npm 网站，我们需要下载使用的模块<br>[tag type=”primary” outline]加载模块的语法[/tag]</li>
-</ul>
-<p>  <em>1.1加载自定义模块</em></p>
-<ul>
-<li>a 文件，必须通过 module.exports 共享（导出、暴露）当前模块中的变量</li>
-<li>b 文件，需要通过 require() 加载（导入）。（a 文件导出什么，b 文件就得到什么）</li>
-<li>加载自定义模块时，必须要带路径 （相对路径、绝对路径都可以；但必须带路径，哪怕是 ./ 也不能省略）</li>
-<li>加载自定义模块时，可以省略后缀</li>
-</ul>
-<p><em>1.2加载内置模块</em></p>
-<ul>
-<li>直接使用 require() 加载即可。</li>
-<li>加载模块时，无需带路径，比如 require(‘fs’)</li>
-<li>加载内置模块，得到对象类型，对象中内置了很多API方法</li>
-</ul>
-<p><em>1.3加载第三方模块</em></p>
-<ul>
-<li>// npm （node package manager）,npm包管理器</li>
-<li>第三方模块，发布在https：//<a href="http://www.npm.js.com/">www.npm.js.com</a></li>
-<li>1,npm init 初始化package.json  || npm  init  -y</li>
-<li>2,安装npm install 包名   || npm i 模块名</li>
-<li>3,卸载npm uninstall 包名   || npm un  模块名</li>
-<li>可以在文件package.json中的dependencied查看安装的模块</li>
-</ul>
-<hr>
-<p>数组排序模块化</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组第一个转大写，其余小写</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + str.slice(<span class="number">1</span>).toLowerCase()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;asdfaknfsakfnaksd&#x27;</span></span><br><span class="line">change(str)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组排序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortBy</span>(<span class="params">pro</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">item1, item2</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item1[pro] - item2[pro]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对外暴露</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">change</span>: change,</span><br><span class="line">    <span class="attr">sortBy</span>: sortBy</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  接受数据</span></span><br><span class="line"><span class="keyword">var</span> &#123; change, sortBy &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib.js&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> r = change(<span class="string">&#x27;adfna&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(r);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(change(<span class="string">&#x27;asdkfksfn&#x27;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AS&#x27;</span>, <span class="attr">age</span>: <span class="number">12</span>, <span class="attr">score</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;DS&#x27;</span>, <span class="attr">age</span>: <span class="number">13</span>, <span class="attr">score</span>: <span class="number">10</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AE&#x27;</span>, <span class="attr">age</span>: <span class="number">11</span>, <span class="attr">score</span>: <span class="number">9</span> &#125;,</span><br><span class="line">]</span><br><span class="line"><span class="keyword">var</span> res = arr.sort(sortBy(<span class="string">&#x27;score&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<p>[tag type=”primary” outline]文件操作[/tag]</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// fs 是file-system 的简写，文件系统的意思</span></span><br><span class="line"><span class="comment">// 在node 中如果想进行文件操作，就必须引入 fs 这个核心模块</span></span><br><span class="line"><span class="comment">// fs.readFine 用来读取文件</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 读取文件 第一个参数要读取的文件路径，第二个是回调函数</span></span><br><span class="line"><span class="comment">// 成功 data 数据  error null</span></span><br><span class="line"><span class="comment">// 失败 data null  error  错误对象</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./1.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写文件第一个参数，路径 ；第二个参数，文件的内容；第三个参数，回调函数</span></span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./data.md&#x27;</span>,<span class="string">&#x27;大家好&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">[/collapse]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>Path 模块</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// path 模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;a/b/c/index.js&#x27;</span></span><br><span class="line"><span class="comment">// 获取路径文件后缀名</span></span><br><span class="line"><span class="comment">// console.log(path.extname(url));</span></span><br><span class="line"><span class="comment">// 拼接给出的路径</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;a/b/c&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">&#x27;d/e/index.html&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log(path.join(a,b));</span></span><br><span class="line"><span class="comment">// 全局变量，表示当前的js的绝对路径</span></span><br><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>querystring 模块</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// querystring 模块</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>);</span><br><span class="line"><span class="comment">// 定义变量，查询字符串</span></span><br><span class="line"><span class="keyword">let</span> urls = <span class="string">&#x27;uname= zhangsan&amp;age=20&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> obj = querystring.parse(urls);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// 将对象转化成字符串</span></span><br><span class="line"><span class="keyword">let</span> os = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;grils&#x27;</span>,</span><br><span class="line">    <span class="attr">lova</span>: <span class="number">5000</span>,</span><br><span class="line">    <span class="attr">moeny</span>: <span class="number">12202</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = querystring.stringify(os);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p>http</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 服务器要干嘛  提供服务：对，数据服务发请求  接受请求  处理请求给个反馈（发送相应） 注册request 请求事件*/</span></span><br><span class="line"><span class="comment">// 1 http 加载http 模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2创建web服务器</span></span><br><span class="line"><span class="comment">// 使用http.createServer()创建web服务器 返回Server实列</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3监听request请求事件        /* req请求，res响应 */</span></span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 简化2 3 步骤</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>responsive_layout</title>
-    <url>/2022/05/11/responsive_layout/</url>
+    <url>/archives/203410a2.html</url>
     <content><![CDATA[<h3 id="1-什么是响应式设计"><a href="#1-什么是响应式设计" class="headerlink" title="1.什么是响应式设计"></a>1.什么是响应式设计</h3><p>响应式网站设计（Responsive Web design）是一种网络页面设计布局，页面的设计与开发应当根据用户行为以及设备环境(系统平台、屏幕尺寸、屏幕定向等)进行相应的响应和调整</p>
 <p>描述响应式界面最著名的一句话就是“Content is like water”</p>
 <p>大白话便是“如果将屏幕看作容器，那么内容就像水一样”</p>
@@ -3031,8 +2939,100 @@
       </tags>
   </entry>
   <entry>
+    <title>node</title>
+    <url>/archives/857fe845.html</url>
+    <content><![CDATA[<p>你好</p>
+<p> node.js是什么？</p>
+<ul>
+<li>node.js不是一门语言，不是库，不是框架，node.js是一个运行javaScript运行时的环境。</li>
+<li>node.js没有Bom，Dom；</li>
+<li>作用：文件读写，网络服务的构建，网络通信，HTTP服务器等</li>
+<li>特性：event.driven事件驱动，ligtweight and efficient 轻量和高效，non-blocking I/o非阻塞io模型</li>
+</ul>
+<p> 浏览器中的JavaScript组成</p>
+<ul>
+<li>Chrome 浏览器 =&gt; V8 </li>
+<li>Firefox 浏览器=&gt; OdinMonkey(奥丁猴)</li>
+<li>Safri 浏览器=&gt; JSCore</li>
+<li>IE 浏览器=&gt; Chakra(查克拉) </li>
+<li>etc… 其中，Chrome 浏览器的 V8 解析引擎性能最好! </li>
+</ul>
+<p> 注意</p>
+<ul>
+<li>运行环境，指 代码能够正常执行，所必须的条件浏览器，就是 JS 代码的 运行环境。（包括解析引擎、窗口显示结果……）脱离运行环境，JS 代码将会失去作用。</li>
+<li>浏览器运行环境中，能够执行的 JS 代码包括（ECMAScript、WebAPI）ECMAScript 肯定能够运行，因为它是核心语法<br>WebAPI 是浏览器环境特有的，只能在浏览器环境中才能使用。</li>
+</ul>
+<hr>
+<ul>
+<li><em>交互模式(了解)</em> </li>
+<li>REPL(Read-Eval -Print-Loop)交互模式指的是在终端窗口中，执行简单的JavaScript代码</li>
+<li>操作步骤：打开任意终端，直接输入 node 命令并回车执行你的JS代码，按回车表示执行按两次“Ctrl+C”退出</li>
+<li>只适合少量js代码<br>[tag type=”success” outline=”1”]脚本模式(重要哦)[/tag]</li>
+<li>如果有大段的JS代码需要在Node环境中运行，可以把JS代码写到JS文件中终端中，使用 node xxx.js 命令即可运行文件中的代码</li>
+<li><strong>注意哟：两种模式不能混用，如果使用第一种模式，必须先退出，然后才能用第二种</strong><br>[tag type=”primary” outline]node中的模块化[/tag]</li>
+<li>Node中的模块化，就是把一个大的JS文件拆分成若干个小文件，还能按照一定的语法组装到一起。</li>
+<li>规定，用户创建的每个JS文件，就是一个小模块，叫做自定义模块</li>
+<li>我们可以按照一定的语法将这些小模块组合到一起，形成一个完整的项目<br>[tag type=”success” outline=”1”]Node中的模块分类[/tag]</li>
+<li>内置模块（核心模块）：Node安装后，即可使用的模块，Node环境自带。</li>
+<li>自定义模块：用户自己创建的每个JS文件，都是自定义模块</li>
+<li>第三方模块：其他人或公司、组织开发的模块，发布到 npm 网站，我们需要下载使用的模块<br>[tag type=”primary” outline]加载模块的语法[/tag]</li>
+</ul>
+<p>  <em>1.1加载自定义模块</em></p>
+<ul>
+<li>a 文件，必须通过 module.exports 共享（导出、暴露）当前模块中的变量</li>
+<li>b 文件，需要通过 require() 加载（导入）。（a 文件导出什么，b 文件就得到什么）</li>
+<li>加载自定义模块时，必须要带路径 （相对路径、绝对路径都可以；但必须带路径，哪怕是 ./ 也不能省略）</li>
+<li>加载自定义模块时，可以省略后缀</li>
+</ul>
+<p><em>1.2加载内置模块</em></p>
+<ul>
+<li>直接使用 require() 加载即可。</li>
+<li>加载模块时，无需带路径，比如 require(‘fs’)</li>
+<li>加载内置模块，得到对象类型，对象中内置了很多API方法</li>
+</ul>
+<p><em>1.3加载第三方模块</em></p>
+<ul>
+<li>// npm （node package manager）,npm包管理器</li>
+<li>第三方模块，发布在https：//<a href="http://www.npm.js.com/">www.npm.js.com</a></li>
+<li>1,npm init 初始化package.json  || npm  init  -y</li>
+<li>2,安装npm install 包名   || npm i 模块名</li>
+<li>3,卸载npm uninstall 包名   || npm un  模块名</li>
+<li>可以在文件package.json中的dependencied查看安装的模块</li>
+</ul>
+<hr>
+<p>数组排序模块化</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组第一个转大写，其余小写</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + str.slice(<span class="number">1</span>).toLowerCase()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;asdfaknfsakfnaksd&#x27;</span></span><br><span class="line">change(str)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组排序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortBy</span>(<span class="params">pro</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">item1, item2</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item1[pro] - item2[pro]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对外暴露</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">change</span>: change,</span><br><span class="line">    <span class="attr">sortBy</span>: sortBy</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  接受数据</span></span><br><span class="line"><span class="keyword">var</span> &#123; change, sortBy &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib.js&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> r = change(<span class="string">&#x27;adfna&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(r);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(change(<span class="string">&#x27;asdkfksfn&#x27;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AS&#x27;</span>, <span class="attr">age</span>: <span class="number">12</span>, <span class="attr">score</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;DS&#x27;</span>, <span class="attr">age</span>: <span class="number">13</span>, <span class="attr">score</span>: <span class="number">10</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;AE&#x27;</span>, <span class="attr">age</span>: <span class="number">11</span>, <span class="attr">score</span>: <span class="number">9</span> &#125;,</span><br><span class="line">]</span><br><span class="line"><span class="keyword">var</span> res = arr.sort(sortBy(<span class="string">&#x27;score&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<p>[tag type=”primary” outline]文件操作[/tag]</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// fs 是file-system 的简写，文件系统的意思</span></span><br><span class="line"><span class="comment">// 在node 中如果想进行文件操作，就必须引入 fs 这个核心模块</span></span><br><span class="line"><span class="comment">// fs.readFine 用来读取文件</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 读取文件 第一个参数要读取的文件路径，第二个是回调函数</span></span><br><span class="line"><span class="comment">// 成功 data 数据  error null</span></span><br><span class="line"><span class="comment">// 失败 data null  error  错误对象</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./1.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写文件第一个参数，路径 ；第二个参数，文件的内容；第三个参数，回调函数</span></span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./data.md&#x27;</span>,<span class="string">&#x27;大家好&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">[/collapse]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Path 模块</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// path 模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;a/b/c/index.js&#x27;</span></span><br><span class="line"><span class="comment">// 获取路径文件后缀名</span></span><br><span class="line"><span class="comment">// console.log(path.extname(url));</span></span><br><span class="line"><span class="comment">// 拼接给出的路径</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;a/b/c&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">&#x27;d/e/index.html&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log(path.join(a,b));</span></span><br><span class="line"><span class="comment">// 全局变量，表示当前的js的绝对路径</span></span><br><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>querystring 模块</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// querystring 模块</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>);</span><br><span class="line"><span class="comment">// 定义变量，查询字符串</span></span><br><span class="line"><span class="keyword">let</span> urls = <span class="string">&#x27;uname= zhangsan&amp;age=20&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> obj = querystring.parse(urls);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// 将对象转化成字符串</span></span><br><span class="line"><span class="keyword">let</span> os = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;grils&#x27;</span>,</span><br><span class="line">    <span class="attr">lova</span>: <span class="number">5000</span>,</span><br><span class="line">    <span class="attr">moeny</span>: <span class="number">12202</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = querystring.stringify(os);</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p>http</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 服务器要干嘛  提供服务：对，数据服务发请求  接受请求  处理请求给个反馈（发送相应） 注册request 请求事件*/</span></span><br><span class="line"><span class="comment">// 1 http 加载http 模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2创建web服务器</span></span><br><span class="line"><span class="comment">// 使用http.createServer()创建web服务器 返回Server实列</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3监听request请求事件        /* req请求，res响应 */</span></span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 简化2 3 步骤</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置响应头                   /* 文本数据 */</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/pain;charest=utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">// 向客户响应数据</span></span><br><span class="line">    res.end(<span class="string">&#x27;你好啊,陌生人&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4,监听端口号.</span></span><br><span class="line">server.listen(<span class="number">5555</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;端口5555已启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sass_less_stylus</title>
-    <url>/2022/05/11/sass_less_stylus/</url>
+    <url>/archives/2039e3ed.html</url>
     <content><![CDATA[<h1 id="面试官：说说对Css预编语言的理解？有哪些区别"><a href="#面试官：说说对Css预编语言的理解？有哪些区别" class="headerlink" title="面试官：说说对Css预编语言的理解？有哪些区别?"></a>面试官：说说对Css预编语言的理解？有哪些区别?</h1><p> <img src="https://static.vue-js.com/81cca1c0-a42c-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>Css</code> 作为一门标记性语言，语法相对简单，对使用者的要求较低，但同时也带来一些问题</p>
 <p>需要书写大量看似没有逻辑的代码，不方便维护及扩展，不利于复用，尤其对于非前端开发工程师来讲，往往会因为缺少 <code>Css</code> 编写经验而很难写出组织良好且易于维护的 <code>Css</code> 代码</p>
@@ -3154,7 +3154,7 @@
   </entry>
   <entry>
     <title>selector</title>
-    <url>/2022/05/14/selector/</url>
+    <url>/archives/9692e25d.html</url>
     <content><![CDATA[<h1 id="面试官：css选择器有哪些？优先级？哪些属性可以继承？"><a href="#面试官：css选择器有哪些？优先级？哪些属性可以继承？" class="headerlink" title="面试官：css选择器有哪些？优先级？哪些属性可以继承？"></a>面试官：css选择器有哪些？优先级？哪些属性可以继承？</h1><p> <img src="https://static.vue-js.com/f7dcd330-8fe1-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、选择器"><a href="#一、选择器" class="headerlink" title="一、选择器"></a>一、选择器</h2><p>CSS选择器是CSS规则的第一部分</p>
 <p>它是元素和其他部分组合起来告诉浏览器哪个HTML元素应当是被选为应用规则中的CSS属性值的方式</p>
@@ -3323,7 +3323,7 @@
   </entry>
   <entry>
     <title>single_multi_line</title>
-    <url>/2022/05/18/single_multi_line/</url>
+    <url>/archives/f7feebc7.html</url>
     <content><![CDATA[<h1 id="面试官：如何实现单行／多行文本溢出的省略样式？"><a href="#面试官：如何实现单行／多行文本溢出的省略样式？" class="headerlink" title="面试官：如何实现单行／多行文本溢出的省略样式？"></a>面试官：如何实现单行／多行文本溢出的省略样式？</h1><p> <img src="https://static.vue-js.com/ada8d840-a0e9-11eb-ab90-d9ae814b240d.png"></p>
 <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在日常开发展示页面，如果一段文本的数量过长，受制于元素宽度的因素，有可能不能完全显示，为了提高用户的使用体验，这个时候就需要我们把溢出的文本显示成省略号</p>
 <p>对于文本的溢出，我们可以分成两种形式：</p>
@@ -3418,7 +3418,7 @@
   </entry>
   <entry>
     <title>That gril</title>
-    <url>/2021/07/04/that-gril/</url>
+    <url>/archives/b7b51641.html</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
   <script id="hbeData" type="hbeData" data-hmacdigest="6fef2d6c87cb9b5f93c6b1d4076c2761a4993209fdd14536a865c52bd8b5978f">7a13521b6242615d832816f422e7dfef21dbb4d9f9d3a719e0fe269ee1c6688a063ce89a9db64539adcc63a2e255d805be8a50d13d44687301d7c068110dd13bc9b12b514d3756ada69087b19746ca0997bd187f56a6fcf930f8f0ebdf1a353b9761de7d7f9249740d8a11c7cada2c03322db9b7ee823f0d841f029530981df64e7afb059330a0abb828f7af7d23b52dddeae783766a2d231bebc266eee729dc9f84552af63af2849002b42263f77be782d43873d94327832f017206fdd0fedfbd9bf939c6842e02eb54a0b845864b5077b890e0446a359ed7561c2fe4829ca67fc8879e2ba71360f04c46057765037ae1bc9716e3355d209847b2a0071d3cd7a8bdb2f1fc24ca9acae957227b2e891a8207f0ee24ab1a08ec9bf5b907d1e3ab6e15a42c6e83780d7533b8b922c4a6ba337a411f6c2d872671ed19eec0ffd4e91cac6e83032fcf5d27da646d56597de4b9417813d3babd298f67d70ed99cafa9072a150a5d674b3f4e73355510ae6529c79354b28c467d56983445d9a547378a0aad267de22601003d8a5b484de69deeefcc9e668d01e8493139d588494f621765adbaca1944199f169819aae4d38cb316ec11b7d1aa02876d2874a4e568e92b3636e14d468b824be9a073a32d55c95e42fd34363b4a06c789c645d2bbd17c7b89c2eaf88c4930353d2587cedabda5d22879873c21b47c1564ec8fde80984b476bcc01c10247828c880bcf32ab37a3b0f3cf493d4b4b5e7398c05fc1a6b73e2e5a66cd88d805c5d603486ebbf0139eadb2e3974a77cc2915169e5eaed2af4d84d3f9a601bfc8045a6938abb77072af9685b300863cf3fbccee63bed423a328247e8355731235106d027d8578886f52ff9e5f4695daee04e0f8718db8be10e7117e1b9f53b2431337f6b45f167819207f905e982386b4373e0ad59b5c02784420f0a1843b02b91d41e7c2f3f43b162d60ee071e5676a0aa86935b10846601a8555a8505c591d1876efcc8940931750f02c96a8981151cfd5c2c7351ebe723b90bbb3b4a31232751b8423bc5481b5373e84c8c20aa30e4863e4b8ba7447d288daf74cccd830f68bc834417c69fe4247d9415397d93fb930e6e7786ed20ce96a13f80c0e31e45e3448db576992dd269ddd1ed469676978ee22ca11a9cfb8bad56d08be7f364c9c7c34c454f2dbf5fc87943567bae18d903e6092276349b100fcc3bcb998a965703dc3874afc03d2d5d5ac1cd7b9c4854dca9fa45088315be607c44d568638ec31c2be59cd2f095b53ccde0aed87651e31f7b6f90892c0769b970c1c336fe30f9f7382217b7498bb48ddcd2f7734288195f495a7e287dadcd07f9ca677c1018ad5d72a71185ce3ee26be127c332b4c8aa710cf69513db0739ecbd21603b6c384941285de04f2e601dcd88fd319f89c87e7e8c8ceaa7ecfc595a3e8e9d2cf4023b6175b9a75be45992917b546ee0333cfcde0a6a418df9c49b90bc070326ea76ce327d38e80fc38983810827842b4923de6d52c29ab7e5e2e52ae7b2e199e375eeb263c56830c1dd8ea9263848dbaeed59c4e2d0e2100efc10a1e86842f0ac9340432a0f8970bad957d4706f7afbda50fee62015a7a579e6f296ad40b7abb88f2bfd924ef4ef58e046157cf2e5e69c9e0240449a6ae407988db2ea2812439f83ca608ded21c02b2a87ec1e1e3139c82584197488ca838c7086417f50ae3fb01ea9a163ae252ca095be7f55a2deabbd62256dc9f37e63590fbcc10017cea2dde50c049f89c9b79b2992fb1fee944f7d62c95b9a2ca1c4d385731f3a0b433be3755d8cc539a86cfc573c55337ef5df129fbbfb28f4dacbce92523bbf4aaa7f4a7a763551f72939cfb50eef0f48dbbcdc9c47f02d3ec508d656e8a899c6ede3dacf81549048386d0bac376881ecc6115bc76bb11f78536dada785f5bb385c7e86b670125962d65a41dbb227e80ed4b6d0e6d4bf294487bf4557cf4303cd0273fab1b22ef2e2c5b8e8077d0943ceabd156843ee917d12f6e15b6d2e81deb67a79757242ce6d61b3f05b8c868899060f85dcd17f7fbc33b93d6dfd65bcd920ad7b17f2fe9c15345464c8fb5179c1572a588971b2e462c990089b474f6ba951c97616635e69ac0f8e098f9424cef5c11dcbcb99603b52d8e25e78b28a765a24db7c16413045a277644af428279707b58cffc3dc946aed148178d3b4e510fd151c536c4f6fa4350cdf22a388a9b30be816fb00cc748af7d80b44bc9445dc925d73b512abd18e473d78aa89588b89a186bba61c416fe39934435e1e292b17577ec771364aac47256f104910455a79f71e08161e867de6d7f6518ef6beaac0a89b2d561c99bb8024bfb91efdc2d1e728f115898528108c70b34af6a8b9f0a20c5cc2f8832d30ae5aec37067b7e9336a941897e0308945c01e4663c0996049de2f8c94b4a4fc856b9d64e912dd02abe623690b925e069c4ed0a12b8e4a2fdcf50752beb7f19b16491c586dc88364723bdf3753527e064f410334172641d4535e7ff9b8e9679145b7ab45955f8e1cc18d3b7bf4f91ba9e95b15ef3e765888c73db5b58a15fc154939a265252b463ef37b455136f7d05b842ab2c1e08b8a367a9565e182800eb745e4d7ca4014f3a95743a17badc1ccdb238fc28157a48664224185d4b298f702b7fe8ec5a36a2e9783bf2031939aeb8d904f833050f32894e5e2da00b6d5f7451072b6006bc340ab9cfc028b083448d9f7289b61060e8273f16f6a130738d03a2a3a72287d3461908b2fc662ddd37f73d188b0ab8de19079176fec0044d57f5425e7f4e5f26859bcafe1039b74602980e1ab2179ea62ca966dd8a3d7e8d272c0e1a409473ec531b6ecaf74b5aea5fbbd0cc25f5982885d6dad5de4e531a1dd4bdb2fb62a45230ce5e230499157fbb97d7063fbe8e851723ef770c045dbc883ff0a918f49fd6e0d50adf2f658227f8c0ce30967df3fac179cda4e0177bb797a08de3741736cc0a51ebe0b62ade3001eba164e528b220705774edaae079930f574db919cd00769e8303a95a34b091dfda02cace5246b16210369d70efb728dfd263b9bc759d86d93b792ba0a88adb659f03174cada27d2622f80f2cff44d97739772ab3d56dade4bc25dfd0c095d27c88df1cd78f4a8b7f3d951d219d106ea8457bf3e4e1672b3c497211901473d4264e5a8f9ebae40ebf0b9d081c426542e310ff2a8da1f9b12209a273e6a02e59f82ac84c81d373834f48cbc959281295e1c56de838f0b7ec1e4c283e6223095eafd2c1cc4c7ce1fedf46ee709de3aa493dec46a7a6132868b7c30138d0854c39d3d2ac9bad8b1c8f0ab7e06786285a6576b203385fcb48179bd81b5f8a1be57b3d821371b2fff0d564c8a92e01c8104514aeceda167d9ffedeeb93b337a917eb25f3c3fcc515d1282fc258b6921ad7195a0ef78a64a6e42aa29869ba8e156bdab06700188b15281668f21632ab652b6599a61e418681750e679d31dbe9c09adb4028441c0b077bf126751793ddefa51a9f5e33e835d476949d99b345e60d1a7ac502e306ce6b1920e1ee6c0f934c7db409d11f3eb11c44fe8270edada53a3b1064fe968fad11b156c42cde06d8b337a67c62b9102d069ca249c7d725af61404361871a062ea435a514166a7f0a3a79b94410dc9713c2e71f76dddba4f73c52bd31cc26a70eb3cf0f00f068b97631617f2ac0d8ae2236262e90ebfd540d78f47b6870fad8f195a40a8fd600b003f6a1490aeba74a208192eac0b7ef934b5e0b5e5e0646fa9423d3a6a2accc9fd2feeae7dde6907c7c23c443386d330b35a276a29ed05e92ba0b10845206826abdff7205fd98e93f3b53ab2cab6a261523f2b97346bd589829f21deefacb633ae2efd4ff2f55b56f7383f4a333f83f7f241c29d4b069f11c27fe8f4713bd7400b2431dc37c7c4ac51449314a0cd0b4b6de4034cf53b740427c7151483d3291161b3dc140f248a84f9498f3d7392214373c7304552e1510b0cd10da92d3ecaa405379481f1a67ea9ad612559843ee4efea021121be85f47d77d51823720140afdb4b9f7a719a9576ab0102d1554d7dc2991416825a7a481de03444c4d83e897bf79103ab03b4363367b199c56bf24053ae9ece0c29cd8ebae318fb9821adc55a917e1cc5c0d2187de816ca890278079a7e615860f47e7b7e2b1fe6118fc9f258ebaff89df5ec663cffe5184750dc27c4bd3ee337ca61b2c01b5a0c7f34fe2eba5835da1853b077edc94cb9ed85bcef5e6ff94530803bd16717191bfb03d740a32ce5d050eba1ded545d0ad101b7b554087bd699e193de70992935df3d80e1dc37568d024023c9d25c65c7d56d21821344dae22115dc88da726e5fd8ab799fdc2abb7bb502829af285946ba2287bec857a05d57864402f40bb33c350856161d17c8a8e86cb6968f382237008a069f9e089ff0460c86d73f67323cb4b7815ae78b09ac4f6c8bf24bd0e33e1ee3f8099bb97ff78a149984592764ead7a63ec6cb615db13ee5ae87cdb47d2feb01b7cbeb879daf0e483f1e467aa878a0bfb0454c724e9782ee7280a2917c6f418d62155c90e934bac257c4c7096d2aab9eed6d3e356ab5f2511cac349c4dd825aff86bab80296044af6605816ea268272b35ad0002f006db09d6ca512993b2e6ef2202d7f3d7506232b03b6f593c01d52aa76b276ef78bdecc8e2231e39ff24a181b98106fe07e15a93f5b6e1a4f3ee5de55de20ab08c7241915918f2b9f88a4dfb189c3d3e26d701eff16d3fd2facdc444cb92d8eba1c4b865c79d8ea3c4bceebbccbc1d39cb93960c30a494f80f6c79653d0833ee0e92ffa21513486f9aa9f8940b6b94ae95b8ef0a6bbda1f0d71a0d22dd5f20a9ba2ce4e8788f9c16b2a74fe5981b6dabd989399c1888dfb0fe0e88b4caf8f4a6e083ecb2a06f9644c64444feb119b59bcf2db76717991cdd50c8ce8451026ac9129cfcb1ded3d10440e5fbcbc5713e6c64fdfc19528fbc6d5c65fdfcc0788c717c2166a0cc41c8574f41adcd2e188187a483e2af2999f703c658d46fb326e6c33bd6acd6012ba822b07015cc7bc2f70e0dfd700bc654935ed3adb5f1d9d48bb2ca8426cde2515e25b967922b06b77b8779a2ddad990ada8a8935a076d16b98390d945c7750625d285555f4c85fe5dea000165c1541c6f5a875a0a3bd385a3a555b018a1174c74cdafd9cd175226c37eab8968bb34756921ee50afd74dd9e0472f4a3b400761050511bf004165c6192301dd6465c7a757650788a213b315e06481a7539c7dd5cdbe7b85889011201d035f8de697184bec8a823772f8d26dc688e389713bf85385fda281313db22bfa488ba0a4ac35934eea342a779dcbd2e95e265ec3b51e16e6b26036d2166c65d9b816f56ed0bb710da4a3495e07c0ed4e707cd396228cff23d942960c18039484a76d10f22bbcdc6f1d6213f09a90ea38d74d8fbfdc518d51d34fc1fe7c49862817e1945c003b71fc7e66b93fba734b5248ae2ad1fc7181012265ab5f7f8a52d0c0b528fcc9c95619f0fc88f6d48ba7daa535e758dc3de74971ac48a6f9240aaac621792b11473b06cefbd5683cd0b15b86f39a40e0246ce01140d06280aa3ff80e36794c7ece595b64c6bb7392dc7316dac356e79b7f7d1b8a6f8e101747523232702b89a8cb4efbe4868b8f0e8e46c61109f1448bd70302c3ced926a6e61b0518ea1791dabd16d153c4cc1b7f5511ac4a6475c0aac2f240281f14c108d3d6f2d4bdf05badc3b95b9f58042b2b32603f27c3d6de5f893ee89bc1630b77b8304335556eabfd85db3ff6b839c4476602fa7375fbe108f94fb2f52610121b0e75905abbba8feb097c7ce78b9899bfc6f01e5804a877f90a09e49a556cc8969d49d6ce1918bf1d8d33d854f3f69dfc2b876522a832378b64758c09996bc074520492c0de96aa6543d311e3e9d59cee3aebcdee084303c4b341984e4d21f7060419adbbf27260d5db66e7bd16813c17d22eefb03a15b22fad99edaca0a8ba7183bc667542a11b8cf470e7dd8488043c68eda101c712b23596a4ff7e88ff1f44a746c55a7daa1c8099144cd5d8dae6451c273242fdbd678e6db8e3db28a401fa409527e96832ffeb2bc8bef52fc01e2b99365c57fefb951955658a65327297412f5f6a129149d59bc65cb5a29e6d8d9627ef1646fcc72b0bdd709da72193e5d4462d25f95a500fe1f1e474614d119da670363e45e853c2c696412ca459fedaa4aeb84d7aacc426097f34028cd55250b959db8cbf6aa41b77b044a3478262bab6b39b57e37326b95caab2734564bc25c991967b4d9eaf062330cba1df6a7e67f710011bfee4fd7966d3651e110e914a1c39af9e2a8296bb8446843e5892467ac39174d9282e57d5585060b24db30d61a5b8c1d44103a76a2eedeedf5f77f879f85c585b3da286c2482d0e5f9ce213152d8e311df7fa566dd0b090026c401182755cc2d1aafb523e367178abd64fdda1e5566f90415efa7367df588201f66a66e8bca81d6d8b62f96070a8ab0ea2dc792c84939dc901ad8303cde839f393ff594006b7736e81e556a74540ed97d9df824519965609fab19f261722f2ae9a0e3886774e21daadf19911a0e163453281923da71fe1f34c156b3852382d6fc2ead99097cdf0e74c3c5faeaf809e54e2c8d086a40e4494f710914983b1e48399b6f5c9e70abb0d321bd6de45adb2fbb3c079d556f56ebab406f981fa01e3010a435eb95fb97d186a9779adb7f8b7f55583db1b1a4ae2c675bc2c69a6949029d695c3fd3cd88c8606f38d58d0a7fada8920558bfa3b6f8b165535d694f923e1ea8fac174c5f24a600f2561cbfa010af53d8048bc35a684e155631536d7cb0a3b60d613e045a11a74d9a627bb567544f375938bfdfad18e9acc175f09a7e77b4cf0b7e62a3b7cee8231dc04543d9ae9700f4c2221831af114d6dc55cba0093e26a82368c93eed34ed64ab38e66abd82543f2172ec7f8fbe49f5628fbc83b801314b8f7d2f240beb43cb2793114f1f21972109c18b04242c1fbf7133ac3cd5648a1d314a64aadf22a9f5f0cff440b448255ac3f5881eb805c5c93d7cc122df87bb7b107eea97aaa85167233d1d80a28e07c514612d613d47feb7c7f7d23f7635d9dd8aaa9cb4f17ffe73e88963006127cfcf6c81cdd9c13ae4624f64490ed666dfd3f81306aacf78ec0a0d6e367710403d05c8fc319fb5b38eb2478d359113dbe9b71d48947de78dfed993c672e0a0c3ef5869ae19d464fa25fc9830cdfc3293a0d7508ee5482809547d9e9c41c0c0eb9233df2faa23e72c9ebe41bc5f484737e81e4f2523a2bd146915b1b7195ba237bcfd81b653d0ea100643189bf324831eb0785f9501f959908858219598dd8beaeb24ec1e94acfc1ce7df575e9e7ba80549ea2b422adfda87b57c5b982e98f1cb2de38d6004ba3e5fc3a5cebe1846b8542930c2a47c36cbf7c3e05e092f6160658879812e72cb147b0a987943c014daaf4da96f9d8caffd8b09b2ad8e3325806254868b480c5ff71c982e449c4826092d824185738edc2a86222ae423c98fbd1ed904bd10661b366b0481e9e82293dddc6a043026b2ca9978f7236a72c3347ea69732dded63df402e52657fc443698f946bdac042c09570b139cd6af1b0478cef23d7fe6aeab75f29930d420095e9bfcc7108a786c0e619479ee55840c88a89fd9f9ab1dab4da6e5f50bd85cd81991c81b02fb489252374f30d63ca9b5c8f9c881db4831118f3c5fcb49b077a162adff7f2abc86fe8fc860451ffe7eb347fd2a93f8bc24246db6c36650506fb528a03ee063e259bd73efc8f1ed63284c2d9e2585a27073d8fd7a1a88ecdc329fe3fb0af76d8c32a0b99f669d989d8e5f2ae37056de06c3a0b53942f49782be57fb41c56ded63d42893930c6f71f33221d1ba25861281ebc033f3d37cdea8f9bd7437aea7bd5f5dddc019e15928feb8902bec639960b17bcd492d944ba51ae6b0b277f46791c5a831164098d550b5be71c1dfab249f7ffe509453495906ab116615149e0a9eb04b91f86f007892cc042d3cf6057d1a51bfd3095a2f8844adc495d20c673ef9387bed5792ca8a59c1532765643588556584395fc798cd503a70507176bf0fe962d904b2d22f75f6634df0ba26f59a3d73e988df643ce7233e7ced9ae15ea64e816b7a124108867f2544cd05cb121dcf9dbabde06aa095ef7cad4042afa7f01c387ab44214d1b91da2f35a93937f9b31316dd06596593114626f8e9389b955625d7844faca8ade274114fe43c211279f3b41b3aebd968ac4c9b76399fd85b60114a372320e8190785a0d3b20ffb7cf5e776318b3bceb3cba846ff42983c21a3a79b9450e9a15a7ed7d694c4b175ab04de36d6f7883e35cf9cbfc8cbf15a241836c86f32db37ebc04c673ff5fab449d91a77206d00f17d1bb2db79e4fc734ab4034dad17f5990affaedaaabf25a84f03eb5657f1ad04828b5ef67626c3c6a604cb6b47e7be615a895b189d8892f9731dd3d3992f1a4af7b3ff10ad9a5095a610db5fe583ca2f7786a639d6c69877fe4681bf2bd928c7a06726f4a96fcd0d56cd6e5dbb457d5d35bce9f0b7de16cf90a02d517e9df2566ffd1dc5a9ff3c2c9809a00cb18d0a4cc8f012e52a397d05bd6b84a74c40b2c91016ce8c04d1886f7b0725830974d0e6c84df1b5a374528647c2594537e9d4b9dc8f4adb43ae423059b85d933cfdba6508daaf1ba9ac4749860806dcf341a8ad801ea5c135e3929172194e0d8f276de855c05288f68f09a0137ef3c29a036e963a8e351f0f083a0f1eda07c6a184c3e30cd00e78cd7b9ce90e4bccf37b1c94d3e5617fb03e58c3c914eaf356aabd8824cbd79bd107ae38a6b125aa76ab16980a84c7ae708e906b1158dc515d63a05046d239a2507c827ea2e7f8f5cbce1f369312f94e9ced881aa13521608b1d735bbba5723281b5088ff9d6131a5f31088f723f8a2adba7fe3e4456f3d807be4dd817d26047a5581254dd4bf945be22531fa878cfb8cd7b0c88ab8d01ecae7f6c68ca3a6f046b79a29ae1d143567998b0a258548721e66499fa38d8bccc39d03777326c03be24844a204821c00f39ba3411ae2df85dfcdba08fa27ac79888592f28fb3a4f084a5f20d4c5d11b9680e05bada97657510f1ba6d4d9a3ed8044d847c83bacdcb8e710ce8293a8bb1b1ca03ab6cc6eedd81a397112b49148d94b7b394a9213013895636411ed411845468aae118cb0c961787239b2836384e74308e2e4896a31c90d36c957640f437da4658b4adcb16d4111be389ef4f89c6e0ba901097d4b9befd7f54398e4358b6aba53780de75c76de326c0ad6870f00eb8f91cee34ac5a7a77b81630146bbe392758ed9b9809f1a4f70bc7a8a8a3559265fb365cf47e855f4bdb89c1d47fbfaef071ea08ce57c7962cc43b4a1301ea3adefbcd38a5b29f19c1e538d8393d73cec93fa3ee0ef8e6175b819a7a3b4e50c5f8d125a4a15facab16fd40ddc1e217833b97aa2d4d68c1d8dc155a42ddaa6699433bf0590415e945600832b5249107bb594b454dd1e1c63a49231a86cb5359a2d4b669d4415da056253d57b51b0becfa005754ea28ac18a278ed3ce06aa0cfbc9eb452786b79f35077f45ff2833db2402318e5290e8b28ad204731792c4a62296fed1fe0954c9f7ac3567448e590eb5ac3d6efe5cded1ede3eded60c59c18a17eb3c8567c64a98842a0821af65d2f96c3aacc31b2f740e415d2b0a0d8b80ce00c9d3707d7ad9db4839</script>
   <div class="hbe hbe-content">
@@ -3441,7 +3441,7 @@
   </entry>
   <entry>
     <title>triangle</title>
-    <url>/2022/05/17/triangle/</url>
+    <url>/archives/df976d87.html</url>
     <content><![CDATA[<h1 id="面试官：CSS如何画一个三角形？原理是什么？"><a href="#面试官：CSS如何画一个三角形？原理是什么？" class="headerlink" title="面试官：CSS如何画一个三角形？原理是什么？"></a>面试官：CSS如何画一个三角形？原理是什么？</h1><p><img src="https://static.vue-js.com/bd310120-a279-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在前端开发的时候，我们有时候会需要用到一个三角形的形状，比如地址选择或者播放器里面播放按钮</p>
 <p> <img src="https://static.vue-js.com/d6d8ff60-a279-11eb-85f6-6fac77c0c9b3.png"></p>
@@ -3507,7 +3507,7 @@
   </entry>
   <entry>
     <title>visual_scrolling</title>
-    <url>/2022/05/18/visual_scrolling/</url>
+    <url>/archives/9370d73f.html</url>
     <content><![CDATA[<h1 id="面试官：如何使用css完成视差滚动效果"><a href="#面试官：如何使用css完成视差滚动效果" class="headerlink" title="面试官：如何使用css完成视差滚动效果?"></a>面试官：如何使用css完成视差滚动效果?</h1><p> <img src="https://static.vue-js.com/1b2d33e0-a18d-11eb-85f6-6fac77c0c9b3.png"></p>
 <h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>视差滚动（Parallax Scrolling）是指多层背景以不同的速度移动，形成立体的运动效果，带来非常出色的视觉体验</p>
 <p>我们可以把网页解刨成：背景层、内容层、悬浮层</p>
@@ -3573,7 +3573,7 @@
   </entry>
   <entry>
     <title>webpack</title>
-    <url>/2022/03/21/webpack/</url>
+    <url>/archives/b9f20a20.html</url>
     <content><![CDATA[<h3 id="tag-webpack介绍-tag"><a href="#tag-webpack介绍-tag" class="headerlink" title="[tag]webpack介绍[/tag]"></a>[tag]webpack介绍[/tag]</h3><ul>
 <li> 基于NodeJS实现的模块打包工具， 就是一个第三方包</li>
 <li> 把很多文件打包整合到一起, 缩小项目体积, 提高加载速度</li>
@@ -3658,7 +3658,7 @@
   </entry>
   <entry>
     <title>星星落落</title>
-    <url>/2021/07/08/%E6%98%9F%E6%98%9F%E8%90%BD%E8%90%BD/</url>
+    <url>/archives/84a91e69.html</url>
     <content><![CDATA[  <!-- header -->
   <div class="container grid-sm s-content header">
     <div class="column col-12">
@@ -3985,7 +3985,7 @@
   </entry>
   <entry>
     <title>Es6</title>
-    <url>/2021/07/02/Es6/</url>
+    <url>/archives/42b82995.html</url>
     <content><![CDATA[<h2 id="ES6语法"><a href="#ES6语法" class="headerlink" title="ES6语法"></a>ES6语法</h2><div id="chakhsu" class="blog-title"></div> <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } /*以下内容自定义修改*/ var l = "这个世界", o = ["没什么好畏惧的，反正我们只来一次。", ].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); </script> <div>
 
 
@@ -4094,7 +4094,7 @@
   </entry>
   <entry>
     <title>ajax</title>
-    <url>/2022/03/21/ajax/</url>
+    <url>/archives/c5a6a264.html</url>
     <content><![CDATA[<p> [hint]Http协议是什么？[/hint]</p>
 <ul>
 <li>http协议（ hypertext transport protocol协议）【超文本传输协议】，详细规定了浏览器和万维网之间通信的的规则 ；<br>[tag type=”primary” outline]常见状态码&amp;含义[/tag]</li>
@@ -4225,7 +4225,7 @@
 <li>初始化</li>
 <li>git init    初始化配置，此时会出现一个隐藏的文件（.git）</li>
 <li>git config –global user.name “xxx”    配置用户名</li>
-<li>git config –global user.email “<a href="mailto:&#x78;&#120;&#120;&#x40;&#88;&#88;&#x58;&#x2e;&#x63;&#x6f;&#x6d;">&#x78;&#120;&#120;&#x40;&#88;&#88;&#x58;&#x2e;&#x63;&#x6f;&#x6d;</a>“   配置邮箱<br>[tag type=”info” outline]查看状态[/tag]</li>
+<li>git config –global user.email “<a href="mailto:&#x78;&#120;&#120;&#x40;&#x58;&#88;&#88;&#46;&#99;&#111;&#109;">&#x78;&#120;&#120;&#x40;&#x58;&#88;&#88;&#46;&#99;&#111;&#109;</a>“   配置邮箱<br>[tag type=”info” outline]查看状态[/tag]</li>
 <li>git status    查看当前版本状态（是否修改）</li>
 <li>git add .    增加当前的更改过的文件   提交到暂存区</li>
 <li>git commit -m  “提交仓库”  并加以注释</li>
@@ -4252,7 +4252,7 @@
 <li> 1.01 在Enter file in which to save the key (中时配置好的文件地址);</li>
 <li> 1.02 后缀为.pub 是生成后的密钥；</li>
 <li> 1.03打开github 点击头像选择Settings， 点击 SSH and GPG keys，在key中输入生成的密钥，</li>
-<li> 1.1  输入  $ ssh -T <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>  注意不是你的邮箱    在输入 yes </li>
+<li> 1.1  输入  $ ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>  注意不是你的邮箱    在输入 yes </li>
 <li> 1.2 若出现 Hi freeXXXXX! You’ve successfully authenticated, but GitHub does not provide shell access.</li>
 <li> 1.3 证明成功</li>
 <li> 1.4 若出现 Hi “用户名” You’ve successfully ‘github.com does not provide shell access.</li>
@@ -4309,7 +4309,7 @@
   </entry>
   <entry>
     <title>vue</title>
-    <url>/2022/03/21/vue/</url>
+    <url>/archives/c0add594.html</url>
     <content><![CDATA[<p>[tag]vue是什么[/tag]</p>
 <ul>
 <li>官网介绍|地址：<a href="https://cn.vuejs.org/v2/guide/">https://cn.vuejs.org/v2/guide/</a></li>

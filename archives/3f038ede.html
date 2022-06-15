@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hide_attributes | freelaeder</title><meta name="keywords" content="css面试,hide_attributes"><meta name="author" content="freelaeder"><meta name="copyright" content="freelaeder"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="面试官：css中，有哪些方式可以隐藏页面元素？区别? 一、前言在平常的样式排版中，我们经常遇到将某个模块隐藏的场景 通过css隐藏元素的方法有很多种，它们看起来实现的效果是一致的 但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合下使用哪一种方法 二、实现方式通过css实现隐藏元素方法有如下：  display:none visibility:hidden opacity:0 设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hide_attributes">
+<meta property="og:url" content="https://freelaeder.github.io/archives/3f038ede.html">
+<meta property="og:site_name" content="freelaeder">
+<meta property="og:description" content="面试官：css中，有哪些方式可以隐藏页面元素？区别? 一、前言在平常的样式排版中，我们经常遇到将某个模块隐藏的场景 通过css隐藏元素的方法有很多种，它们看起来实现的效果是一致的 但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合下使用哪一种方法 二、实现方式通过css实现隐藏元素方法有如下：  display:none visibility:hidden opacity:0 设置">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://freelaeder.github.io/img/62.png">
+<meta property="article:published_time" content="2022-05-05T13:31:00.000Z">
+<meta property="article:modified_time" content="2022-06-09T02:03:04.361Z">
+<meta property="article:author" content="freelaeder">
+<meta property="article:tag" content="css面试">
+<meta property="article:tag" content="hide_attributes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://freelaeder.github.io/img/62.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://freelaeder.github.io/archives/3f038ede"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="code-OYFyQ01IKH"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":366},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: freelaeder","link":"Link: ","source":"Source: freelaeder","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'hide_attributes',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-09 10:03:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/header.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">43</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">41</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> freelaeder</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> hole</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/fine/"><i class="fa-fw fas fa-list"></i><span> fine</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> friends</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> me</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/62.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">freelaeder</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> freelaeder</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> hole</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/fine/"><i class="fa-fw fas fa-list"></i><span> fine</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> friends</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> me</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">hide_attributes</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-05-05T13:31:00.000Z" title="Created 2022-05-05 21:31:00">2022-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-06-09T02:03:04.361Z" title="Updated 2022-06-09 10:03:04">2022-06-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/css/">css</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">922</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>3min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="hide_attributes"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="面试官：css中，有哪些方式可以隐藏页面元素？区别"><a href="#面试官：css中，有哪些方式可以隐藏页面元素？区别" class="headerlink" title="面试官：css中，有哪些方式可以隐藏页面元素？区别?"></a>面试官：css中，有哪些方式可以隐藏页面元素？区别?</h1><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://static.vue-js.com/ccf96f50-929a-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在平常的样式排版中，我们经常遇到将某个模块隐藏的场景</p>
+<p>通过<code>css</code>隐藏元素的方法有很多种，它们看起来实现的效果是一致的</p>
+<p>但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合下使用哪一种方法</p>
+<h2 id="二、实现方式"><a href="#二、实现方式" class="headerlink" title="二、实现方式"></a>二、实现方式</h2><p>通过<code>css</code>实现隐藏元素方法有如下：</p>
+<ul>
+<li>display:none</li>
+<li>visibility:hidden</li>
+<li>opacity:0</li>
+<li>设置height、width模型属性为0</li>
+<li>position:absolute</li>
+<li>clip-path</li>
+</ul>
+<h3 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h3><p>设置元素的<code>display</code>为<code>none</code>是最常用的隐藏元素的方法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>:none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将元素设置为<code>display:none</code>后，元素在页面上将彻底消失</p>
+<p>元素本身占有的空间就会被其他元素占有，也就是说它会导致浏览器的重排和重绘</p>
+<p>消失后，自身绑定的事件不会触发，也不会有过渡效果</p>
+<p>特点：元素不可见，不占据空间，无法响应点击事件</p>
+<h3 id="visibility-hidden"><a href="#visibility-hidden" class="headerlink" title="visibility:hidden"></a>visibility:hidden</h3><p>设置元素的<code>visibility</code>为<code>hidden</code>也是一种常用的隐藏元素的方法</p>
+<p>从页面上仅仅是隐藏该元素，DOM结果均会存在，只是当时在一个不可见的状态，不会触发重排，但是会触发重绘</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hidden</span>&#123;</span><br><span class="line">    <span class="attribute">visibility</span>:hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给人的效果是隐藏了，所以他自身的事件不会触发</p>
+<p>特点：元素不可见，占据页面空间，无法响应点击事件</p>
+<h3 id="opacity-0"><a href="#opacity-0" class="headerlink" title="opacity:0"></a>opacity:0</h3><p><code>opacity</code>属性表示元素的透明度，将元素的透明度设置为0后，在我们用户眼中，元素也是隐藏的</p>
+<p>不会引发重排，一般情况下也会引发重绘</p>
+<blockquote>
+<p>如果利用 animation 动画，对 opacity 做变化（animation会默认触发GPU加速），则只会触发 GPU 层面的 composite，不会触发重绘</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.transparent</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于其仍然是存在于页面上的，所以他自身的的事件仍然是可以触发的，但被他遮挡的元素是不能触发其事件的</p>
+<p>需要注意的是：其子元素不能设置opacity来达到显示的效果</p>
+<p>特点：改变元素透明度，元素不可见，占据页面空间，可以响应点击事件</p>
+<h3 id="设置height、width属性为0"><a href="#设置height、width属性为0" class="headerlink" title="设置height、width属性为0"></a>设置height、width属性为0</h3><p>将元素的<code>margin</code>，<code>border</code>，<code>padding</code>，<code>height</code>和<code>width</code>等影响元素盒模型的属性设置成0，如果元素内有子元素或内容，还应该设置其<code>overflow:hidden</code>来隐藏其子元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hiddenBox</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;     </span><br><span class="line">    <span class="attribute">border</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">overflow</span>:hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：元素不可见，不占据页面空间，无法响应点击事件</p>
+<h3 id="position-absolute"><a href="#position-absolute" class="headerlink" title="position:absolute"></a>position:absolute</h3><p>将元素移出可视区域</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span> &#123;</span><br><span class="line">   <span class="attribute">position</span>: absolute;</span><br><span class="line">   <span class="attribute">top</span>: -<span class="number">9999px</span>;</span><br><span class="line">   <span class="attribute">left</span>: -<span class="number">9999px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：元素不可见，不影响页面布局</p>
+<h3 id="clip-path"><a href="#clip-path" class="headerlink" title="clip-path"></a>clip-path</h3><p>通过裁剪的形式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span> &#123;</span><br><span class="line">  <span class="attribute">clip-path</span>: <span class="built_in">polygon</span>(<span class="number">0px</span> <span class="number">0px</span>,<span class="number">0px</span> <span class="number">0px</span>,<span class="number">0px</span> <span class="number">0px</span>,<span class="number">0px</span> <span class="number">0px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：元素不可见，占据页面空间，无法响应点击事件</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>最常用的还是<code>display:none</code>和<code>visibility:hidden</code>，其他的方式只能认为是奇招，它们的真正用途并不是用于隐藏元素，所以并不推荐使用它们</p>
+<h2 id="三、区别"><a href="#三、区别" class="headerlink" title="三、区别"></a>三、区别</h2><p>关于<code>display: none</code>、<code>  visibility: hidden</code>、<code>opacity: 0</code>的区别，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">display: none</th>
+<th align="left">visibility: hidden</th>
+<th>opacity: 0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">页面中</td>
+<td align="left">不存在</td>
+<td align="left">存在</td>
+<td>存在</td>
+</tr>
+<tr>
+<td align="left">重排</td>
+<td align="left">会</td>
+<td align="left">不会</td>
+<td>不会</td>
+</tr>
+<tr>
+<td align="left">重绘</td>
+<td align="left">会</td>
+<td align="left">会</td>
+<td>不一定</td>
+</tr>
+<tr>
+<td align="left">自身绑定事件</td>
+<td align="left">不触发</td>
+<td align="left">不触发</td>
+<td>可触发</td>
+</tr>
+<tr>
+<td align="left">transition</td>
+<td align="left">不支持</td>
+<td align="left">支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td align="left">子元素可复原</td>
+<td align="left">不能</td>
+<td align="left">能</td>
+<td>不能</td>
+</tr>
+<tr>
+<td align="left">被遮挡的元素可触发事件</td>
+<td align="left">能</td>
+<td align="left">能</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cnblogs.com/a-cat/p/9039962.html">https://www.cnblogs.com/a-cat/p/9039962.html</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">freelaeder</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://freelaeder.github.io/archives/3f038ede.html">https://freelaeder.github.io/archives/3f038ede.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener external nofollow noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/css%E9%9D%A2%E8%AF%95/">css面试</a><a class="post-meta__tags" href="/tags/hide-attributes/">hide_attributes</a></div><div class="post_share"><div class="social-share" data-image="/img/62.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/archives/78ca6597.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/wall1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">layout_painting</div></div></a></div><div class="next-post pull-right"><a href="/archives/2e20d937.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/56.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">grid</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/archives/c5a97815.html" title="BFC"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-01</div><div class="title">BFC</div></div></a></div><div><a href="/archives/8d5284dc.html" title="animation"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">animation</div></div></a></div><div><a href="/archives/8a9483a.html" title="box"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-02</div><div class="title">box</div></div></a></div><div><a href="/archives/40f0eb24.html" title="center"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/18.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-03</div><div class="title">center</div></div></a></div><div><a href="/archives/9a0dce2d.html" title="column_layout"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/25.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-03</div><div class="title">column_layout</div></div></a></div><div><a href="/archives/7c942302.html" title="css3_features"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/27.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-04</div><div class="title">css3_features</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/header.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">freelaeder</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">43</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">41</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">热爱可抵山海</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9Acss%E4%B8%AD%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%E5%8F%AF%E4%BB%A5%E9%9A%90%E8%97%8F%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0%EF%BC%9F%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">面试官：css中，有哪些方式可以隐藏页面元素？区别?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">二、实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none"><span class="toc-number">1.2.1.</span> <span class="toc-text">display:none</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#visibility-hidden"><span class="toc-number">1.2.2.</span> <span class="toc-text">visibility:hidden</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#opacity-0"><span class="toc-number">1.2.3.</span> <span class="toc-text">opacity:0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEheight%E3%80%81width%E5%B1%9E%E6%80%A7%E4%B8%BA0"><span class="toc-number">1.2.4.</span> <span class="toc-text">设置height、width属性为0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position-absolute"><span class="toc-number">1.2.5.</span> <span class="toc-text">position:absolute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clip-path"><span class="toc-number">1.2.6.</span> <span class="toc-text">clip-path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.2.7.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">三、区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/4dbabb82.html" title="copy"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(8).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="copy"/></a><div class="content"><a class="title" href="/archives/4dbabb82.html" title="copy">copy</a><time datetime="2022-05-29T03:31:00.000Z" title="Created 2022-05-29 11:31:00">2022-05-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/9e5f33b7.html" title="continue_to_upload"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(7).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="continue_to_upload"/></a><div class="content"><a class="title" href="/archives/9e5f33b7.html" title="continue_to_upload">continue_to_upload</a><time datetime="2022-05-28T15:31:00.000Z" title="Created 2022-05-28 23:31:00">2022-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/f3d3ee5b.html" title="BOM"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BOM"/></a><div class="content"><a class="title" href="/archives/f3d3ee5b.html" title="BOM">BOM</a><time datetime="2022-05-25T13:31:00.000Z" title="Created 2022-05-25 21:31:00">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/10bf1714.html" title="context_stack"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(6).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="context_stack"/></a><div class="content"><a class="title" href="/archives/10bf1714.html" title="context_stack">context_stack</a><time datetime="2022-05-24T15:31:00.000Z" title="Created 2022-05-24 23:31:00">2022-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/48078dd1.html" title="closure"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(4).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="closure"/></a><div class="content"><a class="title" href="/archives/48078dd1.html" title="closure">closure</a><time datetime="2022-05-24T01:31:00.000Z" title="Created 2022-05-24 09:31:00">2022-05-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By freelaeder</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4J81xwLy9vrYOytbLOns5bwe-gzGzoHsz',
+      appKey: 'B9fhoOdq525uv4Q5v7ugQj6q',
+      placeholder: '您不再踩踩嘛ಠ_ಠ',
+      avatar: 'hide',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '5',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/toos.js"></script><script src="/js/flower.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":null,"use":"live2d-widget-model-koharu","display":{"position":"left","width":100,"height":100},"mobile":{"show":true},"react":null,"opacity":0.9});</script><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
