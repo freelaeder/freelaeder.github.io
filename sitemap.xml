@@ -466,6 +466,13 @@
   </url>
   
   <url>
+    <loc>https://freelaeder.github.io/tags/BOM/</loc>
+    <lastmod>2022-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://freelaeder.github.io/tags/BTC/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -474,13 +481,6 @@
   
   <url>
     <loc>https://freelaeder.github.io/tags/css%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2022-06-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freelaeder.github.io/tags/BOM/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -550,14 +550,14 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/column-layout/</loc>
+    <loc>https://freelaeder.github.io/tags/closure/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/closure/</loc>
+    <loc>https://freelaeder.github.io/tags/column-layout/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -613,14 +613,14 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/grid/</loc>
+    <loc>https://freelaeder.github.io/tags/flexbox/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/flexbox/</loc>
+    <loc>https://freelaeder.github.io/tags/grid/</loc>
     <lastmod>2022-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
