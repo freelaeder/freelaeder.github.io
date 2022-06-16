@@ -2,6 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://freelaeder.github.io/archives/39a5927a.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/archives/82d79681.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/archives/82d79681.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/archives/7331f3bb.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/archives/c7f4347.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/archives/f1d0391c.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/archives/47c3840f.html</loc>
+    
+    <lastmod>2022-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://freelaeder.github.io/archives/b51bdcfa.html</loc>
     
     <lastmod>2022-06-16</lastmod>
@@ -785,6 +848,20 @@
   </url>
   
   <url>
+    <loc>https://freelaeder.github.io/tags/vue3/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/tags/composition/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://freelaeder.github.io/tags/context-stack/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -890,7 +967,7 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/vue3/</loc>
+    <loc>https://freelaeder.github.io/tags/gametime/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -974,7 +1051,28 @@
   </url>
   
   <url>
+    <loc>https://freelaeder.github.io/tags/modal-component/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/tags/my-carousel/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://freelaeder.github.io/tags/new/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/tags/node/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -988,7 +1086,14 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/node/</loc>
+    <loc>https://freelaeder.github.io/tags/performance/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/tags/proxy/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1009,14 +1114,14 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/responsive-layout/</loc>
+    <loc>https://freelaeder.github.io/tags/sass-less-stylus/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/sass-less-stylus/</loc>
+    <loc>https://freelaeder.github.io/tags/responsive-layout/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1066,6 +1171,13 @@
   
   <url>
     <loc>https://freelaeder.github.io/tags/his/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/tags/treeshaking/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

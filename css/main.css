@@ -166,6 +166,8 @@ p .just {
   color: transparent !important;
 }
 
+
+
 /* friends 人物名称 */
 .flink-item-name {
   background: linear-gradient(to right, red, #511067, blue, black);
@@ -267,6 +269,7 @@ p .just {
 }
 
 /* 字数统计 */
+
 .post-meta-wordcount {
   background: linear-gradient(
     to right,
