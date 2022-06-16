@@ -914,13 +914,6 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/me/</loc>
-    <lastmod>2022-06-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://freelaeder.github.io/tags/less-12px/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -928,14 +921,21 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/memory-leak/</loc>
+    <loc>https://freelaeder.github.io/tags/loss-accuracy/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/loss-accuracy/</loc>
+    <loc>https://freelaeder.github.io/tags/me/</loc>
+    <lastmod>2022-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freelaeder.github.io/tags/memory-leak/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1005,14 +1005,14 @@
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/selector/</loc>
+    <loc>https://freelaeder.github.io/tags/single-multi-line/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freelaeder.github.io/tags/single-multi-line/</loc>
+    <loc>https://freelaeder.github.io/tags/selector/</loc>
     <lastmod>2022-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
