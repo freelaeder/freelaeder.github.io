@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dp_px_dpr_ppi | freelaeder</title><meta name="keywords" content="css面试,dp_px_dpr_ppi"><meta name="author" content="freelaeder"><meta name="copyright" content="freelaeder"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？  一、背景在css中我们通常使用px作为单位，在PC浏览器中css的1个像素都是对应着电脑屏幕的1个物理像素 这会造成一种错觉，我们会认为css中的像素就是设备的物理像素 但实际情况却并非如此，css中的像素只是一个抽象的单位，在不同的设备或不同的环境中，css中的1px所代表的设备物理像素是不同的 当我们做移动端开发时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dp_px_dpr_ppi">
+<meta property="og:url" content="https://freelaeder.github.io/archives/14015a55.html">
+<meta property="og:site_name" content="freelaeder">
+<meta property="og:description" content="面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？  一、背景在css中我们通常使用px作为单位，在PC浏览器中css的1个像素都是对应着电脑屏幕的1个物理像素 这会造成一种错觉，我们会认为css中的像素就是设备的物理像素 但实际情况却并非如此，css中的像素只是一个抽象的单位，在不同的设备或不同的环境中，css中的1px所代表的设备物理像素是不同的 当我们做移动端开发时">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://freelaeder.github.io/img/31.png">
+<meta property="article:published_time" content="2022-05-04T13:31:00.000Z">
+<meta property="article:modified_time" content="2022-06-15T15:34:43.281Z">
+<meta property="article:author" content="freelaeder">
+<meta property="article:tag" content="css面试">
+<meta property="article:tag" content="dp_px_dpr_ppi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://freelaeder.github.io/img/31.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://freelaeder.github.io/archives/14015a55"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="code-OYFyQ01IKH"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":366},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: freelaeder","link":"Link: ","source":"Source: freelaeder","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'dp_px_dpr_ppi',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-15 23:34:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/header.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">62</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> freelaeder</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> hole</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/fine/"><i class="fa-fw fas fa-list"></i><span> fine</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> friends</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> me</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/31.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">freelaeder</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> freelaeder</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> hole</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/fine/"><i class="fa-fw fas fa-list"></i><span> fine</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> friends</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> me</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">dp_px_dpr_ppi</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-05-04T13:31:00.000Z" title="Created 2022-05-04 21:31:00">2022-05-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-06-15T15:34:43.281Z" title="Updated 2022-06-15 23:34:43">2022-06-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/css/">css</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>4min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="dp_px_dpr_ppi"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="面试官：说说设备像素、css像素、设备独立像素、dpr、ppi-之间的区别？"><a href="#面试官：说说设备像素、css像素、设备独立像素、dpr、ppi-之间的区别？" class="headerlink" title="面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？"></a>面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？</h1><p> <img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://static.vue-js.com/c4d9bfd0-91f2-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>在<code>css</code>中我们通常使用px作为单位，在PC浏览器中<code>css</code>的1个像素都是对应着电脑屏幕的1个物理像素</p>
+<p>这会造成一种错觉，我们会认为<code>css</code>中的像素就是设备的物理像素</p>
+<p>但实际情况却并非如此，<code>css</code>中的像素只是一个抽象的单位，在不同的设备或不同的环境中，<code>css</code>中的1px所代表的设备物理像素是不同的</p>
+<p>当我们做移动端开发时，同为1px的设置，在不同分辨率的移动设备上显示效果却有很大差异</p>
+<p>这背后就涉及了css像素、设备像素、设备独立像素、dpr、ppi的概念</p>
+<h2 id="二、介绍"><a href="#二、介绍" class="headerlink" title="二、介绍"></a>二、介绍</h2><h3 id="CSS像素"><a href="#CSS像素" class="headerlink" title="CSS像素"></a>CSS像素</h3><p>CSS像素（css pixel, px）: 适用于web编程，在 CSS 中以 px 为后缀，是一个长度单位</p>
+<p>在 CSS 规范中，长度单位可以分为两类，绝对单位以及相对单位</p>
+<p>px是一个相对单位，相对的是设备像素（device pixel）</p>
+<p>一般情况，页面缩放比为1，1个CSS像素等于1个设备独立像素</p>
+<p><code>CSS</code>像素又具有两个方面的相对性：</p>
+<ul>
+<li>在同一个设备上，每1个 CSS 像素所代表的设备像素是可以变化的（比如调整屏幕的分辨率）</li>
+<li>在不同的设备之间，每1个 CSS 像素所代表的设备像素是可以变化的（比如两个不同型号的手机）</li>
+</ul>
+<p>在页面进行缩放操作也会 引起<code>css</code>中<code>px</code>的变化，假设页面放大一倍，原来的 1px 的东西变成 2px，在实际宽度不变的情况下1px 变得跟原来的 2px 的长度（长宽）一样了（元素会占据更多的设备像素）</p>
+<p>假设原来需要 320px 才能填满的宽度现在只需要 160px</p>
+<p>px会受到下面的因素的影响而变化：</p>
+<ul>
+<li>每英寸像素（PPI）</li>
+<li>设备像素比（DPR）</li>
+</ul>
+<h3 id="设备像素"><a href="#设备像素" class="headerlink" title="设备像素"></a>设备像素</h3><p>设备像素（device pixels），又称为物理像素</p>
+<p>指设备能控制显示的最小物理单位，不一定是一个小正方形区块，也没有标准的宽高，只是用于显示丰富色彩的一个“点”而已</p>
+<p>可以参考公园里的景观变色彩灯，一个彩灯(物理像素)由红、蓝、绿小灯组成，三盏小灯不同的亮度混合出各种色彩</p>
+<p> <img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://static.vue-js.com/cffc6570-91f2-11eb-ab90-d9ae814b240d.png"></p>
+<p>从屏幕在工厂生产出的那天起，它上面设备像素点就固定不变了，单位为<code>pt</code></p>
+<h3 id="设备独立像素"><a href="#设备独立像素" class="headerlink" title="设备独立像素"></a>设备独立像素</h3><p>设备独立像素（Device Independent Pixel）：与设备无关的逻辑像素，代表可以通过程序控制使用的虚拟像素，是一个总体概念，包括了CSS像素</p>
+<p>在<code>javaScript</code>中可以通过<code>window.screen.width/ window.screen.height</code> 查看</p>
+<p>比如我们会说“电脑屏幕在 2560x1600分辨率下不适合玩游戏，我们把它调为 1440x900”，这里的“分辨率”（非严谨说法）指的就是设备独立像素</p>
+<p>一个设备独立像素里可能包含1个或者多个物理像素点，包含的越多则屏幕看起来越清晰</p>
+<p>至于为什么出现设备独立像素这种虚拟像素单位概念，下面举个例子：</p>
+<p>iPhone 3GS 和 iPhone 4/4s 的尺寸都是 3.5 寸，但 iPhone 3GS 的分辨率是 320x480，iPhone 4/4s 的分辨率是 640x960</p>
+<p>这意味着，iPhone 3GS 有 320 个物理像素，iPhone 4/4s 有 640 个物理像素</p>
+<p>如果我们按照真实的物理像素进行布局，比如说我们按照 320 物理像素进行布局，到了 640 物理像素的手机上就会有一半的空白，为了避免这种问题，就产生了虚拟像素单位</p>
+<p>我们统一 iPhone 3GS 和 iPhone 4/4s 都是 320 个虚拟像素，只是在 iPhone 3GS 上，最终 1 个虚拟像素换算成 1 个物理像素，在 iphone 4s 中，1 个虚拟像素最终换算成 2 个物理像素</p>
+<p>至于 1 个虚拟像素被换算成几个物理像素，这个数值我们称之为设备像素比，也就是下面介绍的<code>dpr</code></p>
+<h3 id="dpr"><a href="#dpr" class="headerlink" title="dpr"></a>dpr</h3><p>dpr（device pixel ratio），设备像素比，代表设备独立像素到设备像素的转换关系，在<code>JavaScript</code>中可以通过 <code>window.devicePixelRatio</code> 获取</p>
+<p>计算公式如下：</p>
+<p> <img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://static.vue-js.com/dd45e2b0-91f2-11eb-ab90-d9ae814b240d.png"></p>
+<p>当设备像素比为1:1时，使用1（1×1）个设备像素显示1个CSS像素</p>
+<p>当设备像素比为2:1时，使用4（2×2）个设备像素显示1个CSS像素</p>
+<p>当设备像素比为3:1时，使用9（3×3）个设备像素显示1个CSS像素</p>
+<p>如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://static.vue-js.com/e63cceb0-91f2-11eb-ab90-d9ae814b240d.png"></p>
+<p>当<code>dpr</code>为3，那么<code>1px</code>的<code>CSS</code>像素宽度对应<code>3px</code>的物理像素的宽度，1px的<code>CSS</code>像素高度对应<code>3px</code>的物理像素高度</p>
+<h3 id="ppi"><a href="#ppi" class="headerlink" title="ppi"></a>ppi</h3><p>ppi （pixel per inch），每英寸像素，表示每英寸所包含的像素点数目，更确切的说法应该是像素密度。数值越高，说明屏幕能以更高密度显示图像</p>
+<p>计算公式如下：</p>
+<p> <img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://static.vue-js.com/f734adf0-91f2-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>无缩放情况下，1个CSS像素等于1个设备独立像素</p>
+<p>设备像素由屏幕生产之后就不发生改变，而设备独立像素是一个虚拟单位会发生改变</p>
+<p>PC端中，1个设备独立像素 = 1个设备像素 （在100%，未缩放的情况下）</p>
+<p>在移动端中，标准屏幕（160ppi）下 1个设备独立像素 = 1个设备像素</p>
+<p>设备像素比（dpr） = 设备像素 / 设备独立像素</p>
+<p>每英寸像素（ppi），值越大，图像越清晰</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CSS_pixel">https://developer.mozilla.org/zh-CN/docs/Glossary/CSS_pixel</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hijiangtao.github.io/2017/07/09/Device-Viewport-and-Pixel-Introduction/">https://hijiangtao.github.io/2017/07/09/Device-Viewport-and-Pixel-Introduction/</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">freelaeder</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://freelaeder.github.io/archives/14015a55.html">https://freelaeder.github.io/archives/14015a55.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener external nofollow noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/css%E9%9D%A2%E8%AF%95/">css面试</a><a class="post-meta__tags" href="/tags/dp-px-dpr-ppi/">dp_px_dpr_ppi</a></div><div class="post_share"><div class="social-share" data-image="/img/31.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/archives/7c942302.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/27.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">css3_features</div></div></a></div><div class="next-post pull-right"><a href="/archives/92004154.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/55.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">em_px_rem_vh_vw</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/archives/c5a97815.html" title="BFC"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-01</div><div class="title">BFC</div></div></a></div><div><a href="/archives/8d5284dc.html" title="animation"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">animation</div></div></a></div><div><a href="/archives/8a9483a.html" title="box"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-02</div><div class="title">box</div></div></a></div><div><a href="/archives/40f0eb24.html" title="center"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/18.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-03</div><div class="title">center</div></div></a></div><div><a href="/archives/9a0dce2d.html" title="column_layout"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/25.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-03</div><div class="title">column_layout</div></div></a></div><div><a href="/archives/7c942302.html" title="css3_features"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/27.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-04</div><div class="title">css3_features</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/header.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">freelaeder</div><div class="author-info__description">我打碎了夕阳,散做漫天的星光</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">62</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">你我裹挟韶光 , 流沔星河万丈</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E8%AF%B4%E8%AF%B4%E8%AE%BE%E5%A4%87%E5%83%8F%E7%B4%A0%E3%80%81css%E5%83%8F%E7%B4%A0%E3%80%81%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E5%83%8F%E7%B4%A0%E3%80%81dpr%E3%80%81ppi-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">面试官：说说设备像素、css像素、设备独立像素、dpr、ppi 之间的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">二、介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E5%83%8F%E7%B4%A0"><span class="toc-number">1.2.1.</span> <span class="toc-text">CSS像素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%83%8F%E7%B4%A0"><span class="toc-number">1.2.2.</span> <span class="toc-text">设备像素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E5%83%8F%E7%B4%A0"><span class="toc-number">1.2.3.</span> <span class="toc-text">设备独立像素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dpr"><span class="toc-number">1.2.4.</span> <span class="toc-text">dpr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ppi"><span class="toc-number">1.2.5.</span> <span class="toc-text">ppi</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">三、总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/7b268071.html" title="string_api"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(32).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="string_api"/></a><div class="content"><a class="title" href="/archives/7b268071.html" title="string_api">string_api</a><time datetime="2022-06-16T15:33:00.000Z" title="Created 2022-06-16 23:33:00">2022-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/7f6cf7b0.html" title="single_sign"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(29).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="single_sign"/></a><div class="content"><a class="title" href="/archives/7f6cf7b0.html" title="single_sign">single_sign</a><time datetime="2022-06-16T15:13:00.000Z" title="Created 2022-06-16 23:13:00">2022-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/af55d3.html" title="scope"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(26).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="scope"/></a><div class="content"><a class="title" href="/archives/af55d3.html" title="scope">scope</a><time datetime="2022-06-16T15:03:00.000Z" title="Created 2022-06-16 23:03:00">2022-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/c59bd5c1.html" title="security"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(27).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="security"/></a><div class="content"><a class="title" href="/archives/c59bd5c1.html" title="security">security</a><time datetime="2022-06-16T15:03:00.000Z" title="Created 2022-06-16 23:03:00">2022-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/f9f4b1e7.html" title="regexp"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/picfive/wallfive%20(25).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="regexp"/></a><div class="content"><a class="title" href="/archives/f9f4b1e7.html" title="regexp">regexp</a><time datetime="2022-06-16T13:03:00.000Z" title="Created 2022-06-16 21:03:00">2022-06-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By freelaeder</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4J81xwLy9vrYOytbLOns5bwe-gzGzoHsz',
+      appKey: 'B9fhoOdq525uv4Q5v7ugQj6q',
+      placeholder: '您不再踩踩嘛ಠ_ಠ',
+      avatar: 'hide',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '5',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/toos.js"></script><script src="/js/flower.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":null,"use":"live2d-widget-model-koharu","display":{"position":"left","width":100,"height":100},"mobile":{"show":true},"react":null,"opacity":0.9});</script><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
