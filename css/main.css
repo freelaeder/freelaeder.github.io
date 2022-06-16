@@ -17,7 +17,7 @@ p span {
   border-radius: 3px;
 }
 p .label {
-  background-color:#0cf;
+  background-color: #0cf;
 }
 
 /* warm */
@@ -26,11 +26,10 @@ p .wram {
   background-color: #d384dd;
 }
 
-
 /* gold */
 
 p .gold {
-  background-color:gold;
+  background-color: gold;
 }
 
 /* green*/
@@ -70,128 +69,151 @@ p .just {
   background-color: #ff3f01;
 }
 
-
 /* 滚动文字 */
 .blog-title {
   font-size: 1.1rem !important;
-   background: linear-gradient(to right, blue,aqua,yellow,green,#0cf);
-          -webkit-background-clip: text !important;
-          color: transparent !important;
-  text-align:center;
-  margin-bottom:1.25rem,
+  background: linear-gradient(to right, blue, aqua, yellow, green, #0cf);
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+  text-align: center;
+  margin-bottom: 1.25rem;
 }
 
 /* 文章标题 */
 .post-title {
-  background: linear-gradient(to right, blue,aqua,yellow,green,#0cf);
+  background: linear-gradient(to right, blue, aqua, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 /* 左部标题文字 */
 #site-name {
-  background: linear-gradient(to right, blue,aqua,yellow,green,#0cf);
+  background: linear-gradient(to right, blue, aqua, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 /* 文章标题解释文字 */
 .post-meta-date {
-  background: linear-gradient(to right, blue,aqua,yellow,green,#0cf);
+  background: linear-gradient(to right, blue, aqua, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 /* 分类 */
 .post-meta-categories {
-  background: linear-gradient(to right,aqua,yellow,green,#0cf);
+  background: linear-gradient(to right, aqua, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 /* 浏览次数 */
 .post-meta-pv-cv {
-  background: linear-gradient(to right,red,yellow,green,#0cf);
+  background: linear-gradient(to right, red, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* menu 菜单栏 */
 .site-page {
-  background: linear-gradient(to right,gold,pink,yellow,green,#0cf);
+  background: linear-gradient(to right, gold, pink, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 /* 主页状态主标题 */
 #site-title {
-  background: linear-gradient(to right,pink,yellow,green,#0cf,red,blue);
+  background: linear-gradient(to right, pink, yellow, green, #0cf, red, blue);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* 主页状态文章标题 */
 .article-title {
-  background: linear-gradient(to right,#0cf,pink,blue,green,gold);
+  background: linear-gradient(to right, #0cf, pink, blue, green, gold);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* 主页状态文章标题 分类*/
 .article-meta {
-  background: linear-gradient(to right,green,gold);
+  background: linear-gradient(to right, green, gold);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* friends简介 */
 .flink-desc {
-  background: linear-gradient(to right,gold,pink,yellow,green,#0cf);
+  background: linear-gradient(to right, gold, pink, yellow, green, #0cf);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 /* friends小标题 */
-.flink>h2 {
-  background: linear-gradient(to right,gold,pink,yellow,green,#0cf,blue,#511067);
+.flink > h2 {
+  background: linear-gradient(
+    to right,
+    gold,
+    pink,
+    yellow,
+    green,
+    #0cf,
+    blue,
+    #511067
+  );
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* friends 人物介绍 */
 .flink-item-desc {
-  background: linear-gradient(to right,green,gold,blue,#511067);
+  background: linear-gradient(to right, green, gold, blue, #511067);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* friends 人物名称 */
 .flink-item-name {
-  background: linear-gradient(to right,red,#511067,blue,black);
+  background: linear-gradient(to right, red, #511067, blue, black);
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
 
 /* 底部修改 */
 #footer {
-  background: linear-gradient(to right, #fce318,#3cafff,#f16c60,#9276f7,#49dbcc,#fc908b,#3fdc86,#c277ec,#944a9f,#f97444,#fa843e,#7552e4,#6b92fb,#f18f7d) !important;
+  background: linear-gradient(
+    to right,
+    #fce318,
+    #3cafff,
+    #f16c60,
+    #9276f7,
+    #49dbcc,
+    #fc908b,
+    #3fdc86,
+    #c277ec,
+    #944a9f,
+    #f97444,
+    #fa843e,
+    #7552e4,
+    #6b92fb,
+    #f18f7d
+  ) !important;
   background-size: 1400% 300% !important;
-  animation: mymove 15s ease infinite ;
+  animation: mymove 15s ease infinite;
   position: relative;
-  -webkit-animation: mymove 15s ease infinite ;
+  -webkit-animation: mymove 15s ease infinite;
   -moz-animation: mymove 15s ease infinite;
 }
 @keyframes mymove {
   0% {
-      background-position: 0% 0%;
+    background-position: 0% 0%;
   }
 
   50% {
-      background-position: 50% 100%;
+    background-position: 50% 100%;
   }
 
   100% {
-      background-position: 100% 0%;
+    background-position: 100% 0%;
   }
 }
 
-
 /* 跳动文字 */
-#site-title{
+#site-title {
   display: block;
   will-change: transform;
   -webkit-transform-origin: center center;
@@ -203,34 +225,35 @@ p .just {
 }
 @keyframes Pshake_Crazy {
   10% {
-      transform: translate(-0.5px, -0.5px) rotate(0.5deg);
+    transform: translate(-0.5px, -0.5px) rotate(0.5deg);
   }
   20% {
-      transform: translate(-0.5px, 1.5px) rotate(0.5deg);
+    transform: translate(-0.5px, 1.5px) rotate(0.5deg);
   }
   30% {
-      transform: translate(1.5px, 0.5px) rotate(0.5deg);
+    transform: translate(1.5px, 0.5px) rotate(0.5deg);
   }
   40% {
-      transform: translate(1.5px, -0.5px) rotate(-0.5deg);
+    transform: translate(1.5px, -0.5px) rotate(-0.5deg);
   }
   50% {
-      transform: translate(2.5px, 1.5px) rotate(1.5deg);
+    transform: translate(2.5px, 1.5px) rotate(1.5deg);
   }
   60% {
-      transform: translate(-0.5px, -0.5px) rotate(-0.5deg);
+    transform: translate(-0.5px, -0.5px) rotate(-0.5deg);
   }
   70% {
-      transform: translate(-0.5px, 2.5px) rotate(1.5deg);
+    transform: translate(-0.5px, 2.5px) rotate(1.5deg);
   }
   80% {
-      transform: translate(2.5px, -1.5px) rotate(-0.5deg);
+    transform: translate(2.5px, -1.5px) rotate(-0.5deg);
   }
   90% {
-      transform: translate(1.5px, -0.5px) rotate(1.5deg);
+    transform: translate(1.5px, -0.5px) rotate(1.5deg);
   }
-  0%, 100% {
-      transform: translate(0, 0) rotate(0);
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
   }
 }
 
@@ -241,12 +264,27 @@ p .just {
   background-repeat: no-repeat;
   background-position: right;
   margin-bottom: 2px;
-  
 }
 
 /* 字数统计 */
-.post-meta-wordcount{
-  background: linear-gradient(to right, #fce318,#3cafff,#f16c60,#9276f7,#49dbcc,#fc908b,#3fdc86,#c277ec,#944a9f,#f97444,#fa843e,#7552e4,#6b92fb,#f18f7d) !important;
+.post-meta-wordcount {
+  background: linear-gradient(
+    to right,
+    #fce318,
+    #3cafff,
+    #f16c60,
+    #9276f7,
+    #49dbcc,
+    #fc908b,
+    #3fdc86,
+    #c277ec,
+    #944a9f,
+    #f97444,
+    #fa843e,
+    #7552e4,
+    #6b92fb,
+    #f18f7d
+  ) !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
@@ -255,11 +293,17 @@ p .just {
   width: 260px;
   height: 200px;
   overflow: hidden;
-  
 }
 
-.view_vi{
+.view_vi {
   display: flex;
   justify-content: center;
   align-content: center;
+}
+
+@media screen and (max-width: 800px) {
+  .dplayer {
+    max-width: 394.4px;
+    max-height: 221.6px;
+  }
 }
