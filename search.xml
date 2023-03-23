@@ -56,79 +56,6 @@
       </tags>
   </entry>
   <entry>
-    <title>BFC</title>
-    <url>/archives/c5a97815.html</url>
-    <content><![CDATA[<h1 id="面试官：谈谈你对BFC的理解？"><a href="#面试官：谈谈你对BFC的理解？" class="headerlink" title="面试官：谈谈你对BFC的理解？"></a>面试官：谈谈你对BFC的理解？</h1><p><img src="https://static.vue-js.com/c3d68290-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>我们在页面布局的时候，经常出现以下情况：</p>
-<ul>
-<li>这个元素高度怎么没了？</li>
-<li>这两栏布局怎么没法自适应？</li>
-<li>这两个元素的间距怎么有点奇怪的样子？</li>
-<li>……</li>
-</ul>
-<p>原因是元素之间相互的影响，导致了意料之外的情况，这里就涉及到<code>BFC</code>概念</p>
-<p><code>BFC</code>（Block Formatting Context），即块级格式化上下文，它是页面中的一块渲染区域，并且有一套属于自己的渲染规则：</p>
-<ul>
-<li>内部的盒子会在垂直方向上一个接一个的放置</li>
-<li>对于同一个BFC的俩个相邻的盒子的margin会发生重叠，与方向无关。</li>
-<li>每个元素的左外边距与包含块的左边界相接触（从左到右），即使浮动元素也是如此</li>
-<li>BFC的区域不会与float的元素区域重叠</li>
-<li>计算BFC的高度时，浮动子元素也参与计算</li>
-<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然</li>
-</ul>
-<p><code>BFC</code>目的是形成一个相对于外界完全独立的空间，让内部的子元素不会影响到外部的元素</p>
-<h2 id="二、触发条件"><a href="#二、触发条件" class="headerlink" title="二、触发条件"></a>二、触发条件</h2><p>触发<code>BFC</code>的条件包含不限于：</p>
-<ul>
-<li>根元素，即HTML元素</li>
-<li>浮动元素：float值为left、right</li>
-<li>overflow值不为 visible，为 auto、scroll、hidden</li>
-<li>display的值为inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid</li>
-<li>position的值为absolute或fixed</li>
-</ul>
-<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>利用<code>BFC</code>的特性，我们将<code>BFC</code>应用在以下场景：</p>
-<h4 id="防止margin重叠（塌陷）"><a href="#防止margin重叠（塌陷）" class="headerlink" title="防止margin重叠（塌陷）"></a>防止margin重叠（塌陷）</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>页面显示如下：</p>
-<p> <img src="https://static.vue-js.com/d0ce3650-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<p>两个<code>p</code>元素之间的距离为<code>100px</code>，发生了<code>margin</code>重叠（塌陷），以最大的为准，如果第一个P的<code>margin</code>为80的话，两个P之间的距离还是100，以最大的为准。</p>
-<p>前面讲到，同一个<code>BFC</code>的俩个相邻的盒子的<code>margin</code>会发生重叠</p>
-<p>可以在<code>p</code>外面包裹一层容器，并触发这个容器生成一个<code>BFC</code>，那么两个<code>p</code>就不属于同一个<code>BFC</code>，则不会出现<code>margin</code>重叠</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.wrap</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">overflow</span>: hidden;// 新的BFC</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrap&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这时候，边距则不会重叠：</p>
-<p> <img src="https://static.vue-js.com/dec44740-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<h4 id="清除内部浮动"><a href="#清除内部浮动" class="headerlink" title="清除内部浮动"></a>清除内部浮动</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.par</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;par&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>页面显示如下：</p>
-<p> <img src="https://static.vue-js.com/ec5d4410-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<p>而<code>BFC</code>在计算高度时，浮动元素也会参与，所以我们可以触发<code>.par</code>元素生活才能<code>BFC</code>，则内部浮动元素计算高度时候也会计算</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.par</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>实现效果如下：</p>
-<p> <img src="https://static.vue-js.com/f6487b20-9511-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h4 id="自适应多栏布局"><a href="#自适应多栏布局" class="headerlink" title="自适应多栏布局"></a>自适应多栏布局</h4><p>这里举个两栏的布局</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.aside</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.main</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;aside&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>效果图如下：</p>
-<p> <img src="https://static.vue-js.com/ffb95210-9511-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<p>前面讲到，每个元素的左外边距与包含块的左边界相接触</p>
-<p>因此，虽然<code>.aslide</code>为浮动元素，但是<code>main</code>的左边依然会与包含块的左边相接触</p>
-<p>而<code>BFC</code>的区域不会与浮动盒子重叠</p>
-<p>所以我们可以通过触发<code>main</code>生成<code>BFC</code>，以此适应两栏布局</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这时候，新的<code>BFC</code>不会与浮动的<code>.aside</code>元素重叠。因此会根据包含块的宽度，和<code>.aside</code>的宽度，自动变窄</p>
-<p>效果如下：</p>
-<p> <img src="https://static.vue-js.com/0a5f2690-9512-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>可以看到上面几个案例，都体现了<code>BFC</code>实际就是页面一个独立的容器，里面的子元素不影响外面的元素</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context</a></li>
-<li><a href="https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md">https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>BTC</tag>
-        <tag>css面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BOM</title>
     <url>/archives/f3d3ee5b.html</url>
     <content><![CDATA[<h1 id="面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？"><a href="#面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？" class="headerlink" title="面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？"></a>面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？</h1><p> <img src="https://static.vue-js.com/3e191c40-8089-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
@@ -243,6 +170,79 @@
       <tags>
         <tag>js面试</tag>
         <tag>BOM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BFC</title>
+    <url>/archives/c5a97815.html</url>
+    <content><![CDATA[<h1 id="面试官：谈谈你对BFC的理解？"><a href="#面试官：谈谈你对BFC的理解？" class="headerlink" title="面试官：谈谈你对BFC的理解？"></a>面试官：谈谈你对BFC的理解？</h1><p><img src="https://static.vue-js.com/c3d68290-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>我们在页面布局的时候，经常出现以下情况：</p>
+<ul>
+<li>这个元素高度怎么没了？</li>
+<li>这两栏布局怎么没法自适应？</li>
+<li>这两个元素的间距怎么有点奇怪的样子？</li>
+<li>……</li>
+</ul>
+<p>原因是元素之间相互的影响，导致了意料之外的情况，这里就涉及到<code>BFC</code>概念</p>
+<p><code>BFC</code>（Block Formatting Context），即块级格式化上下文，它是页面中的一块渲染区域，并且有一套属于自己的渲染规则：</p>
+<ul>
+<li>内部的盒子会在垂直方向上一个接一个的放置</li>
+<li>对于同一个BFC的俩个相邻的盒子的margin会发生重叠，与方向无关。</li>
+<li>每个元素的左外边距与包含块的左边界相接触（从左到右），即使浮动元素也是如此</li>
+<li>BFC的区域不会与float的元素区域重叠</li>
+<li>计算BFC的高度时，浮动子元素也参与计算</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然</li>
+</ul>
+<p><code>BFC</code>目的是形成一个相对于外界完全独立的空间，让内部的子元素不会影响到外部的元素</p>
+<h2 id="二、触发条件"><a href="#二、触发条件" class="headerlink" title="二、触发条件"></a>二、触发条件</h2><p>触发<code>BFC</code>的条件包含不限于：</p>
+<ul>
+<li>根元素，即HTML元素</li>
+<li>浮动元素：float值为left、right</li>
+<li>overflow值不为 visible，为 auto、scroll、hidden</li>
+<li>display的值为inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid</li>
+<li>position的值为absolute或fixed</li>
+</ul>
+<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>利用<code>BFC</code>的特性，我们将<code>BFC</code>应用在以下场景：</p>
+<h4 id="防止margin重叠（塌陷）"><a href="#防止margin重叠（塌陷）" class="headerlink" title="防止margin重叠（塌陷）"></a>防止margin重叠（塌陷）</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>页面显示如下：</p>
+<p> <img src="https://static.vue-js.com/d0ce3650-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<p>两个<code>p</code>元素之间的距离为<code>100px</code>，发生了<code>margin</code>重叠（塌陷），以最大的为准，如果第一个P的<code>margin</code>为80的话，两个P之间的距离还是100，以最大的为准。</p>
+<p>前面讲到，同一个<code>BFC</code>的俩个相邻的盒子的<code>margin</code>会发生重叠</p>
+<p>可以在<code>p</code>外面包裹一层容器，并触发这个容器生成一个<code>BFC</code>，那么两个<code>p</code>就不属于同一个<code>BFC</code>，则不会出现<code>margin</code>重叠</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.wrap</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">overflow</span>: hidden;// 新的BFC</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#f55</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Haha&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrap&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hehe&lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时候，边距则不会重叠：</p>
+<p> <img src="https://static.vue-js.com/dec44740-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<h4 id="清除内部浮动"><a href="#清除内部浮动" class="headerlink" title="清除内部浮动"></a>清除内部浮动</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.par</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>:<span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;par&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>页面显示如下：</p>
+<p> <img src="https://static.vue-js.com/ec5d4410-9511-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<p>而<code>BFC</code>在计算高度时，浮动元素也会参与，所以我们可以触发<code>.par</code>元素生活才能<code>BFC</code>，则内部浮动元素计算高度时候也会计算</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.par</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现效果如下：</p>
+<p> <img src="https://static.vue-js.com/f6487b20-9511-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h4 id="自适应多栏布局"><a href="#自适应多栏布局" class="headerlink" title="自适应多栏布局"></a>自适应多栏布局</h4><p>这里举个两栏的布局</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.aside</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#f66</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-class">.main</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="number">#fcc</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;aside&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果图如下：</p>
+<p> <img src="https://static.vue-js.com/ffb95210-9511-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<p>前面讲到，每个元素的左外边距与包含块的左边界相接触</p>
+<p>因此，虽然<code>.aslide</code>为浮动元素，但是<code>main</code>的左边依然会与包含块的左边相接触</p>
+<p>而<code>BFC</code>的区域不会与浮动盒子重叠</p>
+<p>所以我们可以通过触发<code>main</code>生成<code>BFC</code>，以此适应两栏布局</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，新的<code>BFC</code>不会与浮动的<code>.aside</code>元素重叠。因此会根据包含块的宽度，和<code>.aside</code>的宽度，自动变窄</p>
+<p>效果如下：</p>
+<p> <img src="https://static.vue-js.com/0a5f2690-9512-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>可以看到上面几个案例，都体现了<code>BFC</code>实际就是页面一个独立的容器，里面的子元素不影响外面的元素</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context</a></li>
+<li><a href="https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md">https://github.com/zuopf769/notebook/blob/master/fe/BFC%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/README.md</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>BTC</tag>
+        <tag>css面试</tag>
       </tags>
   </entry>
   <entry>
@@ -416,6 +416,28 @@
       </categories>
       <tags>
         <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>about us 2021</title>
+    <url>/archives/afcd4575.html</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="ab7727bc9c471bd7f0b444471bbc6b4692c3848db01021781153c4dabf1c187b">7a13521b6242615d832816f422e7dfef73da25fdbdf3b6222d8a59b6468cf1af43f41c56cd77ce14167e0f47abb820f3b30907a60039d37ff17b59d57fe34743842ccb0d9384c989a69e8e7cdf1c7ef60db4d200d78b42a3b4723dd629cf5e2f7cc4a2706e193a5c80750d76129251512268f46f459ad01fd03b9f749a9bffb4f85d24a6d37df1b5e2dcb2e0059afb240dcd607e6c6c2d89ffc9dcbfaebd8bd0b5669189c24c4e991018c04055be3173d83dc8ffbffa92a72024a5b313ac213026ae571261cecf38ebdf6a1a67330bb222a778afafaaadcd3454403d5d0167e30d61a1d34ec44bf116ce09a42ce7a79312a2015918a13b93cad06387d6821c550637f665360a4b7a3c2eaac0f833b5a3443724186d1d0786929cb57ff9139905d1a81f2feeb7c8b942de492c97362f1d59d3072de91baeddedf36f0c6b947595fd1cedb65dbc03f7d2d0014dc205afc90dfe9292cdbb0ed425a46f2e0d5c152933e0ca62ede3b8d5874be034d4cf89823390f656c100792ac2ca272707ca5de1fc85a059e25cb2604a035f2177b7580f36978e2129156ec8bbb7cd70ad9e01a9b6fe974214a40df8299a74c92b72d3a49430e50598ed6ba3f07dc93a9334a7313900e10aa3fa9778a94676d4b53b280178d5aa506a526a4c9151244f4fb9abe0f7b8f8e46540adf13eb72900fa3b4a33075bffb843956d69b21e7092152b5b5c665401215ccc521f9f3faddf9f90e894b4478f951c1089f663650cde8d321227f78f11e5d6f7e7c7bfece80e08fd3846701fd018bec4dd849b8a80248418effcc8c97c81660c528cb716fb7c55583efee30620acba057fa86dac27ded47d83d8491b035818c16fc11220cc055b7619fe3a8791659824c0e41765301845a11570e9ca6f3e509e1be1ff31f656a10b8b3631cdae6bb83aa09ef2a32c224f85066db880cd3b4f6c87b9f75d64162522c864d0376ed7c0376f0c683a5df81e9f86ac607d463c31aed5dd74c09a7d74ab05df50622be84b70be065a13e7d6a9f4f89d23b8809139a23105501d0cd6b723f2c8b3b539f513bcb410b3cc38bc32922924d99d54dfeab46e2474101519f09f87899a9c8fe6d9a64d9654c9ca6b465c9d6ea2fdba37dff3b77ad65c64c6795a0973639747af545a85b9b34fc9d0b733967c29a6908c8b6c63ed242b12e430faf2a073f4620ebba1d0e8d0e9343e9cf49dce50458c30183ba037e964f2d29b247641e892d3fa5fafbef3da2806cfeeca8e531ce25c0238cf9c674a83c61ddbbfba1580f765e1f2f757fa639c6e9e8b2e46b6866e7cc5e4e64441652de50492ccdfb0e4fde7bf8a34eb7a7c19715f9fbc7add5b79be916c6fc9af7f7274a2a8ce592a4cdebd90dd35236e5fd662d11183cb850c005c902cf3c3eb1fbf6d2e0cd90154816a02b82ad5386c6bd176ad5392a3a455459907032a450440e34ad12b06be1c297adc27c2a2e314ebde790c1a3f194f1033ebc6dde7a8e10b9699e2f7f623ca685175d0b384d15bbec2a767d0c270d2c9941217268d89bc0b9a4e443c268764bf601b67d4d380ff94a3c6975b1b8375de834f0cef033d72fb04f8931c3e47d7b6135feac8c69f7bdbb9be4c3234ad264b7226a0d304305beddc9be96af2713a71bec0c377145da2118b5c0f34038249141a3246e589e69c7d5f74d572f32386fa144023e345fa6ff9364f7a3ade18ef79994124b1aa692e2b790c5da743d2fb4f275f368cdc7844c78c368805b84c91a68a178488b2cb517bfd67e489bbdbb277b97b7195a1bd00e76430120aec1f60c8e4ddbfa4422c96bbb5f8190fd2ff3a9d342db34544dc1130fb42f2d6a9971d51e98b4273f2354fcd5ef4b507151810116e07c3db9f479b4582cbde23beec7e855d49a930c4426459424ac832ff29473888e4a2d46f31fd58eee3dff95826d24dad1f69ab64b28d81cd2a7ba4cf100a0b597163bf0d4c1e1d6ba98c5f532b7ad3960884361fb68d417bc6283cdcf9849fe29634f9be1145eaf43c8a4cf17f5e171cd28a024320a95e9c912c1386a1c9f25959e5ffc3de3a4b6c557d54fde500505098b8ce818bef65d1b51c4b185648d73ba410302fb574f0392c896225c41e114e9ec1bf007b8956bd4dcd778e41bc63eeb4e8cf1c4a3e78c70193a9a7228289fefe6860ba011d0b6d3fda88a030e2f042efb7d0dfb9dd9cc33162ab277c4e9c717b186c4aceb250942b040733b4df49dd1e379b5fb9c35fe079f4da1ca600a568d7534d6597cb725010f6c26e041943717e2745acef4ec56013d08c4c91a58434136e96d74cf973410b8cf408f0f855113ef97181688103fff12dfe96f52e7e459bd7953cd488d4edcc2532495709a5fac90079eaa0cbb8f98fdde3928a11c838d2dfe2259e9cbed5a9a0e435cf7b0017c9612c462c43b8c179fc3198793447fc7159922defc9d3c84f6f6854a2fbb5d0508e752d14f9ab78d0493bb22384b1a8a4df92e868680ae7662fd9c2b4961ba2b80839def458dac2d583a82ea347401e30aac3d1f6dfc6de5c73803d07735fff106be5d1260993accd390d9aaa718266e04f9b5871b6021dce99ae8038ac95656f64c7e2bdfbae0bfb02b28437ddd65c9564617dc6ef377db36b3a1cf2b8cd2a0be66ceaddb5da4f9153f96f4af88a8b96c4424e26a00d7da8d0a914ff24377ffa5edbbb42a2287fadd58d865dd792e23e2c2d9741c215791f72939434b3e6fd57a643a772d78793f3532c9d5a1c456873db15f2dd3692ab5c84d2e17d1a36735f610d1d0bfa722a54b0a2ae8e234c7c8f5b5d5ab8e4bc4b6805986be48903ae3caa89645bc8ad3840ea67fc1425ab663979fba29c38023c8528d3b92f2c13035cabc1a6d3d5553c580c6f55288c35d6269e82fb337daed881371dbfa6293b2ebba3bd72d9741aefffecb878bb198680f19d0892b39fdd53bc144483692ad9070bb6ead21ef4da1c3788d9ee0207ff75a60412f6d4961736ac6f67f7345eee90b51f88818750d91e33bd985a21d64fd7184f7245f66728d2cf99050f422c4d3ccc8bc8a0ff0d6be20d32f1380356d654b64b7667b63e9922036ea1c1a61596dc5076a5c0d46b18962d1a29c3e4780528df8e82f85e49b089e7f89a31a76049e63d291bbcec90fefd4b958d99954f8ef72693a78935f17078faf7f9bced734ab9d20bf5ec6b8edadef2b97323cdded4f5b0badcc8e6b829420a28d8d86b898740f7ca982b0a29dac184811554600306cef9b8af87c2cf298dda22742f111a6388b85071fd5dc9d15f4f2522271e2beb91363cc9cf068d75e4f22b1a5331ef42a1b7b07b6b55720f528be40ec49af823651b1a6aa58ecf240204438d21bed386f7ce73ef7f7e3fb1170063a94b233814c9c3e5e2372f6b68c3f6d9146269486ab8b88c2609d407172e27918a9d978512d2e2be56c9478072174cc906a936e24a3a3123a5034cb36fc6f04fb928dcdc65c67617425805748742a1307cd93f04d9e4283566e88058f06fd81a17005291f484c9b293ba376f76c80ecf69155b8e2b8155a21293cd8ad9ec8857dccff7c4838d795ca04a9c88343790c14c522df4a5e2377c5f2e6315853f929ea7a06768ae748129a0d93bbfb44fd27ac37422d1743dc790db977ceb8d3286b7f88f61c3b8c59c7551bdeee90abd2bbc96a42a78594253441e3122a04ae5676a8b575d42be0865393b76fe12a152e16db63a11b4424b6abb87887bb593380a366e8ba26c8e36b433e13fd4e6ec43c4642e1839c2d1cfc0369ab7c180a7a2e27917cd85144896108371493ebcc23481f14eb8b3b27520ff619dc82a33042c872371812b1592e5d5e234242ba0ffb76ff26e4dc0a1605489419bfcdd95e41482e4e0e2114faac1f28dbd96fd064a597420b07660690da8927ad755d65a4c4b00d98c51046f37b724a766557ab39781c4b3fecae88191f4f66379e4e3f4785ba14bdc3fb09c542c03dae7989b0bc6e4ed945e975fbc9862435e80ef3fbb20d413504375bda9078639d2d93e0385beccd2bf993761f9ccae9d741d3488bda79f6f18ebae7adbc59752768a69b11c4f46088565c359751a0a4c60b0a1387e9d74a307dc6cbcfad8ed5c574b995fb5837b08255b9ae949bb77b56d3e590af2c0669e48f03b5aa5cd7c495ea12fde79e45d4a8defb9335fbc64215d8d40f9e726acc2b8586f39b63c2166c934cffec6c29e5c927a5b3a114ccc19a00b8a908b84c4a163af6d43aca826c8cadeb7c8c0f8f58220d086d1290160e78cc4a7d4ddbe36f2da42af7a74029845b9e2601ce9e279a4b4ccdb3e604e639e32761f567addb9ce4d482a3aeaff6b135ccda5b08cead2a447cf953edd03cee958523bbd9d404ee4ba6c4d9d4924de05b4bbb79029e47cf2d5bbe9331e5f6ba9da43aa557cc4a5738882dd8f43d1487eae4c23f1cf3db02661cdea093153c4124277aa1c133c70e9b2431fa0c09a30e39cab92ea9dd17d6d868f10c1a47cce4fb68b4ef0be2012c4b79ca9e911ac7a1c884003174306d4b14185d31983a138ebb9b3f3eb51e6a1526945841d1b2c5eb037c4ca8cba9c79eca62c5121945b8013be08f522afb43d7d726df5605f4eb7a89262d56394684eccda4c8ca60ab3eeeac64e9796ca9e6852b1165ee6001e407d1b5c80ba1241d35010fffac567</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">想看我的秘密，需要密码呦༼ つ ◕_◕ ༽つ</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>fine</category>
+      </categories>
+      <tags>
+        <tag>fine</tag>
       </tags>
   </entry>
   <entry>
@@ -869,25 +891,76 @@
       </tags>
   </entry>
   <entry>
-    <title>about us 2021</title>
-    <url>/archives/afcd4575.html</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="ab7727bc9c471bd7f0b444471bbc6b4692c3848db01021781153c4dabf1c187b">7a13521b6242615d832816f422e7dfef73da25fdbdf3b6222d8a59b6468cf1af43f41c56cd77ce14167e0f47abb820f3b30907a60039d37ff17b59d57fe34743842ccb0d9384c989a69e8e7cdf1c7ef60db4d200d78b42a3b4723dd629cf5e2f7cc4a2706e193a5c80750d76129251512268f46f459ad01fd03b9f749a9bffb4f85d24a6d37df1b5e2dcb2e0059afb240dcd607e6c6c2d89ffc9dcbfaebd8bd0b5669189c24c4e991018c04055be3173d83dc8ffbffa92a72024a5b313ac213026ae571261cecf38ebdf6a1a67330bb222a778afafaaadcd3454403d5d0167e30d61a1d34ec44bf116ce09a42ce7a79312a2015918a13b93cad06387d6821c550637f665360a4b7a3c2eaac0f833b5a3443724186d1d0786929cb57ff9139905d1a81f2feeb7c8b942de492c97362f1d59d3072de91baeddedf36f0c6b947595fd1cedb65dbc03f7d2d0014dc205afc90dfe9292cdbb0ed425a46f2e0d5c152933e0ca62ede3b8d5874be034d4cf89823390f656c100792ac2ca272707ca5de1fc85a059e25cb2604a035f2177b7580f36978e2129156ec8bbb7cd70ad9e01a9b6fe974214a40df8299a74c92b72d3a49430e50598ed6ba3f07dc93a9334a7313900e10aa3fa9778a94676d4b53b280178d5aa506a526a4c9151244f4fb9abe0f7b8f8e46540adf13eb72900fa3b4a33075bffb843956d69b21e7092152b5b5c665401215ccc521f9f3faddf9f90e894b4478f951c1089f663650cde8d321227f78f11e5d6f7e7c7bfece80e08fd3846701fd018bec4dd849b8a80248418effcc8c97c81660c528cb716fb7c55583efee30620acba057fa86dac27ded47d83d8491b035818c16fc11220cc055b7619fe3a8791659824c0e41765301845a11570e9ca6f3e509e1be1ff31f656a10b8b3631cdae6bb83aa09ef2a32c224f85066db880cd3b4f6c87b9f75d64162522c864d0376ed7c0376f0c683a5df81e9f86ac607d463c31aed5dd74c09a7d74ab05df50622be84b70be065a13e7d6a9f4f89d23b8809139a23105501d0cd6b723f2c8b3b539f513bcb410b3cc38bc32922924d99d54dfeab46e2474101519f09f87899a9c8fe6d9a64d9654c9ca6b465c9d6ea2fdba37dff3b77ad65c64c6795a0973639747af545a85b9b34fc9d0b733967c29a6908c8b6c63ed242b12e430faf2a073f4620ebba1d0e8d0e9343e9cf49dce50458c30183ba037e964f2d29b247641e892d3fa5fafbef3da2806cfeeca8e531ce25c0238cf9c674a83c61ddbbfba1580f765e1f2f757fa639c6e9e8b2e46b6866e7cc5e4e64441652de50492ccdfb0e4fde7bf8a34eb7a7c19715f9fbc7add5b79be916c6fc9af7f7274a2a8ce592a4cdebd90dd35236e5fd662d11183cb850c005c902cf3c3eb1fbf6d2e0cd90154816a02b82ad5386c6bd176ad5392a3a455459907032a450440e34ad12b06be1c297adc27c2a2e314ebde790c1a3f194f1033ebc6dde7a8e10b9699e2f7f623ca685175d0b384d15bbec2a767d0c270d2c9941217268d89bc0b9a4e443c268764bf601b67d4d380ff94a3c6975b1b8375de834f0cef033d72fb04f8931c3e47d7b6135feac8c69f7bdbb9be4c3234ad264b7226a0d304305beddc9be96af2713a71bec0c377145da2118b5c0f34038249141a3246e589e69c7d5f74d572f32386fa144023e345fa6ff9364f7a3ade18ef79994124b1aa692e2b790c5da743d2fb4f275f368cdc7844c78c368805b84c91a68a178488b2cb517bfd67e489bbdbb277b97b7195a1bd00e76430120aec1f60c8e4ddbfa4422c96bbb5f8190fd2ff3a9d342db34544dc1130fb42f2d6a9971d51e98b4273f2354fcd5ef4b507151810116e07c3db9f479b4582cbde23beec7e855d49a930c4426459424ac832ff29473888e4a2d46f31fd58eee3dff95826d24dad1f69ab64b28d81cd2a7ba4cf100a0b597163bf0d4c1e1d6ba98c5f532b7ad3960884361fb68d417bc6283cdcf9849fe29634f9be1145eaf43c8a4cf17f5e171cd28a024320a95e9c912c1386a1c9f25959e5ffc3de3a4b6c557d54fde500505098b8ce818bef65d1b51c4b185648d73ba410302fb574f0392c896225c41e114e9ec1bf007b8956bd4dcd778e41bc63eeb4e8cf1c4a3e78c70193a9a7228289fefe6860ba011d0b6d3fda88a030e2f042efb7d0dfb9dd9cc33162ab277c4e9c717b186c4aceb250942b040733b4df49dd1e379b5fb9c35fe079f4da1ca600a568d7534d6597cb725010f6c26e041943717e2745acef4ec56013d08c4c91a58434136e96d74cf973410b8cf408f0f855113ef97181688103fff12dfe96f52e7e459bd7953cd488d4edcc2532495709a5fac90079eaa0cbb8f98fdde3928a11c838d2dfe2259e9cbed5a9a0e435cf7b0017c9612c462c43b8c179fc3198793447fc7159922defc9d3c84f6f6854a2fbb5d0508e752d14f9ab78d0493bb22384b1a8a4df92e868680ae7662fd9c2b4961ba2b80839def458dac2d583a82ea347401e30aac3d1f6dfc6de5c73803d07735fff106be5d1260993accd390d9aaa718266e04f9b5871b6021dce99ae8038ac95656f64c7e2bdfbae0bfb02b28437ddd65c9564617dc6ef377db36b3a1cf2b8cd2a0be66ceaddb5da4f9153f96f4af88a8b96c4424e26a00d7da8d0a914ff24377ffa5edbbb42a2287fadd58d865dd792e23e2c2d9741c215791f72939434b3e6fd57a643a772d78793f3532c9d5a1c456873db15f2dd3692ab5c84d2e17d1a36735f610d1d0bfa722a54b0a2ae8e234c7c8f5b5d5ab8e4bc4b6805986be48903ae3caa89645bc8ad3840ea67fc1425ab663979fba29c38023c8528d3b92f2c13035cabc1a6d3d5553c580c6f55288c35d6269e82fb337daed881371dbfa6293b2ebba3bd72d9741aefffecb878bb198680f19d0892b39fdd53bc144483692ad9070bb6ead21ef4da1c3788d9ee0207ff75a60412f6d4961736ac6f67f7345eee90b51f88818750d91e33bd985a21d64fd7184f7245f66728d2cf99050f422c4d3ccc8bc8a0ff0d6be20d32f1380356d654b64b7667b63e9922036ea1c1a61596dc5076a5c0d46b18962d1a29c3e4780528df8e82f85e49b089e7f89a31a76049e63d291bbcec90fefd4b958d99954f8ef72693a78935f17078faf7f9bced734ab9d20bf5ec6b8edadef2b97323cdded4f5b0badcc8e6b829420a28d8d86b898740f7ca982b0a29dac184811554600306cef9b8af87c2cf298dda22742f111a6388b85071fd5dc9d15f4f2522271e2beb91363cc9cf068d75e4f22b1a5331ef42a1b7b07b6b55720f528be40ec49af823651b1a6aa58ecf240204438d21bed386f7ce73ef7f7e3fb1170063a94b233814c9c3e5e2372f6b68c3f6d9146269486ab8b88c2609d407172e27918a9d978512d2e2be56c9478072174cc906a936e24a3a3123a5034cb36fc6f04fb928dcdc65c67617425805748742a1307cd93f04d9e4283566e88058f06fd81a17005291f484c9b293ba376f76c80ecf69155b8e2b8155a21293cd8ad9ec8857dccff7c4838d795ca04a9c88343790c14c522df4a5e2377c5f2e6315853f929ea7a06768ae748129a0d93bbfb44fd27ac37422d1743dc790db977ceb8d3286b7f88f61c3b8c59c7551bdeee90abd2bbc96a42a78594253441e3122a04ae5676a8b575d42be0865393b76fe12a152e16db63a11b4424b6abb87887bb593380a366e8ba26c8e36b433e13fd4e6ec43c4642e1839c2d1cfc0369ab7c180a7a2e27917cd85144896108371493ebcc23481f14eb8b3b27520ff619dc82a33042c872371812b1592e5d5e234242ba0ffb76ff26e4dc0a1605489419bfcdd95e41482e4e0e2114faac1f28dbd96fd064a597420b07660690da8927ad755d65a4c4b00d98c51046f37b724a766557ab39781c4b3fecae88191f4f66379e4e3f4785ba14bdc3fb09c542c03dae7989b0bc6e4ed945e975fbc9862435e80ef3fbb20d413504375bda9078639d2d93e0385beccd2bf993761f9ccae9d741d3488bda79f6f18ebae7adbc59752768a69b11c4f46088565c359751a0a4c60b0a1387e9d74a307dc6cbcfad8ed5c574b995fb5837b08255b9ae949bb77b56d3e590af2c0669e48f03b5aa5cd7c495ea12fde79e45d4a8defb9335fbc64215d8d40f9e726acc2b8586f39b63c2166c934cffec6c29e5c927a5b3a114ccc19a00b8a908b84c4a163af6d43aca826c8cadeb7c8c0f8f58220d086d1290160e78cc4a7d4ddbe36f2da42af7a74029845b9e2601ce9e279a4b4ccdb3e604e639e32761f567addb9ce4d482a3aeaff6b135ccda5b08cead2a447cf953edd03cee958523bbd9d404ee4ba6c4d9d4924de05b4bbb79029e47cf2d5bbe9331e5f6ba9da43aa557cc4a5738882dd8f43d1487eae4c23f1cf3db02661cdea093153c4124277aa1c133c70e9b2431fa0c09a30e39cab92ea9dd17d6d868f10c1a47cce4fb68b4ef0be2012c4b79ca9e911ac7a1c884003174306d4b14185d31983a138ebb9b3f3eb51e6a1526945841d1b2c5eb037c4ca8cba9c79eca62c5121945b8013be08f522afb43d7d726df5605f4eb7a89262d56394684eccda4c8ca60ab3eeeac64e9796ca9e6852b1165ee6001e407d1b5c80ba1241d35010fffac567</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">想看我的秘密，需要密码呦༼ つ ◕_◕ ༽つ</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <title>ajax2</title>
+    <url>/archives/50cfbdee.html</url>
+    <content><![CDATA[<h1 id="面试官：ajax原理是什么？如何实现？"><a href="#面试官：ajax原理是什么？如何实现？" class="headerlink" title="面试官：ajax原理是什么？如何实现？"></a>面试官：ajax原理是什么？如何实现？</h1><p> <img src="https://static.vue-js.com/a35a2950-7b2a-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>AJAX</code>全称(Async Javascript and XML)</p>
+<p>即异步的<code>JavaScript</code> 和<code>XML</code>，是一种创建交互式网页应用的网页开发技术，可以在不重新加载整个网页的情况下，与服务器交换数据，并且更新部分网页</p>
+<p><code>Ajax</code>的原理简单来说通过<code>XmlHttpRequest</code>对象来向服务器发异步请求，从服务器获得数据，然后用<code>JavaScript</code>来操作<code>DOM</code>而更新页面</p>
+<p>流程图如下：</p>
+<p> <img src="https://static.vue-js.com/af42de10-7b2a-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<p>下面举个例子：</p>
+<p>领导想找小李汇报一下工作，就委托秘书去叫小李，自己就接着做其他事情，直到秘书告诉他小李已经到了，最后小李跟领导汇报工作</p>
+<p><code>Ajax</code>请求数据流程与“领导想找小李汇报一下工作”类似，上述秘书就相当于<code>XMLHttpRequest</code>对象，领导相当于浏览器，响应数据相当于小李</p>
+<p>浏览器可以发送<code>HTTP</code>请求后，接着做其他事情，等收到<code>XHR</code>返回来的数据再进行操作</p>
+<h2 id="二、实现过程"><a href="#二、实现过程" class="headerlink" title="二、实现过程"></a>二、实现过程</h2><p>实现 <code>Ajax</code>异步交互需要服务器逻辑进行配合，需要完成以下步骤：</p>
+<ul>
+<li><p>创建 <code>Ajax</code>的核心对象 <code>XMLHttpRequest</code>对象</p>
+</li>
+<li><p>通过 <code>XMLHttpRequest</code> 对象的 <code>open()</code> 方法与服务端建立连接</p>
+</li>
+<li><p>构建请求所需的数据内容，并通过<code>XMLHttpRequest</code> 对象的 <code>send()</code> 方法发送给服务器端</p>
+</li>
+<li><p>通过 <code>XMLHttpRequest</code> 对象提供的 <code>onreadystatechange</code> 事件监听服务器端你的通信状态</p>
+</li>
+<li><p>接受并处理服务端向客户端响应的数据结果</p>
+</li>
+<li><p>将处理结果更新到 <code>HTML</code>页面中</p>
+</li>
+</ul>
+<h3 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h3><p>通过<code>XMLHttpRequest()</code> 构造函数用于初始化一个 <code>XMLHttpRequest</code> 实例对象</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+<h3 id="与服务器建立连接"><a href="#与服务器建立连接" class="headerlink" title="与服务器建立连接"></a>与服务器建立连接</h3><p>通过 <code>XMLHttpRequest</code> 对象的 <code>open()</code> 方法与服务器建立连接</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.open(method, url, [<span class="keyword">async</span>][, user][, password])</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><p><code>method</code>：表示当前的请求方式，常见的有<code>GET</code>、<code>POST</code></p>
+</li>
+<li><p><code>url</code>：服务端地址</p>
+</li>
+<li><p><code>async</code>：布尔值，表示是否异步执行操作，默认为<code>true</code></p>
+</li>
+<li><p><code>user</code>: 可选的用户名用于认证用途；默认为`null</p>
+</li>
+</ul>
+<ul>
+<li><code>password</code>: 可选的密码用于认证用途，默认为`null</li>
+</ul>
+<h3 id="给服务端发送数据"><a href="#给服务端发送数据" class="headerlink" title="给服务端发送数据"></a>给服务端发送数据</h3><p>通过 <code>XMLHttpRequest</code> 对象的 <code>send()</code> 方法，将客户端页面的数据发送给服务端</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.send([body])</span><br></pre></td></tr></table></figure>
+<p><code>body</code>: 在 <code>XHR</code> 请求中要发送的数据体，如果不传递数据则为 <code>null</code></p>
+<p>如果使用<code>GET</code>请求发送数据的时候，需要注意如下：</p>
+<ul>
+<li>将请求数据添加到<code>open()</code>方法中的<code>url</code>地址中</li>
+<li>发送请求数据中的<code>send()</code>方法中参数设置为<code>null</code></li>
+</ul>
+<h3 id="绑定onreadystatechange事件"><a href="#绑定onreadystatechange事件" class="headerlink" title="绑定onreadystatechange事件"></a>绑定onreadystatechange事件</h3><p><code>onreadystatechange</code> 事件用于监听服务器端的通信状态，主要监听的属性为<code>XMLHttpRequest.readyState</code> ,</p>
+<p>关于<code>XMLHttpRequest.readyState</code>属性有五个状态，如下图显示</p>
+<p><img src="https://static.vue-js.com/9782fc90-7b31-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<p>只要 <code>readyState</code>属性值一变化，就会触发一次 <code>readystatechange</code> 事件</p>
+<p><code>XMLHttpRequest.responseText</code>属性用于接收服务器端的响应结果</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(request.readyState === <span class="number">4</span>)&#123; <span class="comment">// 整个请求过程完毕</span></span><br><span class="line">        <span class="keyword">if</span>(request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt;= <span class="number">300</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(request.responseText) <span class="comment">// 服务端返回的结果</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(request.status &gt;=<span class="number">400</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&quot;错误信息：&quot;</span> + request.status)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">request.open(<span class="string">&#x27;POST&#x27;</span>,<span class="string">&#x27;http://xxxx&#x27;</span>)</span><br><span class="line">request.send()</span><br></pre></td></tr></table></figure>
+<h2 id="三、封装"><a href="#三、封装" class="headerlink" title="三、封装"></a>三、封装</h2><p>通过上面对<code>XMLHttpRequest</code>对象的了解，下面来封装一个简单的<code>ajax</code>请求</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//封装一个ajax请求</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//创建XMLHttpRequest对象</span></span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化参数的内容</span></span><br><span class="line">    options = options || &#123;&#125;</span><br><span class="line">    options.type = (options.type || <span class="string">&#x27;GET&#x27;</span>).toUpperCase()</span><br><span class="line">    options.dataType = options.dataType || <span class="string">&#x27;json&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> params = options.data</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发送请求</span></span><br><span class="line">    <span class="keyword">if</span> (options.type === <span class="string">&#x27;GET&#x27;</span>) &#123;</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, options.url + <span class="string">&#x27;?&#x27;</span> + params, <span class="literal">true</span>)</span><br><span class="line">        xhr.send(<span class="literal">null</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (options.type === <span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">        xhr.open(<span class="string">&#x27;POST&#x27;</span>, options.url, <span class="literal">true</span>)</span><br><span class="line">        xhr.send(params)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收请求</span></span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> status = xhr.status</span><br><span class="line">            <span class="keyword">if</span> (status &gt;= <span class="number">200</span> &amp;&amp; status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                options.success &amp;&amp; options.success(xhr.responseText, xhr.responseXML)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                options.fail &amp;&amp; options.fail(status)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方式如下</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ajax(&#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;https://xxxx&#x27;</span>,</span><br><span class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">text,xml</span>)</span>&#123;<span class="comment">//请求成功后的回调函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(text)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">fail</span>: <span class="function"><span class="keyword">function</span>(<span class="params">status</span>)</span>&#123;<span class="comment">////请求失败后的回调函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(status)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>fine</category>
+        <category>ajax</category>
       </categories>
       <tags>
-        <tag>fine</tag>
+        <tag>ajax2</tag>
+        <tag>ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -1062,6 +1135,182 @@
       </categories>
       <tags>
         <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>animation</title>
+    <url>/archives/8d5284dc.html</url>
+    <content><![CDATA[<h1 id="面试官：css3动画有哪些？"><a href="#面试官：css3动画有哪些？" class="headerlink" title="面试官：css3动画有哪些？"></a>面试官：css3动画有哪些？</h1><p> <img src="https://static.vue-js.com/d12e2380-9c0a-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>CSS动画（CSS Animations）是为层叠样式表建议的允许可扩展标记语言（XML）元素使用CSS的动画的模块</p>
+<p>即指元素从一种样式逐渐过渡为另一种样式的过程</p>
+<p>常见的动画效果有很多，如平移、旋转、缩放等等，复杂动画则是多个简单动画的组合</p>
+<p><code>css</code>实现动画的方式，有如下几种：</p>
+<ul>
+<li>transition 实现渐变动画</li>
+<li>transform 转变动画</li>
+<li>animation 实现自定义动画</li>
+</ul>
+<h2 id="二、实现方式"><a href="#二、实现方式" class="headerlink" title="二、实现方式"></a>二、实现方式</h2><h3 id="transition-实现渐变动画"><a href="#transition-实现渐变动画" class="headerlink" title="transition 实现渐变动画"></a>transition 实现渐变动画</h3><p><code>transition</code>的属性如下：</p>
+<ul>
+<li>property:填写需要变化的css属性</li>
+<li>duration:完成过渡效果需要的时间单位(s或者ms)</li>
+<li>timing-function:完成效果的速度曲线</li>
+<li>delay: 动画效果的延迟触发时间</li>
+</ul>
+<p>其中<code>timing-function</code>的值有如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear</td>
+<td>匀速（等于 cubic-bezier(0,0,1,1)）</td>
+</tr>
+<tr>
+<td>ease</td>
+<td>从慢到快再到慢（cubic-bezier(0.25,0.1,0.25,1)）</td>
+</tr>
+<tr>
+<td>ease-in</td>
+<td>慢慢变快（等于 cubic-bezier(0.42,0,1,1)）</td>
+</tr>
+<tr>
+<td>ease-out</td>
+<td>慢慢变慢（等于 cubic-bezier(0,0,0.58,1)）</td>
+</tr>
+<tr>
+<td>ease-in-out</td>
+<td>先变快再到慢（等于 cubic-bezier(0.42,0,0.58,1)），渐显渐隐效果</td>
+</tr>
+<tr>
+<td>cubic-bezier(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
+<td>在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注意：并不是所有的属性都能使用过渡的，如<code>display:none&lt;-&gt;display:block</code></p>
+<p>举个例子，实现鼠标移动上去发生变化动画效果</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">       <span class="selector-class">.base</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: <span class="number">#0EA9FF</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-width</span>: <span class="number">5px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-style</span>: solid;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-color</span>: <span class="number">#5daf34</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-property</span>: width, height, background-color, border-width;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-duration</span>: <span class="number">2s</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-timing-function</span>: ease-in;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-delay</span>: <span class="number">500ms</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="comment">/*简写*/</span></span></span><br><span class="line"><span class="css">        <span class="comment">/*transition: all 2s ease-in 500ms;*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-class">.base</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: <span class="number">#5daf34</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-width</span>: <span class="number">10px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-color</span>: <span class="number">#3a8ee6</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;base&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="transform-转变动画"><a href="#transform-转变动画" class="headerlink" title="transform 转变动画"></a>transform 转变动画</h3><p>包含四个常用的功能：</p>
+<ul>
+<li>translate：位移</li>
+<li>scale：缩放</li>
+<li>rotate：旋转</li>
+<li>skew：倾斜</li>
+</ul>
+<p>一般配合<code>transition</code>过度使用</p>
+<p>注意的是，<code>transform</code>不支持<code>inline</code>元素，使用前把它变成<code>block</code></p>
+<p>举个例子</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.base</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: <span class="number">#0EA9FF</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">border-width</span>: <span class="number">5px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">border-style</span>: solid;</span></span><br><span class="line"><span class="css">        <span class="attribute">border-color</span>: <span class="number">#5daf34</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-property</span>: width, height, background-color, border-width;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-duration</span>: <span class="number">2s</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-timing-function</span>: ease-in;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-delay</span>: <span class="number">500ms</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.base2</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: none;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-property</span>: transform;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-delay</span>: <span class="number">5ms</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.base2</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.8</span>, <span class="number">1.5</span>) <span class="built_in">rotate</span>(<span class="number">35deg</span>) <span class="built_in">skew</span>(<span class="number">5deg</span>) <span class="built_in">translate</span>(<span class="number">15px</span>, <span class="number">25px</span>);</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;base base2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看到盒子发生了旋转，倾斜，平移，放大</p>
+<h3 id="animation-实现自定义动画"><a href="#animation-实现自定义动画" class="headerlink" title="animation 实现自定义动画"></a>animation 实现自定义动画</h3><p><code>animation</code>是由 8 个属性的简写，分别如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>属性值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>animation-duration</td>
+<td>指定动画完成一个周期所需要时间，单位秒（s）或毫秒（ms），默认是 0</td>
+<td></td>
+</tr>
+<tr>
+<td>animation-timing-function</td>
+<td>指定动画计时函数，即动画的速度曲线，默认是 “ease”</td>
+<td>linear、ease、ease-in、ease-out、ease-in-out</td>
+</tr>
+<tr>
+<td>animation-delay</td>
+<td>指定动画延迟时间，即动画何时开始，默认是 0</td>
+<td></td>
+</tr>
+<tr>
+<td>animation-iteration-count</td>
+<td>指定动画播放的次数，默认是 1</td>
+<td></td>
+</tr>
+<tr>
+<td>animation-direction 指定动画播放的方向</td>
+<td>默认是 normal</td>
+<td>normal、reverse、alternate、alternate-reverse</td>
+</tr>
+<tr>
+<td>animation-fill-mode</td>
+<td>指定动画填充模式。默认是 none</td>
+<td>forwards、backwards、both</td>
+</tr>
+<tr>
+<td>animation-play-state</td>
+<td>指定动画播放状态，正在运行或暂停。默认是 running</td>
+<td>running、pauser</td>
+</tr>
+<tr>
+<td>animation-name</td>
+<td>指定 @keyframes 动画的名称</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>CSS</code> 动画只需要定义一些关键的帧，而其余的帧，浏览器会根据计时函数插值计算出来，</p>
+<p>通过 <code>@keyframes</code> 来定义关键帧</p>
+<p>因此，如果我们想要让元素旋转一圈，只需要定义开始和结束两帧即可：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> rotate&#123;</span><br><span class="line">    <span class="selector-tag">from</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">0deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>from</code> 表示最开始的那一帧，<code>to</code> 表示结束时的那一帧</p>
+<p>也可以使用百分比刻画生命周期</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> rotate&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">0deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">180deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义好了关键帧后，下来就可以直接用它了：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">animation</span>: rotate <span class="number">2s</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transition（过度）</td>
+<td>用于设置元素的样式过度，和animation有着类似的效果，但细节上有很大的不同</td>
+</tr>
+<tr>
+<td>transform（变形）</td>
+<td>用于元素进行旋转、缩放、移动或倾斜，和设置样式的动画并没有什么关系，就相当于color一样用来设置元素的“外表”</td>
+</tr>
+<tr>
+<td>translate（移动）</td>
+<td>只是transform的一个属性值，即移动</td>
+</tr>
+<tr>
+<td>animation（动画）</td>
+<td>用于设置动画属性，他是一个简写的属性，包含6个属性</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://segmentfault.com/a/1190000022540857">https://segmentfault.com/a/1190000022540857</a></li>
+<li><a href="https://zh.m.wikipedia.org/wiki/CSS%E5%8A%A8%E7%94%BB">https://zh.m.wikipedia.org/wiki/CSS%E5%8A%A8%E7%94%BB</a></li>
+<li><a href="https://vue3js.cn/interview">https://vue3js.cn/interview</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css面试</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -1916,255 +2165,6 @@
       <tags>
         <tag>typeScript基础知识</tag>
         <tag>typeScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ajax2</title>
-    <url>/archives/50cfbdee.html</url>
-    <content><![CDATA[<h1 id="面试官：ajax原理是什么？如何实现？"><a href="#面试官：ajax原理是什么？如何实现？" class="headerlink" title="面试官：ajax原理是什么？如何实现？"></a>面试官：ajax原理是什么？如何实现？</h1><p> <img src="https://static.vue-js.com/a35a2950-7b2a-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>AJAX</code>全称(Async Javascript and XML)</p>
-<p>即异步的<code>JavaScript</code> 和<code>XML</code>，是一种创建交互式网页应用的网页开发技术，可以在不重新加载整个网页的情况下，与服务器交换数据，并且更新部分网页</p>
-<p><code>Ajax</code>的原理简单来说通过<code>XmlHttpRequest</code>对象来向服务器发异步请求，从服务器获得数据，然后用<code>JavaScript</code>来操作<code>DOM</code>而更新页面</p>
-<p>流程图如下：</p>
-<p> <img src="https://static.vue-js.com/af42de10-7b2a-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<p>下面举个例子：</p>
-<p>领导想找小李汇报一下工作，就委托秘书去叫小李，自己就接着做其他事情，直到秘书告诉他小李已经到了，最后小李跟领导汇报工作</p>
-<p><code>Ajax</code>请求数据流程与“领导想找小李汇报一下工作”类似，上述秘书就相当于<code>XMLHttpRequest</code>对象，领导相当于浏览器，响应数据相当于小李</p>
-<p>浏览器可以发送<code>HTTP</code>请求后，接着做其他事情，等收到<code>XHR</code>返回来的数据再进行操作</p>
-<h2 id="二、实现过程"><a href="#二、实现过程" class="headerlink" title="二、实现过程"></a>二、实现过程</h2><p>实现 <code>Ajax</code>异步交互需要服务器逻辑进行配合，需要完成以下步骤：</p>
-<ul>
-<li><p>创建 <code>Ajax</code>的核心对象 <code>XMLHttpRequest</code>对象</p>
-</li>
-<li><p>通过 <code>XMLHttpRequest</code> 对象的 <code>open()</code> 方法与服务端建立连接</p>
-</li>
-<li><p>构建请求所需的数据内容，并通过<code>XMLHttpRequest</code> 对象的 <code>send()</code> 方法发送给服务器端</p>
-</li>
-<li><p>通过 <code>XMLHttpRequest</code> 对象提供的 <code>onreadystatechange</code> 事件监听服务器端你的通信状态</p>
-</li>
-<li><p>接受并处理服务端向客户端响应的数据结果</p>
-</li>
-<li><p>将处理结果更新到 <code>HTML</code>页面中</p>
-</li>
-</ul>
-<h3 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h3><p>通过<code>XMLHttpRequest()</code> 构造函数用于初始化一个 <code>XMLHttpRequest</code> 实例对象</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
-<h3 id="与服务器建立连接"><a href="#与服务器建立连接" class="headerlink" title="与服务器建立连接"></a>与服务器建立连接</h3><p>通过 <code>XMLHttpRequest</code> 对象的 <code>open()</code> 方法与服务器建立连接</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.open(method, url, [<span class="keyword">async</span>][, user][, password])</span><br></pre></td></tr></table></figure>
-<p>参数说明：</p>
-<ul>
-<li><p><code>method</code>：表示当前的请求方式，常见的有<code>GET</code>、<code>POST</code></p>
-</li>
-<li><p><code>url</code>：服务端地址</p>
-</li>
-<li><p><code>async</code>：布尔值，表示是否异步执行操作，默认为<code>true</code></p>
-</li>
-<li><p><code>user</code>: 可选的用户名用于认证用途；默认为`null</p>
-</li>
-</ul>
-<ul>
-<li><code>password</code>: 可选的密码用于认证用途，默认为`null</li>
-</ul>
-<h3 id="给服务端发送数据"><a href="#给服务端发送数据" class="headerlink" title="给服务端发送数据"></a>给服务端发送数据</h3><p>通过 <code>XMLHttpRequest</code> 对象的 <code>send()</code> 方法，将客户端页面的数据发送给服务端</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.send([body])</span><br></pre></td></tr></table></figure>
-<p><code>body</code>: 在 <code>XHR</code> 请求中要发送的数据体，如果不传递数据则为 <code>null</code></p>
-<p>如果使用<code>GET</code>请求发送数据的时候，需要注意如下：</p>
-<ul>
-<li>将请求数据添加到<code>open()</code>方法中的<code>url</code>地址中</li>
-<li>发送请求数据中的<code>send()</code>方法中参数设置为<code>null</code></li>
-</ul>
-<h3 id="绑定onreadystatechange事件"><a href="#绑定onreadystatechange事件" class="headerlink" title="绑定onreadystatechange事件"></a>绑定onreadystatechange事件</h3><p><code>onreadystatechange</code> 事件用于监听服务器端的通信状态，主要监听的属性为<code>XMLHttpRequest.readyState</code> ,</p>
-<p>关于<code>XMLHttpRequest.readyState</code>属性有五个状态，如下图显示</p>
-<p><img src="https://static.vue-js.com/9782fc90-7b31-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<p>只要 <code>readyState</code>属性值一变化，就会触发一次 <code>readystatechange</code> 事件</p>
-<p><code>XMLHttpRequest.responseText</code>属性用于接收服务器端的响应结果</p>
-<p>举个例子：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(request.readyState === <span class="number">4</span>)&#123; <span class="comment">// 整个请求过程完毕</span></span><br><span class="line">        <span class="keyword">if</span>(request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt;= <span class="number">300</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(request.responseText) <span class="comment">// 服务端返回的结果</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(request.status &gt;=<span class="number">400</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&quot;错误信息：&quot;</span> + request.status)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">request.open(<span class="string">&#x27;POST&#x27;</span>,<span class="string">&#x27;http://xxxx&#x27;</span>)</span><br><span class="line">request.send()</span><br></pre></td></tr></table></figure>
-<h2 id="三、封装"><a href="#三、封装" class="headerlink" title="三、封装"></a>三、封装</h2><p>通过上面对<code>XMLHttpRequest</code>对象的了解，下面来封装一个简单的<code>ajax</code>请求</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//封装一个ajax请求</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//创建XMLHttpRequest对象</span></span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化参数的内容</span></span><br><span class="line">    options = options || &#123;&#125;</span><br><span class="line">    options.type = (options.type || <span class="string">&#x27;GET&#x27;</span>).toUpperCase()</span><br><span class="line">    options.dataType = options.dataType || <span class="string">&#x27;json&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> params = options.data</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发送请求</span></span><br><span class="line">    <span class="keyword">if</span> (options.type === <span class="string">&#x27;GET&#x27;</span>) &#123;</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, options.url + <span class="string">&#x27;?&#x27;</span> + params, <span class="literal">true</span>)</span><br><span class="line">        xhr.send(<span class="literal">null</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (options.type === <span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">        xhr.open(<span class="string">&#x27;POST&#x27;</span>, options.url, <span class="literal">true</span>)</span><br><span class="line">        xhr.send(params)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收请求</span></span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> status = xhr.status</span><br><span class="line">            <span class="keyword">if</span> (status &gt;= <span class="number">200</span> &amp;&amp; status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                options.success &amp;&amp; options.success(xhr.responseText, xhr.responseXML)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                options.fail &amp;&amp; options.fail(status)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用方式如下</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ajax(&#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;https://xxxx&#x27;</span>,</span><br><span class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">text,xml</span>)</span>&#123;<span class="comment">//请求成功后的回调函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(text)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">fail</span>: <span class="function"><span class="keyword">function</span>(<span class="params">status</span>)</span>&#123;<span class="comment">////请求失败后的回调函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(status)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>ajax</category>
-      </categories>
-      <tags>
-        <tag>ajax2</tag>
-        <tag>ajax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>animation</title>
-    <url>/archives/8d5284dc.html</url>
-    <content><![CDATA[<h1 id="面试官：css3动画有哪些？"><a href="#面试官：css3动画有哪些？" class="headerlink" title="面试官：css3动画有哪些？"></a>面试官：css3动画有哪些？</h1><p> <img src="https://static.vue-js.com/d12e2380-9c0a-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>CSS动画（CSS Animations）是为层叠样式表建议的允许可扩展标记语言（XML）元素使用CSS的动画的模块</p>
-<p>即指元素从一种样式逐渐过渡为另一种样式的过程</p>
-<p>常见的动画效果有很多，如平移、旋转、缩放等等，复杂动画则是多个简单动画的组合</p>
-<p><code>css</code>实现动画的方式，有如下几种：</p>
-<ul>
-<li>transition 实现渐变动画</li>
-<li>transform 转变动画</li>
-<li>animation 实现自定义动画</li>
-</ul>
-<h2 id="二、实现方式"><a href="#二、实现方式" class="headerlink" title="二、实现方式"></a>二、实现方式</h2><h3 id="transition-实现渐变动画"><a href="#transition-实现渐变动画" class="headerlink" title="transition 实现渐变动画"></a>transition 实现渐变动画</h3><p><code>transition</code>的属性如下：</p>
-<ul>
-<li>property:填写需要变化的css属性</li>
-<li>duration:完成过渡效果需要的时间单位(s或者ms)</li>
-<li>timing-function:完成效果的速度曲线</li>
-<li>delay: 动画效果的延迟触发时间</li>
-</ul>
-<p>其中<code>timing-function</code>的值有如下：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>linear</td>
-<td>匀速（等于 cubic-bezier(0,0,1,1)）</td>
-</tr>
-<tr>
-<td>ease</td>
-<td>从慢到快再到慢（cubic-bezier(0.25,0.1,0.25,1)）</td>
-</tr>
-<tr>
-<td>ease-in</td>
-<td>慢慢变快（等于 cubic-bezier(0.42,0,1,1)）</td>
-</tr>
-<tr>
-<td>ease-out</td>
-<td>慢慢变慢（等于 cubic-bezier(0,0,0.58,1)）</td>
-</tr>
-<tr>
-<td>ease-in-out</td>
-<td>先变快再到慢（等于 cubic-bezier(0.42,0,0.58,1)），渐显渐隐效果</td>
-</tr>
-<tr>
-<td>cubic-bezier(<em>n</em>,<em>n</em>,<em>n</em>,<em>n</em>)</td>
-<td>在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>注意：并不是所有的属性都能使用过渡的，如<code>display:none&lt;-&gt;display:block</code></p>
-<p>举个例子，实现鼠标移动上去发生变化动画效果</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">       <span class="selector-class">.base</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: <span class="number">#0EA9FF</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-width</span>: <span class="number">5px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-style</span>: solid;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-color</span>: <span class="number">#5daf34</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-property</span>: width, height, background-color, border-width;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-duration</span>: <span class="number">2s</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-timing-function</span>: ease-in;</span></span><br><span class="line"><span class="css">            <span class="attribute">transition-delay</span>: <span class="number">500ms</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="comment">/*简写*/</span></span></span><br><span class="line"><span class="css">        <span class="comment">/*transition: all 2s ease-in 500ms;*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-class">.base</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: <span class="number">#5daf34</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-width</span>: <span class="number">10px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-color</span>: <span class="number">#3a8ee6</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;base&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="transform-转变动画"><a href="#transform-转变动画" class="headerlink" title="transform 转变动画"></a>transform 转变动画</h3><p>包含四个常用的功能：</p>
-<ul>
-<li>translate：位移</li>
-<li>scale：缩放</li>
-<li>rotate：旋转</li>
-<li>skew：倾斜</li>
-</ul>
-<p>一般配合<code>transition</code>过度使用</p>
-<p>注意的是，<code>transform</code>不支持<code>inline</code>元素，使用前把它变成<code>block</code></p>
-<p>举个例子</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.base</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: <span class="number">#0EA9FF</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">border-width</span>: <span class="number">5px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">border-style</span>: solid;</span></span><br><span class="line"><span class="css">        <span class="attribute">border-color</span>: <span class="number">#5daf34</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-property</span>: width, height, background-color, border-width;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-duration</span>: <span class="number">2s</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-timing-function</span>: ease-in;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-delay</span>: <span class="number">500ms</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.base2</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: none;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-property</span>: transform;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition-delay</span>: <span class="number">5ms</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.base2</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.8</span>, <span class="number">1.5</span>) <span class="built_in">rotate</span>(<span class="number">35deg</span>) <span class="built_in">skew</span>(<span class="number">5deg</span>) <span class="built_in">translate</span>(<span class="number">15px</span>, <span class="number">25px</span>);</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;base base2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>可以看到盒子发生了旋转，倾斜，平移，放大</p>
-<h3 id="animation-实现自定义动画"><a href="#animation-实现自定义动画" class="headerlink" title="animation 实现自定义动画"></a>animation 实现自定义动画</h3><p><code>animation</code>是由 8 个属性的简写，分别如下：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-<th>属性值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>animation-duration</td>
-<td>指定动画完成一个周期所需要时间，单位秒（s）或毫秒（ms），默认是 0</td>
-<td></td>
-</tr>
-<tr>
-<td>animation-timing-function</td>
-<td>指定动画计时函数，即动画的速度曲线，默认是 “ease”</td>
-<td>linear、ease、ease-in、ease-out、ease-in-out</td>
-</tr>
-<tr>
-<td>animation-delay</td>
-<td>指定动画延迟时间，即动画何时开始，默认是 0</td>
-<td></td>
-</tr>
-<tr>
-<td>animation-iteration-count</td>
-<td>指定动画播放的次数，默认是 1</td>
-<td></td>
-</tr>
-<tr>
-<td>animation-direction 指定动画播放的方向</td>
-<td>默认是 normal</td>
-<td>normal、reverse、alternate、alternate-reverse</td>
-</tr>
-<tr>
-<td>animation-fill-mode</td>
-<td>指定动画填充模式。默认是 none</td>
-<td>forwards、backwards、both</td>
-</tr>
-<tr>
-<td>animation-play-state</td>
-<td>指定动画播放状态，正在运行或暂停。默认是 running</td>
-<td>running、pauser</td>
-</tr>
-<tr>
-<td>animation-name</td>
-<td>指定 @keyframes 动画的名称</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code>CSS</code> 动画只需要定义一些关键的帧，而其余的帧，浏览器会根据计时函数插值计算出来，</p>
-<p>通过 <code>@keyframes</code> 来定义关键帧</p>
-<p>因此，如果我们想要让元素旋转一圈，只需要定义开始和结束两帧即可：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> rotate&#123;</span><br><span class="line">    <span class="selector-tag">from</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">0deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>from</code> 表示最开始的那一帧，<code>to</code> 表示结束时的那一帧</p>
-<p>也可以使用百分比刻画生命周期</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> rotate&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">0deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">180deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>定义好了关键帧后，下来就可以直接用它了：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">animation</span>: rotate <span class="number">2s</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>transition（过度）</td>
-<td>用于设置元素的样式过度，和animation有着类似的效果，但细节上有很大的不同</td>
-</tr>
-<tr>
-<td>transform（变形）</td>
-<td>用于元素进行旋转、缩放、移动或倾斜，和设置样式的动画并没有什么关系，就相当于color一样用来设置元素的“外表”</td>
-</tr>
-<tr>
-<td>translate（移动）</td>
-<td>只是transform的一个属性值，即移动</td>
-</tr>
-<tr>
-<td>animation（动画）</td>
-<td>用于设置动画属性，他是一个简写的属性，包含6个属性</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://segmentfault.com/a/1190000022540857">https://segmentfault.com/a/1190000022540857</a></li>
-<li><a href="https://zh.m.wikipedia.org/wiki/CSS%E5%8A%A8%E7%94%BB">https://zh.m.wikipedia.org/wiki/CSS%E5%8A%A8%E7%94%BB</a></li>
-<li><a href="https://vue3js.cn/interview">https://vue3js.cn/interview</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css面试</tag>
-        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -4258,6 +4258,56 @@
       </tags>
   </entry>
   <entry>
+    <title>function_cache</title>
+    <url>/archives/adb78c8a.html</url>
+    <content><![CDATA[<h1 id="面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？"><a href="#面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？" class="headerlink" title="面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？"></a>面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？</h1><p> <img src="https://static.vue-js.com/2ae9dda0-85fa-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>函数缓存，就是将函数运算过的结果进行缓存</p>
+<p>本质上就是用空间（缓存存储）换时间（计算过程）</p>
+<p>常用于缓存数据计算结果和缓存对象</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> add = <span class="function">(<span class="params">a,b</span>) =&gt;</span> a+b;</span><br><span class="line"><span class="keyword">const</span> calc = memoize(add); <span class="comment">// 函数缓存</span></span><br><span class="line">calc(<span class="number">10</span>,<span class="number">20</span>);<span class="comment">// 30</span></span><br><span class="line">calc(<span class="number">10</span>,<span class="number">20</span>);<span class="comment">// 30 缓存</span></span><br></pre></td></tr></table></figure>
+<p>缓存只是一个临时的数据存储，它保存数据，以便将来对该数据的请求能够更快地得到处理</p>
+<h2 id="二、如何实现"><a href="#二、如何实现" class="headerlink" title="二、如何实现"></a>二、如何实现</h2><p>实现函数缓存主要依靠闭包、柯里化、高阶函数，这里再简单复习下：</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包可以理解成，函数 + 函数体内可访问的变量总和</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> b = <span class="number">2</span></span><br><span class="line">        <span class="keyword">let</span> sum = b + a</span><br><span class="line">        <span class="built_in">console</span>.log(sum); <span class="comment">// 3</span></span><br><span class="line">    &#125;</span><br><span class="line">    add()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p><code>add</code>函数本身，以及其内部可访问的变量，即 <code>a = 1</code>，这两个组合在⼀起就形成了闭包</p>
+<h3 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h3><p>把接受多个参数的函数转换成接受一个单一参数的函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 非函数柯里化</span></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">3</span>,<span class="number">4</span>) <span class="comment">//7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数柯里化</span></span><br><span class="line"><span class="keyword">var</span> add2 = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//**返回函数**</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">y</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x+y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">add2(<span class="number">3</span>)(<span class="number">4</span>) <span class="comment">//7</span></span><br></pre></td></tr></table></figure>
+<p>将一个二元函数拆分成两个一元函数</p>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>通过接收其他函数作为参数或返回其他函数的函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz();<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<p>函数 <code>foo</code> 如何返回另一个函数 <code>bar</code>，<code>baz</code> 现在持有对 <code>foo</code> 中定义的<code>bar</code> 函数的引用。由于闭包特性，<code>a</code>的值能够得到</p>
+<p>下面再看看如何实现函数缓存，实现原理也很简单，把参数和对应的结果数据存在一个对象中，调用时判断参数对应的数据是否存在，存在就返回对应的结果数据，否则就返回计算结果</p>
+<p>如下所示</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> memoize = <span class="function"><span class="keyword">function</span> (<span class="params">func, content</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cache = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  content = content || <span class="built_in">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!cache[key]) &#123;</span><br><span class="line">      cache[key] = func.apply(content, key)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cache[key]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用方式也很简单</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> calc = memoize(add);</span><br><span class="line"><span class="keyword">const</span> num1 = calc(<span class="number">100</span>,<span class="number">200</span>)</span><br><span class="line"><span class="keyword">const</span> num2 = calc(<span class="number">100</span>,<span class="number">200</span>) <span class="comment">// 缓存得到的结果</span></span><br></pre></td></tr></table></figure>
+<p>过程分析：</p>
+<ul>
+<li>在当前函数作用域定义了一个空对象，用于缓存运行结果</li>
+<li>运用柯里化返回一个函数，返回的函数由于闭包特性，可以访问到<code>cache</code></li>
+<li>然后判断输入参数是不是在<code>cache</code>的中。如果已经存在，直接返回<code>cache</code>的内容，如果没有存在，使用函数<code>func</code>对输入参数求值，然后把结果存储在<code>cache</code>中</li>
+</ul>
+<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>虽然使用缓存效率是非常高的，但并不是所有场景都适用，因此千万不要极端的将所有函数都添加缓存</p>
+<p>以下几种情况下，适合使用缓存：</p>
+<ul>
+<li>对于昂贵的函数调用，执行复杂计算的函数</li>
+<li>对于具有有限且高度重复输入范围的函数</li>
+<li>对于具有重复输入值的递归函数</li>
+<li>对于纯函数，即每次使用特定输入调用时返回相同输出的函数</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/112505577">https://zhuanlan.zhihu.com/p/112505577</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js面试</tag>
+        <tag>function_cache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>function</title>
     <url>/archives/caae163d.html</url>
     <content><![CDATA[<h1 id="面试官：对象新增了哪些扩展？"><a href="#面试官：对象新增了哪些扩展？" class="headerlink" title="面试官：对象新增了哪些扩展？"></a>面试官：对象新增了哪些扩展？</h1><p><img src="https://static.vue-js.com/54a04a10-5569-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
@@ -4316,56 +4366,6 @@
       <tags>
         <tag>es6</tag>
         <tag>function</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>function_cache</title>
-    <url>/archives/adb78c8a.html</url>
-    <content><![CDATA[<h1 id="面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？"><a href="#面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？" class="headerlink" title="面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？"></a>面试官：Javascript中如何实现函数缓存？函数缓存有哪些应用场景？</h1><p> <img src="https://static.vue-js.com/2ae9dda0-85fa-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>函数缓存，就是将函数运算过的结果进行缓存</p>
-<p>本质上就是用空间（缓存存储）换时间（计算过程）</p>
-<p>常用于缓存数据计算结果和缓存对象</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> add = <span class="function">(<span class="params">a,b</span>) =&gt;</span> a+b;</span><br><span class="line"><span class="keyword">const</span> calc = memoize(add); <span class="comment">// 函数缓存</span></span><br><span class="line">calc(<span class="number">10</span>,<span class="number">20</span>);<span class="comment">// 30</span></span><br><span class="line">calc(<span class="number">10</span>,<span class="number">20</span>);<span class="comment">// 30 缓存</span></span><br></pre></td></tr></table></figure>
-<p>缓存只是一个临时的数据存储，它保存数据，以便将来对该数据的请求能够更快地得到处理</p>
-<h2 id="二、如何实现"><a href="#二、如何实现" class="headerlink" title="二、如何实现"></a>二、如何实现</h2><p>实现函数缓存主要依靠闭包、柯里化、高阶函数，这里再简单复习下：</p>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包可以理解成，函数 + 函数体内可访问的变量总和</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> b = <span class="number">2</span></span><br><span class="line">        <span class="keyword">let</span> sum = b + a</span><br><span class="line">        <span class="built_in">console</span>.log(sum); <span class="comment">// 3</span></span><br><span class="line">    &#125;</span><br><span class="line">    add()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-<p><code>add</code>函数本身，以及其内部可访问的变量，即 <code>a = 1</code>，这两个组合在⼀起就形成了闭包</p>
-<h3 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h3><p>把接受多个参数的函数转换成接受一个单一参数的函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 非函数柯里化</span></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">3</span>,<span class="number">4</span>) <span class="comment">//7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数柯里化</span></span><br><span class="line"><span class="keyword">var</span> add2 = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//**返回函数**</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">y</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x+y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">add2(<span class="number">3</span>)(<span class="number">4</span>) <span class="comment">//7</span></span><br></pre></td></tr></table></figure>
-<p>将一个二元函数拆分成两个一元函数</p>
-<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>通过接收其他函数作为参数或返回其他函数的函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz();<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
-<p>函数 <code>foo</code> 如何返回另一个函数 <code>bar</code>，<code>baz</code> 现在持有对 <code>foo</code> 中定义的<code>bar</code> 函数的引用。由于闭包特性，<code>a</code>的值能够得到</p>
-<p>下面再看看如何实现函数缓存，实现原理也很简单，把参数和对应的结果数据存在一个对象中，调用时判断参数对应的数据是否存在，存在就返回对应的结果数据，否则就返回计算结果</p>
-<p>如下所示</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> memoize = <span class="function"><span class="keyword">function</span> (<span class="params">func, content</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cache = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  content = content || <span class="built_in">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!cache[key]) &#123;</span><br><span class="line">      cache[key] = func.apply(content, key)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cache[key]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>调用方式也很简单</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> calc = memoize(add);</span><br><span class="line"><span class="keyword">const</span> num1 = calc(<span class="number">100</span>,<span class="number">200</span>)</span><br><span class="line"><span class="keyword">const</span> num2 = calc(<span class="number">100</span>,<span class="number">200</span>) <span class="comment">// 缓存得到的结果</span></span><br></pre></td></tr></table></figure>
-<p>过程分析：</p>
-<ul>
-<li>在当前函数作用域定义了一个空对象，用于缓存运行结果</li>
-<li>运用柯里化返回一个函数，返回的函数由于闭包特性，可以访问到<code>cache</code></li>
-<li>然后判断输入参数是不是在<code>cache</code>的中。如果已经存在，直接返回<code>cache</code>的内容，如果没有存在，使用函数<code>func</code>对输入参数求值，然后把结果存储在<code>cache</code>中</li>
-</ul>
-<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>虽然使用缓存效率是非常高的，但并不是所有场景都适用，因此千万不要极端的将所有函数都添加缓存</p>
-<p>以下几种情况下，适合使用缓存：</p>
-<ul>
-<li>对于昂贵的函数调用，执行复杂计算的函数</li>
-<li>对于具有有限且高度重复输入范围的函数</li>
-<li>对于具有重复输入值的递归函数</li>
-<li>对于纯函数，即每次使用特定输入调用时返回相同输出的函数</li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/112505577">https://zhuanlan.zhihu.com/p/112505577</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js面试</tag>
-        <tag>function_cache</tag>
       </tags>
   </entry>
   <entry>
@@ -5165,6 +5165,42 @@
       </tags>
   </entry>
   <entry>
+    <title>js_data_structure</title>
+    <url>/archives/958c57b5.html</url>
+    <content><![CDATA[<h1 id="面试官：说说你了解的js数据结构？"><a href="#面试官：说说你了解的js数据结构？" class="headerlink" title="面试官：说说你了解的js数据结构？"></a>面试官：说说你了解的js数据结构？</h1><h2 id="什么是数据结构？"><a href="#什么是数据结构？" class="headerlink" title="什么是数据结构？"></a>什么是数据结构？</h2><p>数据结构是计算机存储、组织数据的方式。<br>数据结构意味着接口或封装：一个数据结构可被视为两个函数之间的接口，或者是由数据类型联合组成的存储内容的访问方法封装。</p>
+<p>我们每天的编码中都会用到数据结构<br>数组是最简单的内存数据结构<br>下面是常见的数据结构：</p>
+<ol>
+<li>数组（Array）</li>
+<li>栈（Stack）</li>
+<li>队列（Queue）</li>
+<li>链表（Linked List）</li>
+<li>字典</li>
+<li>散列表（Hash table）</li>
+<li>树（Tree）</li>
+<li>图（Graph）</li>
+<li>堆（Heap）</li>
+</ol>
+<h2 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h2><p>数组是最最基本的数据结构，很多语言都内置支持数组。<br>数组是使用一块连续的内存空间保存数据，保存的数据的个数在分配内存的时候就是确定的。</p>
+<p>在日常生活中，人们经常使用列表：待办事项列表、购物清单等。</p>
+<p>而计算机程序也在使用列表，在下面的条件下，选择列表作为数据结构就显得尤为有用：<br>数据结构较为简单<br>不需要在一个长序列中查找元素，或者对其进行排序<br>反之，如果数据结构非常复杂，列表的作用就没有那么大了。</p>
+<h2 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h2><p>栈是一种遵循后进先出（LIFO）原则的有序集合<br>在栈里，新元素都接近栈顶，旧元素都接近栈底。<br>每次加入新的元素和拿走元素都在顶部操作<br><img src="https://upload-images.jianshu.io/upload_images/13253432-ddcb884374470d2c?imageMogr2/auto-orient/strip|imageView2/2/format/webp" alt=""></p>
+<h2 id="队列（Queue）"><a href="#队列（Queue）" class="headerlink" title="队列（Queue）"></a>队列（Queue）</h2><p>队列是遵循先进先出（FIFO，也称为先来先服务）原则的一组有序的项<br>队列在尾部添加新元素，并从顶部移除元素<br>最新添加的元素必须排在队列的末尾<br><img src="https://upload-images.jianshu.io/upload_images/13253432-55ad7c7db40d3796?imageMogr2/auto-orient/strip|imageView2/2/format/webp" alt=""></p>
+<h2 id="链表（Linked-List）"><a href="#链表（Linked-List）" class="headerlink" title="链表（Linked List）"></a>链表（Linked List）</h2><p>链表也是一种列表，已经设计了数组，为什么还需要链表呢？<br>JavaScript中数组的主要问题时，它们被实现成了对象，<br>与其他语言（比如C++和Java）的数组相对，效率很低。<br>如果你发现数组在实际使用时很慢，就可以考虑使用链表来代替它。</p>
+<p>使用条件：<br>链表几乎可以用在任何可以使用一维数组的情况中。<br>如果需要随机访问，数组仍然是更好的选择。<br><img src="https://raw.githubusercontent.com/zoro-web/blog/master/img/lian.jpg" alt=""></p>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>字典是一种以键-值对存储数据的数据结构，js中的Object类就是以字典的形式设计的。JavaScript可以通过实现字典类，让这种字典类型的对象使用起来更加简单，字典可以实现对象拥有的常见功能，并相应拓展自己想要的功能，而对象在JavaScript编写中随处可见，所以字典的作用也异常明显了。</p>
+<h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><p>也称为哈希表，特点是在散列表上插入、删除和取用数据都非常快。<br>为什么要设计这种数据结构呢？<br>用数组或链表存储数据，如果想要找到其中一个数据，需要从头进行遍历，因为不知道这个数据存储到了数组的哪个位置。</p>
+<p>散列表在JavaScript中可以基础数组去进行设计。<br>数组的长度是预先设定的，所有元素根据和该元素对应的键，保存在数组的特定位置，这里的键和对象的键是类型的概念。<br>使用散列表存储数组时，通过一个散列函数将键映射为一个数字，这个数字的范围是0到散列表的长度。</p>
+<p>即使使用一个高效的散列函数，依然存在将两个键映射为同一个值得可能，这种现象叫做碰撞。常见碰撞的处理方法有：开链法和线性探测法（具体概念有兴趣的可以网上自信了解）<br>使用条件：<br>可以用于数据的插入、删除和取用，不适用于查找数据<br><img src="https://raw.githubusercontent.com/zoro-web/blog/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170820211406.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js面试</tag>
+        <tag>js_data_structure</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>layout_painting</title>
     <url>/archives/78ca6597.html</url>
     <content><![CDATA[<h1 id="面试官：怎么理解回流跟重绘？什么场景下会触发？"><a href="#面试官：怎么理解回流跟重绘？什么场景下会触发？" class="headerlink" title="面试官：怎么理解回流跟重绘？什么场景下会触发？"></a>面试官：怎么理解回流跟重绘？什么场景下会触发？</h1><p> <img src="https://static.vue-js.com/1ed5d340-9cdc-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
@@ -5258,42 +5294,6 @@
       <tags>
         <tag>css面试</tag>
         <tag>layout_painting</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js_data_structure</title>
-    <url>/archives/958c57b5.html</url>
-    <content><![CDATA[<h1 id="面试官：说说你了解的js数据结构？"><a href="#面试官：说说你了解的js数据结构？" class="headerlink" title="面试官：说说你了解的js数据结构？"></a>面试官：说说你了解的js数据结构？</h1><h2 id="什么是数据结构？"><a href="#什么是数据结构？" class="headerlink" title="什么是数据结构？"></a>什么是数据结构？</h2><p>数据结构是计算机存储、组织数据的方式。<br>数据结构意味着接口或封装：一个数据结构可被视为两个函数之间的接口，或者是由数据类型联合组成的存储内容的访问方法封装。</p>
-<p>我们每天的编码中都会用到数据结构<br>数组是最简单的内存数据结构<br>下面是常见的数据结构：</p>
-<ol>
-<li>数组（Array）</li>
-<li>栈（Stack）</li>
-<li>队列（Queue）</li>
-<li>链表（Linked List）</li>
-<li>字典</li>
-<li>散列表（Hash table）</li>
-<li>树（Tree）</li>
-<li>图（Graph）</li>
-<li>堆（Heap）</li>
-</ol>
-<h2 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h2><p>数组是最最基本的数据结构，很多语言都内置支持数组。<br>数组是使用一块连续的内存空间保存数据，保存的数据的个数在分配内存的时候就是确定的。</p>
-<p>在日常生活中，人们经常使用列表：待办事项列表、购物清单等。</p>
-<p>而计算机程序也在使用列表，在下面的条件下，选择列表作为数据结构就显得尤为有用：<br>数据结构较为简单<br>不需要在一个长序列中查找元素，或者对其进行排序<br>反之，如果数据结构非常复杂，列表的作用就没有那么大了。</p>
-<h2 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h2><p>栈是一种遵循后进先出（LIFO）原则的有序集合<br>在栈里，新元素都接近栈顶，旧元素都接近栈底。<br>每次加入新的元素和拿走元素都在顶部操作<br><img src="https://upload-images.jianshu.io/upload_images/13253432-ddcb884374470d2c?imageMogr2/auto-orient/strip|imageView2/2/format/webp" alt=""></p>
-<h2 id="队列（Queue）"><a href="#队列（Queue）" class="headerlink" title="队列（Queue）"></a>队列（Queue）</h2><p>队列是遵循先进先出（FIFO，也称为先来先服务）原则的一组有序的项<br>队列在尾部添加新元素，并从顶部移除元素<br>最新添加的元素必须排在队列的末尾<br><img src="https://upload-images.jianshu.io/upload_images/13253432-55ad7c7db40d3796?imageMogr2/auto-orient/strip|imageView2/2/format/webp" alt=""></p>
-<h2 id="链表（Linked-List）"><a href="#链表（Linked-List）" class="headerlink" title="链表（Linked List）"></a>链表（Linked List）</h2><p>链表也是一种列表，已经设计了数组，为什么还需要链表呢？<br>JavaScript中数组的主要问题时，它们被实现成了对象，<br>与其他语言（比如C++和Java）的数组相对，效率很低。<br>如果你发现数组在实际使用时很慢，就可以考虑使用链表来代替它。</p>
-<p>使用条件：<br>链表几乎可以用在任何可以使用一维数组的情况中。<br>如果需要随机访问，数组仍然是更好的选择。<br><img src="https://raw.githubusercontent.com/zoro-web/blog/master/img/lian.jpg" alt=""></p>
-<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>字典是一种以键-值对存储数据的数据结构，js中的Object类就是以字典的形式设计的。JavaScript可以通过实现字典类，让这种字典类型的对象使用起来更加简单，字典可以实现对象拥有的常见功能，并相应拓展自己想要的功能，而对象在JavaScript编写中随处可见，所以字典的作用也异常明显了。</p>
-<h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><p>也称为哈希表，特点是在散列表上插入、删除和取用数据都非常快。<br>为什么要设计这种数据结构呢？<br>用数组或链表存储数据，如果想要找到其中一个数据，需要从头进行遍历，因为不知道这个数据存储到了数组的哪个位置。</p>
-<p>散列表在JavaScript中可以基础数组去进行设计。<br>数组的长度是预先设定的，所有元素根据和该元素对应的键，保存在数组的特定位置，这里的键和对象的键是类型的概念。<br>使用散列表存储数组时，通过一个散列函数将键映射为一个数字，这个数字的范围是0到散列表的长度。</p>
-<p>即使使用一个高效的散列函数，依然存在将两个键映射为同一个值得可能，这种现象叫做碰撞。常见碰撞的处理方法有：开链法和线性探测法（具体概念有兴趣的可以网上自信了解）<br>使用条件：<br>可以用于数据的插入、删除和取用，不适用于查找数据<br><img src="https://raw.githubusercontent.com/zoro-web/blog/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170820211406.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js面试</tag>
-        <tag>js_data_structure</tag>
       </tags>
   </entry>
   <entry>
@@ -6136,75 +6136,6 @@
       </tags>
   </entry>
   <entry>
-    <title>prototype</title>
-    <url>/archives/a36a5ae4.html</url>
-    <content><![CDATA[<h1 id="面试官：JavaScript原型，原型链-有什么特点？"><a href="#面试官：JavaScript原型，原型链-有什么特点？" class="headerlink" title="面试官：JavaScript原型，原型链 ? 有什么特点？"></a>面试官：JavaScript原型，原型链 ? 有什么特点？</h1><p> <img src="https://static.vue-js.com/4500e170-725e-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<h2 id="一、原型"><a href="#一、原型" class="headerlink" title="一、原型"></a>一、原型</h2><p><code>JavaScript</code> 常被描述为一种基于原型的语言——每个对象拥有一个原型对象</p>
-<p>当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾</p>
-<p>准确地说，这些属性和方法定义在Object的构造器函数（constructor functions）之上的<code>prototype</code>属性上，而非实例对象本身</p>
-<p>下面举个例子：</p>
-<p>函数可以有属性。 每个函数都有一个特殊的属性叫作原型<code>prototype</code> </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log( doSomething.prototype );</span><br></pre></td></tr></table></figure>
-<p>控制台输出</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">constructor</span>: ƒ doSomething(),</span><br><span class="line">    <span class="attr">__proto__</span>: &#123;</span><br><span class="line">        <span class="attr">constructor</span>: ƒ <span class="built_in">Object</span>(),</span><br><span class="line">        <span class="attr">hasOwnProperty</span>: ƒ hasOwnProperty(),</span><br><span class="line">        <span class="attr">isPrototypeOf</span>: ƒ isPrototypeOf(),</span><br><span class="line">        <span class="attr">propertyIsEnumerable</span>: ƒ propertyIsEnumerable(),</span><br><span class="line">        <span class="attr">toLocaleString</span>: ƒ toLocaleString(),</span><br><span class="line">        <span class="attr">toString</span>: ƒ toString(),</span><br><span class="line">        <span class="attr">valueOf</span>: ƒ valueOf()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这个对象，就是大家常说的原型对象</p>
-<p>可以看到，原型对象有一个自有属性<code>constructor</code>，这个属性指向该函数，如下图关系展示</p>
-<p> <img src="https://static.vue-js.com/56d87250-725e-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h2 id="二、原型链"><a href="#二、原型链" class="headerlink" title="二、原型链"></a>二、原型链</h2><p>原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为原型链 (prototype chain)，它解释了为何一个对象会拥有定义在其他对象中的属性和方法</p>
-<p>在对象实例和它的构造器之间建立一个链接（它是<code>__proto__</code>属性，是从构造函数的<code>prototype</code>属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法</p>
-<p>下面举个例子：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = <span class="number">18</span>;</span><br><span class="line">    <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第二步 创建实例</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">&#x27;person&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>根据代码，我们可以得到下图</p>
-<p> <img src="https://static.vue-js.com/60825aa0-725e-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<p>下面分析一下：</p>
-<ul>
-<li>构造函数<code>Person</code>存在原型对象<code>Person.prototype</code></li>
-<li>构造函数生成实例对象<code>person</code>，<code>person</code>的<code>__proto__</code>指向构造函数<code>Person</code>原型对象</li>
-<li><p><code>Person.prototype.__proto__</code> 指向内置对象，因为 <code>Person.prototype</code> 是个对象，默认是由 <code>Object</code>函数作为类创建的，而 <code>Object.prototype</code> 为内置对象</p>
-</li>
-<li><p><code>Person.__proto__</code> 指向内置匿名函数 <code>anonymous</code>，因为 Person 是个函数对象，默认由 Function 作为类创建</p>
-</li>
-<li><p><code>Function.prototype</code> 和 <code>Function.__proto__</code>同时指向内置匿名函数 <code>anonymous</code>，这样原型链的终点就是 <code>null</code></p>
-</li>
-</ul>
-<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>下面首先要看几个概念：</p>
-<p><code>__proto__</code>作为不同对象之间的桥梁，用来指向创建它的构造函数的原型对象的</p>
-<p> <img src="https://static.vue-js.com/6a742160-725e-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<p>每个对象的<code>__proto__</code>都是指向它的构造函数的原型对象<code>prototype</code>的</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">person1.__proto__ === Person.prototype</span><br></pre></td></tr></table></figure>
-<p>构造函数是一个函数对象，是通过 <code>Function</code>构造器产生的</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Person.__proto__ === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></table></figure>
-<p>原型对象本身是一个普通对象，而普通对象的构造函数都是<code>Object</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Person.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br></pre></td></tr></table></figure>
-<p>刚刚上面说了，所有的构造器都是函数对象，函数对象都是 <code>Function</code>构造产生的</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></table></figure>
-<p><code>Object</code>的原型对象也有<code>__proto__</code>属性指向<code>null</code>，<code>null</code>是原型链的顶端</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span></span><br></pre></td></tr></table></figure>
-<p>下面作出总结：</p>
-<ul>
-<li><p>一切对象都是继承自<code>Object</code>对象，<code>Object</code> 对象直接继承根源对象<code>null</code></p>
-</li>
-<li><p>一切的函数对象（包括 <code>Object</code> 对象），都是继承自 <code>Function</code> 对象</p>
-</li>
-<li><p><code>Object</code> 对象直接继承自 <code>Function</code> 对象</p>
-</li>
-<li><p><code>Function</code>对象的<code>__proto__</code>会指向自己的原型对象，最终还是继承自<code>Object</code>对象</p>
-</li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://juejin.cn/post/6870732239556640775#heading-7">https://juejin.cn/post/6870732239556640775#heading-7</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js面试</tag>
-        <tag>prototype</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>promise</title>
     <url>/archives/9b0c2390.html</url>
     <content><![CDATA[<h1 id="面试官：你是怎么理解ES6中-Promise的？使用场景？"><a href="#面试官：你是怎么理解ES6中-Promise的？使用场景？" class="headerlink" title="面试官：你是怎么理解ES6中 Promise的？使用场景？"></a>面试官：你是怎么理解ES6中 Promise的？使用场景？</h1><p><img src="https://static.vue-js.com/f033b160-5811-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
@@ -6319,6 +6250,75 @@
       <tags>
         <tag>es6</tag>
         <tag>promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>prototype</title>
+    <url>/archives/a36a5ae4.html</url>
+    <content><![CDATA[<h1 id="面试官：JavaScript原型，原型链-有什么特点？"><a href="#面试官：JavaScript原型，原型链-有什么特点？" class="headerlink" title="面试官：JavaScript原型，原型链 ? 有什么特点？"></a>面试官：JavaScript原型，原型链 ? 有什么特点？</h1><p> <img src="https://static.vue-js.com/4500e170-725e-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<h2 id="一、原型"><a href="#一、原型" class="headerlink" title="一、原型"></a>一、原型</h2><p><code>JavaScript</code> 常被描述为一种基于原型的语言——每个对象拥有一个原型对象</p>
+<p>当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾</p>
+<p>准确地说，这些属性和方法定义在Object的构造器函数（constructor functions）之上的<code>prototype</code>属性上，而非实例对象本身</p>
+<p>下面举个例子：</p>
+<p>函数可以有属性。 每个函数都有一个特殊的属性叫作原型<code>prototype</code> </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log( doSomething.prototype );</span><br></pre></td></tr></table></figure>
+<p>控制台输出</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">constructor</span>: ƒ doSomething(),</span><br><span class="line">    <span class="attr">__proto__</span>: &#123;</span><br><span class="line">        <span class="attr">constructor</span>: ƒ <span class="built_in">Object</span>(),</span><br><span class="line">        <span class="attr">hasOwnProperty</span>: ƒ hasOwnProperty(),</span><br><span class="line">        <span class="attr">isPrototypeOf</span>: ƒ isPrototypeOf(),</span><br><span class="line">        <span class="attr">propertyIsEnumerable</span>: ƒ propertyIsEnumerable(),</span><br><span class="line">        <span class="attr">toLocaleString</span>: ƒ toLocaleString(),</span><br><span class="line">        <span class="attr">toString</span>: ƒ toString(),</span><br><span class="line">        <span class="attr">valueOf</span>: ƒ valueOf()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这个对象，就是大家常说的原型对象</p>
+<p>可以看到，原型对象有一个自有属性<code>constructor</code>，这个属性指向该函数，如下图关系展示</p>
+<p> <img src="https://static.vue-js.com/56d87250-725e-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h2 id="二、原型链"><a href="#二、原型链" class="headerlink" title="二、原型链"></a>二、原型链</h2><p>原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为原型链 (prototype chain)，它解释了为何一个对象会拥有定义在其他对象中的属性和方法</p>
+<p>在对象实例和它的构造器之间建立一个链接（它是<code>__proto__</code>属性，是从构造函数的<code>prototype</code>属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法</p>
+<p>下面举个例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = <span class="number">18</span>;</span><br><span class="line">    <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第二步 创建实例</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">&#x27;person&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>根据代码，我们可以得到下图</p>
+<p> <img src="https://static.vue-js.com/60825aa0-725e-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<p>下面分析一下：</p>
+<ul>
+<li>构造函数<code>Person</code>存在原型对象<code>Person.prototype</code></li>
+<li>构造函数生成实例对象<code>person</code>，<code>person</code>的<code>__proto__</code>指向构造函数<code>Person</code>原型对象</li>
+<li><p><code>Person.prototype.__proto__</code> 指向内置对象，因为 <code>Person.prototype</code> 是个对象，默认是由 <code>Object</code>函数作为类创建的，而 <code>Object.prototype</code> 为内置对象</p>
+</li>
+<li><p><code>Person.__proto__</code> 指向内置匿名函数 <code>anonymous</code>，因为 Person 是个函数对象，默认由 Function 作为类创建</p>
+</li>
+<li><p><code>Function.prototype</code> 和 <code>Function.__proto__</code>同时指向内置匿名函数 <code>anonymous</code>，这样原型链的终点就是 <code>null</code></p>
+</li>
+</ul>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>下面首先要看几个概念：</p>
+<p><code>__proto__</code>作为不同对象之间的桥梁，用来指向创建它的构造函数的原型对象的</p>
+<p> <img src="https://static.vue-js.com/6a742160-725e-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<p>每个对象的<code>__proto__</code>都是指向它的构造函数的原型对象<code>prototype</code>的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">person1.__proto__ === Person.prototype</span><br></pre></td></tr></table></figure>
+<p>构造函数是一个函数对象，是通过 <code>Function</code>构造器产生的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Person.__proto__ === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></table></figure>
+<p>原型对象本身是一个普通对象，而普通对象的构造函数都是<code>Object</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Person.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br></pre></td></tr></table></figure>
+<p>刚刚上面说了，所有的构造器都是函数对象，函数对象都是 <code>Function</code>构造产生的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></table></figure>
+<p><code>Object</code>的原型对象也有<code>__proto__</code>属性指向<code>null</code>，<code>null</code>是原型链的顶端</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<p>下面作出总结：</p>
+<ul>
+<li><p>一切对象都是继承自<code>Object</code>对象，<code>Object</code> 对象直接继承根源对象<code>null</code></p>
+</li>
+<li><p>一切的函数对象（包括 <code>Object</code> 对象），都是继承自 <code>Function</code> 对象</p>
+</li>
+<li><p><code>Object</code> 对象直接继承自 <code>Function</code> 对象</p>
+</li>
+<li><p><code>Function</code>对象的<code>__proto__</code>会指向自己的原型对象，最终还是继承自<code>Object</code>对象</p>
+</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://juejin.cn/post/6870732239556640775#heading-7">https://juejin.cn/post/6870732239556640775#heading-7</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js面试</tag>
+        <tag>prototype</tag>
       </tags>
   </entry>
   <entry>
@@ -6549,101 +6549,6 @@
       <tags>
         <tag>js面试</tag>
         <tag>下拉刷新</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>responsive_layout</title>
-    <url>/archives/203410a2.html</url>
-    <content><![CDATA[<h3 id="1-什么是响应式设计"><a href="#1-什么是响应式设计" class="headerlink" title="1.什么是响应式设计"></a>1.什么是响应式设计</h3><p>响应式网站设计（Responsive Web design）是一种网络页面设计布局，页面的设计与开发应当根据用户行为以及设备环境(系统平台、屏幕尺寸、屏幕定向等)进行相应的响应和调整</p>
-<p>描述响应式界面最著名的一句话就是“Content is like water”</p>
-<p>大白话便是“如果将屏幕看作容器，那么内容就像水一样”</p>
-<p>响应式网站常见特点：</p>
-<ul>
-<li><p>同时适配PC + 平板 + 手机等</p>
-</li>
-<li><p>标签导航在接近手持终端设备时改变为经典的抽屉式导航</p>
-</li>
-<li><p>网站的布局会根据视口来调整模块的大小和位置</p>
-<p><img src="https://static.vue-js.com/ae68be30-9dba-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-</li>
-</ul>
-<h3 id="2-响应式基本原理"><a href="#2-响应式基本原理" class="headerlink" title="2.响应式基本原理"></a>2.响应式基本原理</h3><p>响应式设计的基本原理是通过媒体查询检测不同的设备屏幕尺寸做处理，为了处理移动端，页面头部必须有<code>meta</code>声明<code>viewport</code></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no”&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>属性对应如下：</p>
-<ul>
-<li><p>width=device-width: 是自适应手机屏幕的尺寸宽度</p>
-</li>
-<li><p>maximum-scale:是缩放比例的最大值</p>
-</li>
-<li><p>inital-scale:是缩放的初始化</p>
-</li>
-<li><p>user-scalable:是用户的可以缩放的操作</p>
-</li>
-</ul>
-<p>实现响应式布局的方式有如下：</p>
-<ul>
-<li>媒体查询</li>
-<li>百分比</li>
-<li>vw/vh</li>
-<li>rem</li>
-</ul>
-<h3 id="3-媒体查询"><a href="#3-媒体查询" class="headerlink" title="3.媒体查询"></a>3.媒体查询</h3><p><code>CSS3</code>中的增加了更多的媒体查询，就像<code>if</code>条件表达式一样，我们可以设置不同类型的媒体条件，并根据对应的条件，给相应符合条件的媒体调用相对应的样式表</p>
-<p>使用<code>@Media</code>查询，可以针对不同的媒体类型定义不同的样式，如：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">1920px</span>) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>当视口在375px - 600px之间，设置特定字体大小18px</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen (<span class="attribute">min-width</span>: <span class="number">375px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过媒体查询，可以通过给不同分辨率的设备编写不同的样式来实现响应式的布局，比如我们为不同分辨率的屏幕，设置不同的背景图片</p>
-<p>比如给小屏幕手机设置@2x图，为大屏幕手机设置@3x图，通过媒体查询就能很方便的实现</p>
-<h3 id="4-百分比"><a href="#4-百分比" class="headerlink" title="4.百分比"></a>4.百分比</h3><p>通过百分比单位 “ % “ 来实现响应式的效果</p>
-<p> 比如当浏览器的宽度或者高度发生变化时，通过百分比单位，可以使得浏览器中的组件的宽和高随着浏览器的变化而变化，从而实现响应式的效果</p>
-<p><code>height</code>、<code>width</code>属性的百分比依托于父标签的宽高，但是其他盒子属性则不完全依赖父元素：</p>
-<ul>
-<li><p>子元素的top/left和bottom/right如果设置百分比，则相对于直接非static定位(默认定位)的父元素的高度/宽度</p>
-</li>
-<li><p>子元素的padding如果设置百分比，不论是垂直方向或者是水平方向，都相对于直接父亲元素的width，而与父元素的height无关。</p>
-</li>
-<li><p>子元素的margin如果设置成百分比，不论是垂直方向还是水平方向，都相对于直接父元素的width</p>
-</li>
-<li><p>border-radius不一样，如果设置border-radius为百分比，则是相对于自身的宽度</p>
-</li>
-</ul>
-<p>可以看到每个属性都使用百分比，会照成布局的复杂度，所以不建议使用百分比来实现响应式</p>
-<h3 id="5-vw-vh"><a href="#5-vw-vh" class="headerlink" title="5.vw/vh"></a>5.vw/vh</h3><p><code>vw</code>表示相对于视图窗口的宽度，<code>vh</code>表示相对于视图窗口高度。 任意层级元素，在使用<code>vw</code>单位的情况下，<code>1vw</code>都等于视图宽度的百分之一</p>
-<p>与百分比布局很相似，在以前文章提过与<code>%</code>的区别，这里就不再展开述说</p>
-<h3 id="6-rem"><a href="#6-rem" class="headerlink" title="6.rem"></a>6.rem</h3><p>在以前也讲到，<code>rem</code>是相对于根元素<code>html</code>的<code>font-size</code>属性，默认情况下浏览器字体大小为<code>16px</code>，此时<code>1rem = 16px</code></p>
-<p>可以利用前面提到的媒体查询，针对不同设备分辨率改变<code>font-size</code>的值，如下：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">414px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">18px</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">375px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">320px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>为了更准确监听设备可视窗口变化，我们可以在<code>css</code>之前插入<code>script</code>标签，内容如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//动态为根元素设置字体大小</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取屏幕宽度</span></span><br><span class="line">    <span class="keyword">var</span> width = <span class="built_in">document</span>.documentElement.clientWidth</span><br><span class="line">    <span class="comment">// 设置根元素字体大小。此时为宽的10等分</span></span><br><span class="line">    <span class="built_in">document</span>.documentElement.style.fontSize = width / <span class="number">10</span> + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//首次加载应用，设置一次</span></span><br><span class="line">init()</span><br><span class="line"><span class="comment">// 监听手机旋转的事件的时机，重新设置</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;orientationchange&#x27;</span>, init)</span><br><span class="line"><span class="comment">// 监听手机窗口变化，重新设置</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;resize&#x27;</span>, init)</span><br></pre></td></tr></table></figure>
-<p>无论设备可视窗口如何变化，始终设置<code>rem</code>为<code>width</code>的1/10，实现了百分比布局</p>
-<p>除此之外，我们还可以利用主流<code>UI</code>框架，如：<code>element ui</code>、<code>antd</code>提供的栅格布局实现响应式</p>
-<h3 id="7-小结"><a href="#7-小结" class="headerlink" title="7.小结"></a>7.小结</h3><p>响应式设计实现通常会从以下几方面思考：</p>
-<ul>
-<li>弹性盒子（包括图片、表格、视频）和媒体查询等技术</li>
-<li>使用百分比布局创建流式布局的弹性UI，同时使用媒体查询限制元素的尺寸和内容变更范围</li>
-<li>使用相对单位使得内容自适应调节</li>
-<li>选择断点，针对不同断点实现不同布局和内容展示</li>
-</ul>
-<h3 id="8-响应式优缺点"><a href="#8-响应式优缺点" class="headerlink" title="8.响应式优缺点"></a>8.响应式优缺点</h3><p>响应式布局优点可以看到：</p>
-<ul>
-<li>面对不同分辨率设备灵活性强</li>
-<li>能够快捷解决多设备显示适应问题</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>仅适用布局、信息、框架并不复杂的部门类型网站</li>
-<li>兼容各种设备工作量大，效率低下</li>
-<li>代码累赘，会出现隐藏无用的元素，加载时间加长</li>
-<li>其实这是一种折中性质的设计解决方案，多方面因素影响而达不到最佳效果</li>
-<li>一定程度上改变了网站原有的布局结构，会出现用户混淆的情况</li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css面试</tag>
-        <tag>responsive_layout</tag>
       </tags>
   </entry>
   <entry>
@@ -6931,6 +6836,101 @@
       </tags>
   </entry>
   <entry>
+    <title>responsive_layout</title>
+    <url>/archives/203410a2.html</url>
+    <content><![CDATA[<h3 id="1-什么是响应式设计"><a href="#1-什么是响应式设计" class="headerlink" title="1.什么是响应式设计"></a>1.什么是响应式设计</h3><p>响应式网站设计（Responsive Web design）是一种网络页面设计布局，页面的设计与开发应当根据用户行为以及设备环境(系统平台、屏幕尺寸、屏幕定向等)进行相应的响应和调整</p>
+<p>描述响应式界面最著名的一句话就是“Content is like water”</p>
+<p>大白话便是“如果将屏幕看作容器，那么内容就像水一样”</p>
+<p>响应式网站常见特点：</p>
+<ul>
+<li><p>同时适配PC + 平板 + 手机等</p>
+</li>
+<li><p>标签导航在接近手持终端设备时改变为经典的抽屉式导航</p>
+</li>
+<li><p>网站的布局会根据视口来调整模块的大小和位置</p>
+<p><img src="https://static.vue-js.com/ae68be30-9dba-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+</li>
+</ul>
+<h3 id="2-响应式基本原理"><a href="#2-响应式基本原理" class="headerlink" title="2.响应式基本原理"></a>2.响应式基本原理</h3><p>响应式设计的基本原理是通过媒体查询检测不同的设备屏幕尺寸做处理，为了处理移动端，页面头部必须有<code>meta</code>声明<code>viewport</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no”&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>属性对应如下：</p>
+<ul>
+<li><p>width=device-width: 是自适应手机屏幕的尺寸宽度</p>
+</li>
+<li><p>maximum-scale:是缩放比例的最大值</p>
+</li>
+<li><p>inital-scale:是缩放的初始化</p>
+</li>
+<li><p>user-scalable:是用户的可以缩放的操作</p>
+</li>
+</ul>
+<p>实现响应式布局的方式有如下：</p>
+<ul>
+<li>媒体查询</li>
+<li>百分比</li>
+<li>vw/vh</li>
+<li>rem</li>
+</ul>
+<h3 id="3-媒体查询"><a href="#3-媒体查询" class="headerlink" title="3.媒体查询"></a>3.媒体查询</h3><p><code>CSS3</code>中的增加了更多的媒体查询，就像<code>if</code>条件表达式一样，我们可以设置不同类型的媒体条件，并根据对应的条件，给相应符合条件的媒体调用相对应的样式表</p>
+<p>使用<code>@Media</code>查询，可以针对不同的媒体类型定义不同的样式，如：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">1920px</span>) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>当视口在375px - 600px之间，设置特定字体大小18px</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen (<span class="attribute">min-width</span>: <span class="number">375px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过媒体查询，可以通过给不同分辨率的设备编写不同的样式来实现响应式的布局，比如我们为不同分辨率的屏幕，设置不同的背景图片</p>
+<p>比如给小屏幕手机设置@2x图，为大屏幕手机设置@3x图，通过媒体查询就能很方便的实现</p>
+<h3 id="4-百分比"><a href="#4-百分比" class="headerlink" title="4.百分比"></a>4.百分比</h3><p>通过百分比单位 “ % “ 来实现响应式的效果</p>
+<p> 比如当浏览器的宽度或者高度发生变化时，通过百分比单位，可以使得浏览器中的组件的宽和高随着浏览器的变化而变化，从而实现响应式的效果</p>
+<p><code>height</code>、<code>width</code>属性的百分比依托于父标签的宽高，但是其他盒子属性则不完全依赖父元素：</p>
+<ul>
+<li><p>子元素的top/left和bottom/right如果设置百分比，则相对于直接非static定位(默认定位)的父元素的高度/宽度</p>
+</li>
+<li><p>子元素的padding如果设置百分比，不论是垂直方向或者是水平方向，都相对于直接父亲元素的width，而与父元素的height无关。</p>
+</li>
+<li><p>子元素的margin如果设置成百分比，不论是垂直方向还是水平方向，都相对于直接父元素的width</p>
+</li>
+<li><p>border-radius不一样，如果设置border-radius为百分比，则是相对于自身的宽度</p>
+</li>
+</ul>
+<p>可以看到每个属性都使用百分比，会照成布局的复杂度，所以不建议使用百分比来实现响应式</p>
+<h3 id="5-vw-vh"><a href="#5-vw-vh" class="headerlink" title="5.vw/vh"></a>5.vw/vh</h3><p><code>vw</code>表示相对于视图窗口的宽度，<code>vh</code>表示相对于视图窗口高度。 任意层级元素，在使用<code>vw</code>单位的情况下，<code>1vw</code>都等于视图宽度的百分之一</p>
+<p>与百分比布局很相似，在以前文章提过与<code>%</code>的区别，这里就不再展开述说</p>
+<h3 id="6-rem"><a href="#6-rem" class="headerlink" title="6.rem"></a>6.rem</h3><p>在以前也讲到，<code>rem</code>是相对于根元素<code>html</code>的<code>font-size</code>属性，默认情况下浏览器字体大小为<code>16px</code>，此时<code>1rem = 16px</code></p>
+<p>可以利用前面提到的媒体查询，针对不同设备分辨率改变<code>font-size</code>的值，如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">414px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">18px</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">375px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">320px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了更准确监听设备可视窗口变化，我们可以在<code>css</code>之前插入<code>script</code>标签，内容如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//动态为根元素设置字体大小</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取屏幕宽度</span></span><br><span class="line">    <span class="keyword">var</span> width = <span class="built_in">document</span>.documentElement.clientWidth</span><br><span class="line">    <span class="comment">// 设置根元素字体大小。此时为宽的10等分</span></span><br><span class="line">    <span class="built_in">document</span>.documentElement.style.fontSize = width / <span class="number">10</span> + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//首次加载应用，设置一次</span></span><br><span class="line">init()</span><br><span class="line"><span class="comment">// 监听手机旋转的事件的时机，重新设置</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;orientationchange&#x27;</span>, init)</span><br><span class="line"><span class="comment">// 监听手机窗口变化，重新设置</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;resize&#x27;</span>, init)</span><br></pre></td></tr></table></figure>
+<p>无论设备可视窗口如何变化，始终设置<code>rem</code>为<code>width</code>的1/10，实现了百分比布局</p>
+<p>除此之外，我们还可以利用主流<code>UI</code>框架，如：<code>element ui</code>、<code>antd</code>提供的栅格布局实现响应式</p>
+<h3 id="7-小结"><a href="#7-小结" class="headerlink" title="7.小结"></a>7.小结</h3><p>响应式设计实现通常会从以下几方面思考：</p>
+<ul>
+<li>弹性盒子（包括图片、表格、视频）和媒体查询等技术</li>
+<li>使用百分比布局创建流式布局的弹性UI，同时使用媒体查询限制元素的尺寸和内容变更范围</li>
+<li>使用相对单位使得内容自适应调节</li>
+<li>选择断点，针对不同断点实现不同布局和内容展示</li>
+</ul>
+<h3 id="8-响应式优缺点"><a href="#8-响应式优缺点" class="headerlink" title="8.响应式优缺点"></a>8.响应式优缺点</h3><p>响应式布局优点可以看到：</p>
+<ul>
+<li>面对不同分辨率设备灵活性强</li>
+<li>能够快捷解决多设备显示适应问题</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>仅适用布局、信息、框架并不复杂的部门类型网站</li>
+<li>兼容各种设备工作量大，效率低下</li>
+<li>代码累赘，会出现隐藏无用的元素，加载时间加长</li>
+<li>其实这是一种折中性质的设计解决方案，多方面因素影响而达不到最佳效果</li>
+<li>一定程度上改变了网站原有的布局结构，会出现用户混淆的情况</li>
+</ul>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css面试</tag>
+        <tag>responsive_layout</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sass_less_stylus</title>
     <url>/archives/2039e3ed.html</url>
     <content><![CDATA[<h1 id="面试官：说说对Css预编语言的理解？有哪些区别"><a href="#面试官：说说对Css预编语言的理解？有哪些区别" class="headerlink" title="面试官：说说对Css预编语言的理解？有哪些区别?"></a>面试官：说说对Css预编语言的理解？有哪些区别?</h1><p> <img src="https://static.vue-js.com/81cca1c0-a42c-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
@@ -7067,6 +7067,155 @@
       <tags>
         <tag>js面试</tag>
         <tag>scope</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>selector</title>
+    <url>/archives/9692e25d.html</url>
+    <content><![CDATA[<h1 id="面试官：css选择器有哪些？优先级？哪些属性可以继承？"><a href="#面试官：css选择器有哪些？优先级？哪些属性可以继承？" class="headerlink" title="面试官：css选择器有哪些？优先级？哪些属性可以继承？"></a>面试官：css选择器有哪些？优先级？哪些属性可以继承？</h1><p> <img src="https://static.vue-js.com/f7dcd330-8fe1-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<h2 id="一、选择器"><a href="#一、选择器" class="headerlink" title="一、选择器"></a>一、选择器</h2><p>CSS选择器是CSS规则的第一部分</p>
+<p>它是元素和其他部分组合起来告诉浏览器哪个HTML元素应当是被选为应用规则中的CSS属性值的方式</p>
+<p>选择器所选择的元素，叫做“选择器的对象”</p>
+<p>我们从一个<code>Html</code>结构开始</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;one&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;one_1&quot;</span>&gt;</span></span><br><span class="line">        &lt;/p &gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;one_1&quot;</span>&gt;</span></span><br><span class="line">        &lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>关于<code>css</code>属性选择器常用的有：</p>
+<ul>
+<li><p>id选择器（#box），选择id为box的元素</p>
+</li>
+<li><p>类选择器（.one），选择类名为one的所有元素</p>
+</li>
+<li><p>标签选择器（div），选择标签为div的所有元素</p>
+</li>
+<li><p>后代选择器（#box div），选择id为box元素内部所有的div元素</p>
+</li>
+<li>子选择器（.one&gt;one_1），选择父元素为.one的所有.one_1的元素</li>
+<li>相邻同胞选择器（.one+.two），选择紧接在.one之后的所有.two元素</li>
+<li>群组选择器（div,p），选择div、p的所有元素</li>
+</ul>
+<p>还有一些使用频率相对没那么多的选择器：</p>
+<ul>
+<li>伪类选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:link</span> ：选择未被访问的链接</span><br><span class="line"><span class="selector-pseudo">:visited</span>：选取已被访问的链接</span><br><span class="line"><span class="selector-pseudo">:active</span>：选择活动链接</span><br><span class="line"><span class="selector-pseudo">:hover</span> ：鼠标指针浮动在上面的元素</span><br><span class="line"><span class="selector-pseudo">:focus</span> ：选择具有焦点的</span><br><span class="line"><span class="selector-pseudo">:first</span>-child：父元素的首个子元素</span><br></pre></td></tr></table></figure>
+<ul>
+<li>伪元素选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:first</span>-letter ：用于选取指定选择器的首字母</span><br><span class="line"><span class="selector-pseudo">:first</span>-line ：选取指定选择器的首行</span><br><span class="line">:before : 选择器在被选元素的内容前面插入内容</span><br><span class="line">:after : 选择器在被选元素的内容后面插入内容</span><br></pre></td></tr></table></figure>
+<ul>
+<li>属性选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[attribute]</span> 选择带有attribute属性的元素</span><br><span class="line"><span class="selector-attr">[attribute=value]</span> 选择所有使用attribute=value的元素</span><br><span class="line"><span class="selector-attr">[attribute~=value]</span> 选择attribute属性包含value的元素</span><br><span class="line"><span class="selector-attr">[attribute|=value]</span>：选择attribute属性以value开头的元素</span><br></pre></td></tr></table></figure>
+<p>在<code>CSS3</code>中新增的选择器有如下：</p>
+<ul>
+<li>层次选择器（p~ul），选择前面有p元素的每个ul元素</li>
+<li>伪类选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:first</span>-of-type 表示一组同级元素中其类型的第一个元素</span><br><span class="line"><span class="selector-pseudo">:last-of-type</span> 表示一组同级元素中其类型的最后一个元素</span><br><span class="line"><span class="selector-pseudo">:only-of-type</span> 表示没有同类型兄弟元素的元素</span><br><span class="line"><span class="selector-pseudo">:only-child</span> 表示没有任何兄弟的元素</span><br><span class="line"><span class="selector-pseudo">:nth-child</span>(n) 根据元素在一组同级中的位置匹配元素</span><br><span class="line"><span class="selector-pseudo">:nth-last-of-type</span>(n) 匹配给定类型的元素，基于它们在一组兄弟元素中的位置，从末尾开始计数</span><br><span class="line"><span class="selector-pseudo">:last-child</span> 表示一组兄弟元素中的最后一个元素</span><br><span class="line"><span class="selector-pseudo">:root</span> 设置<span class="selector-tag">HTML</span>文档</span><br><span class="line"><span class="selector-pseudo">:empty</span> 指定空的元素</span><br><span class="line"><span class="selector-pseudo">:enabled</span> 选择可用元素</span><br><span class="line"><span class="selector-pseudo">:disabled</span> 选择被禁用元素</span><br><span class="line"><span class="selector-pseudo">:checked</span> 选择选中的元素</span><br><span class="line"><span class="selector-pseudo">:not</span>(selector) 选择与 &lt;selector&gt; 不匹配的所有元素</span><br></pre></td></tr></table></figure>
+<ul>
+<li>属性选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[attribute*=value]</span>：选择attribute属性值包含value的所有元素</span><br><span class="line"><span class="selector-attr">[attribute^=value]</span>：选择attribute属性开头为value的所有元素</span><br><span class="line"><span class="selector-attr">[attribute$=value]</span>：选择attribute属性结尾为value的所有元素</span><br></pre></td></tr></table></figure>
+<h2 id="二、优先级"><a href="#二、优先级" class="headerlink" title="二、优先级"></a>二、优先级</h2><p>相信大家对<code>CSS</code>选择器的优先级都不陌生：</p>
+<blockquote>
+<p>内联 &gt; ID选择器 &gt; 类选择器 &gt; 标签选择器</p>
+</blockquote>
+<p>到具体的计算层⾯，优先级是由 A 、B、C、D 的值来决定的，其中它们的值计算规则如下：</p>
+<ul>
+<li><p>如果存在内联样式，那么 A = 1, 否则 A = 0</p>
+</li>
+<li><p>B的值等于 ID选择器出现的次数</p>
+</li>
+<li><p>C的值等于 类选择器 和 属性选择器 和 伪类 出现的总次数</p>
+</li>
+<li><p>D 的值等于 标签选择器 和 伪元素 出现的总次数</p>
+</li>
+</ul>
+<p>这里举个例子：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#nav-global</span> &gt; <span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.nav-link</span></span><br></pre></td></tr></table></figure>
+<p>套用上面的算法，依次求出 <code>A</code> <code>B</code> <code>C</code> <code>D</code> 的值：</p>
+<ul>
+<li><p>因为没有内联样式 ，所以 A = 0</p>
+</li>
+<li><p>ID选择器总共出现了1次， B = 1</p>
+</li>
+<li><p>类选择器出现了1次， 属性选择器出现了0次，伪类选择器出现0次，所以 C = (1 + 0 + 0) = 1</p>
+</li>
+<li>标签选择器出现了3次， 伪元素出现了0次，所以 D = (3 + 0) = 3</li>
+</ul>
+<p>上面算出的<code>A</code> 、 <code>B</code>、<code>C</code>、<code>D</code> 可以简记作：<code>(0, 1, 1, 3)</code></p>
+<p>知道了优先级是如何计算之后，就来看看比较规则：</p>
+<ul>
+<li>从左往右依次进行比较 ，较大者优先级更高</li>
+<li>如果相等，则继续往右移动一位进行比较</li>
+<li>如果4位全部相等，则后面的会覆盖前面的</li>
+</ul>
+<p>经过上面的优先级计算规则，我们知道内联样式的优先级最高，如果外部样式需要覆盖内联样式，就需要使用<code>!important</code></p>
+<h2 id="三、继承属性"><a href="#三、继承属性" class="headerlink" title="三、继承属性"></a>三、继承属性</h2><p>在<code>css</code>中，继承是指的是给父元素设置一些属性，后代元素会自动拥有这些属性</p>
+<p>关于继承属性，可以分成：</p>
+<ul>
+<li>字体系列属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">font</span>:组合字体</span><br><span class="line">font-family:规定元素的字体系列</span><br><span class="line">font-weight:设置字体的粗细</span><br><span class="line">font-size:设置字体的尺寸</span><br><span class="line">font-style:定义字体的风格</span><br><span class="line">font-variant:偏大或偏小的字体</span><br></pre></td></tr></table></figure>
+<ul>
+<li>文本系列属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">text-indent</span>：文本缩进</span><br><span class="line"><span class="attribute">text-align</span>：文本水平对刘</span><br><span class="line"><span class="attribute">line-height</span>：行高</span><br><span class="line"><span class="attribute">word-spacing</span>：增加或减少单词间的空白</span><br><span class="line"><span class="attribute">letter-spacing</span>：增加或减少字符间的空白</span><br><span class="line"><span class="attribute">text-transform</span>：控制文本大小写</span><br><span class="line"><span class="attribute">direction</span>：规定文本的书写方向</span><br><span class="line"><span class="attribute">color</span>：文本颜色</span><br></pre></td></tr></table></figure>
+<ul>
+<li>元素可见性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">visibility</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>表格布局属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">caption-side</span>：定位表格标题位置</span><br><span class="line"><span class="attribute">border-collapse</span>：合并表格边框</span><br><span class="line"><span class="attribute">border-spacing</span>：设置相邻单元格的边框间的距离</span><br><span class="line"><span class="attribute">empty-cells</span>：单元格的边框的出现与消失</span><br><span class="line"><span class="attribute">table-layout</span>：表格的宽度由什么决定</span><br></pre></td></tr></table></figure>
+<ul>
+<li>列表属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">list-style-type</span>：文字前面的小点点样式</span><br><span class="line"><span class="attribute">list-style-position</span>：小点点位置</span><br><span class="line"><span class="attribute">list-style</span>：以上的属性可通过这属性集合</span><br></pre></td></tr></table></figure>
+<ul>
+<li>引用</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">quotes</span>：设置嵌套引用的引号类型</span><br></pre></td></tr></table></figure>
+<ul>
+<li>光标属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cursor</span>：箭头可以变成需要的形状</span><br></pre></td></tr></table></figure>
+<p>继承中比较特殊的几点：</p>
+<ul>
+<li><p>a 标签的字体颜色不能被继承</p>
+</li>
+<li><p>h1-h6标签字体的大下也是不能被继承的</p>
+</li>
+</ul>
+<h3 id="无继承的属性"><a href="#无继承的属性" class="headerlink" title="无继承的属性"></a>无继承的属性</h3><ul>
+<li><p>display</p>
+</li>
+<li><p>文本属性：vertical-align、text-decoration</p>
+</li>
+<li><p>盒子模型的属性：宽度、高度、内外边距、边框等</p>
+</li>
+<li><p>背景属性：背景图片、颜色、位置等</p>
+</li>
+<li><p>定位属性：浮动、清除浮动、定位position等</p>
+</li>
+<li><p>生成内容属性：content、counter-reset、counter-increment</p>
+</li>
+<li><p>轮廓样式属性：outline-style、outline-width、outline-color、outline</p>
+</li>
+<li><p>页面样式属性：size、page-break-before、page-break-after</p>
+</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://www.html.cn/qa/css3/13444.html">https://www.html.cn/qa/css3/13444.html</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css面试</tag>
+        <tag>selector</tag>
       </tags>
   </entry>
   <entry>
@@ -7227,155 +7376,6 @@
       <tags>
         <tag>js面试</tag>
         <tag>security</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>selector</title>
-    <url>/archives/9692e25d.html</url>
-    <content><![CDATA[<h1 id="面试官：css选择器有哪些？优先级？哪些属性可以继承？"><a href="#面试官：css选择器有哪些？优先级？哪些属性可以继承？" class="headerlink" title="面试官：css选择器有哪些？优先级？哪些属性可以继承？"></a>面试官：css选择器有哪些？优先级？哪些属性可以继承？</h1><p> <img src="https://static.vue-js.com/f7dcd330-8fe1-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<h2 id="一、选择器"><a href="#一、选择器" class="headerlink" title="一、选择器"></a>一、选择器</h2><p>CSS选择器是CSS规则的第一部分</p>
-<p>它是元素和其他部分组合起来告诉浏览器哪个HTML元素应当是被选为应用规则中的CSS属性值的方式</p>
-<p>选择器所选择的元素，叫做“选择器的对象”</p>
-<p>我们从一个<code>Html</code>结构开始</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;one&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;one_1&quot;</span>&gt;</span></span><br><span class="line">        &lt;/p &gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;one_1&quot;</span>&gt;</span></span><br><span class="line">        &lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>关于<code>css</code>属性选择器常用的有：</p>
-<ul>
-<li><p>id选择器（#box），选择id为box的元素</p>
-</li>
-<li><p>类选择器（.one），选择类名为one的所有元素</p>
-</li>
-<li><p>标签选择器（div），选择标签为div的所有元素</p>
-</li>
-<li><p>后代选择器（#box div），选择id为box元素内部所有的div元素</p>
-</li>
-<li>子选择器（.one&gt;one_1），选择父元素为.one的所有.one_1的元素</li>
-<li>相邻同胞选择器（.one+.two），选择紧接在.one之后的所有.two元素</li>
-<li>群组选择器（div,p），选择div、p的所有元素</li>
-</ul>
-<p>还有一些使用频率相对没那么多的选择器：</p>
-<ul>
-<li>伪类选择器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:link</span> ：选择未被访问的链接</span><br><span class="line"><span class="selector-pseudo">:visited</span>：选取已被访问的链接</span><br><span class="line"><span class="selector-pseudo">:active</span>：选择活动链接</span><br><span class="line"><span class="selector-pseudo">:hover</span> ：鼠标指针浮动在上面的元素</span><br><span class="line"><span class="selector-pseudo">:focus</span> ：选择具有焦点的</span><br><span class="line"><span class="selector-pseudo">:first</span>-child：父元素的首个子元素</span><br></pre></td></tr></table></figure>
-<ul>
-<li>伪元素选择器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:first</span>-letter ：用于选取指定选择器的首字母</span><br><span class="line"><span class="selector-pseudo">:first</span>-line ：选取指定选择器的首行</span><br><span class="line">:before : 选择器在被选元素的内容前面插入内容</span><br><span class="line">:after : 选择器在被选元素的内容后面插入内容</span><br></pre></td></tr></table></figure>
-<ul>
-<li>属性选择器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[attribute]</span> 选择带有attribute属性的元素</span><br><span class="line"><span class="selector-attr">[attribute=value]</span> 选择所有使用attribute=value的元素</span><br><span class="line"><span class="selector-attr">[attribute~=value]</span> 选择attribute属性包含value的元素</span><br><span class="line"><span class="selector-attr">[attribute|=value]</span>：选择attribute属性以value开头的元素</span><br></pre></td></tr></table></figure>
-<p>在<code>CSS3</code>中新增的选择器有如下：</p>
-<ul>
-<li>层次选择器（p~ul），选择前面有p元素的每个ul元素</li>
-<li>伪类选择器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:first</span>-of-type 表示一组同级元素中其类型的第一个元素</span><br><span class="line"><span class="selector-pseudo">:last-of-type</span> 表示一组同级元素中其类型的最后一个元素</span><br><span class="line"><span class="selector-pseudo">:only-of-type</span> 表示没有同类型兄弟元素的元素</span><br><span class="line"><span class="selector-pseudo">:only-child</span> 表示没有任何兄弟的元素</span><br><span class="line"><span class="selector-pseudo">:nth-child</span>(n) 根据元素在一组同级中的位置匹配元素</span><br><span class="line"><span class="selector-pseudo">:nth-last-of-type</span>(n) 匹配给定类型的元素，基于它们在一组兄弟元素中的位置，从末尾开始计数</span><br><span class="line"><span class="selector-pseudo">:last-child</span> 表示一组兄弟元素中的最后一个元素</span><br><span class="line"><span class="selector-pseudo">:root</span> 设置<span class="selector-tag">HTML</span>文档</span><br><span class="line"><span class="selector-pseudo">:empty</span> 指定空的元素</span><br><span class="line"><span class="selector-pseudo">:enabled</span> 选择可用元素</span><br><span class="line"><span class="selector-pseudo">:disabled</span> 选择被禁用元素</span><br><span class="line"><span class="selector-pseudo">:checked</span> 选择选中的元素</span><br><span class="line"><span class="selector-pseudo">:not</span>(selector) 选择与 &lt;selector&gt; 不匹配的所有元素</span><br></pre></td></tr></table></figure>
-<ul>
-<li>属性选择器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[attribute*=value]</span>：选择attribute属性值包含value的所有元素</span><br><span class="line"><span class="selector-attr">[attribute^=value]</span>：选择attribute属性开头为value的所有元素</span><br><span class="line"><span class="selector-attr">[attribute$=value]</span>：选择attribute属性结尾为value的所有元素</span><br></pre></td></tr></table></figure>
-<h2 id="二、优先级"><a href="#二、优先级" class="headerlink" title="二、优先级"></a>二、优先级</h2><p>相信大家对<code>CSS</code>选择器的优先级都不陌生：</p>
-<blockquote>
-<p>内联 &gt; ID选择器 &gt; 类选择器 &gt; 标签选择器</p>
-</blockquote>
-<p>到具体的计算层⾯，优先级是由 A 、B、C、D 的值来决定的，其中它们的值计算规则如下：</p>
-<ul>
-<li><p>如果存在内联样式，那么 A = 1, 否则 A = 0</p>
-</li>
-<li><p>B的值等于 ID选择器出现的次数</p>
-</li>
-<li><p>C的值等于 类选择器 和 属性选择器 和 伪类 出现的总次数</p>
-</li>
-<li><p>D 的值等于 标签选择器 和 伪元素 出现的总次数</p>
-</li>
-</ul>
-<p>这里举个例子：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#nav-global</span> &gt; <span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.nav-link</span></span><br></pre></td></tr></table></figure>
-<p>套用上面的算法，依次求出 <code>A</code> <code>B</code> <code>C</code> <code>D</code> 的值：</p>
-<ul>
-<li><p>因为没有内联样式 ，所以 A = 0</p>
-</li>
-<li><p>ID选择器总共出现了1次， B = 1</p>
-</li>
-<li><p>类选择器出现了1次， 属性选择器出现了0次，伪类选择器出现0次，所以 C = (1 + 0 + 0) = 1</p>
-</li>
-<li>标签选择器出现了3次， 伪元素出现了0次，所以 D = (3 + 0) = 3</li>
-</ul>
-<p>上面算出的<code>A</code> 、 <code>B</code>、<code>C</code>、<code>D</code> 可以简记作：<code>(0, 1, 1, 3)</code></p>
-<p>知道了优先级是如何计算之后，就来看看比较规则：</p>
-<ul>
-<li>从左往右依次进行比较 ，较大者优先级更高</li>
-<li>如果相等，则继续往右移动一位进行比较</li>
-<li>如果4位全部相等，则后面的会覆盖前面的</li>
-</ul>
-<p>经过上面的优先级计算规则，我们知道内联样式的优先级最高，如果外部样式需要覆盖内联样式，就需要使用<code>!important</code></p>
-<h2 id="三、继承属性"><a href="#三、继承属性" class="headerlink" title="三、继承属性"></a>三、继承属性</h2><p>在<code>css</code>中，继承是指的是给父元素设置一些属性，后代元素会自动拥有这些属性</p>
-<p>关于继承属性，可以分成：</p>
-<ul>
-<li>字体系列属性</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">font</span>:组合字体</span><br><span class="line">font-family:规定元素的字体系列</span><br><span class="line">font-weight:设置字体的粗细</span><br><span class="line">font-size:设置字体的尺寸</span><br><span class="line">font-style:定义字体的风格</span><br><span class="line">font-variant:偏大或偏小的字体</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文本系列属性</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">text-indent</span>：文本缩进</span><br><span class="line"><span class="attribute">text-align</span>：文本水平对刘</span><br><span class="line"><span class="attribute">line-height</span>：行高</span><br><span class="line"><span class="attribute">word-spacing</span>：增加或减少单词间的空白</span><br><span class="line"><span class="attribute">letter-spacing</span>：增加或减少字符间的空白</span><br><span class="line"><span class="attribute">text-transform</span>：控制文本大小写</span><br><span class="line"><span class="attribute">direction</span>：规定文本的书写方向</span><br><span class="line"><span class="attribute">color</span>：文本颜色</span><br></pre></td></tr></table></figure>
-<ul>
-<li>元素可见性</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">visibility</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>表格布局属性</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">caption-side</span>：定位表格标题位置</span><br><span class="line"><span class="attribute">border-collapse</span>：合并表格边框</span><br><span class="line"><span class="attribute">border-spacing</span>：设置相邻单元格的边框间的距离</span><br><span class="line"><span class="attribute">empty-cells</span>：单元格的边框的出现与消失</span><br><span class="line"><span class="attribute">table-layout</span>：表格的宽度由什么决定</span><br></pre></td></tr></table></figure>
-<ul>
-<li>列表属性</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">list-style-type</span>：文字前面的小点点样式</span><br><span class="line"><span class="attribute">list-style-position</span>：小点点位置</span><br><span class="line"><span class="attribute">list-style</span>：以上的属性可通过这属性集合</span><br></pre></td></tr></table></figure>
-<ul>
-<li>引用</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">quotes</span>：设置嵌套引用的引号类型</span><br></pre></td></tr></table></figure>
-<ul>
-<li>光标属性</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cursor</span>：箭头可以变成需要的形状</span><br></pre></td></tr></table></figure>
-<p>继承中比较特殊的几点：</p>
-<ul>
-<li><p>a 标签的字体颜色不能被继承</p>
-</li>
-<li><p>h1-h6标签字体的大下也是不能被继承的</p>
-</li>
-</ul>
-<h3 id="无继承的属性"><a href="#无继承的属性" class="headerlink" title="无继承的属性"></a>无继承的属性</h3><ul>
-<li><p>display</p>
-</li>
-<li><p>文本属性：vertical-align、text-decoration</p>
-</li>
-<li><p>盒子模型的属性：宽度、高度、内外边距、边框等</p>
-</li>
-<li><p>背景属性：背景图片、颜色、位置等</p>
-</li>
-<li><p>定位属性：浮动、清除浮动、定位position等</p>
-</li>
-<li><p>生成内容属性：content、counter-reset、counter-increment</p>
-</li>
-<li><p>轮廓样式属性：outline-style、outline-width、outline-color、outline</p>
-</li>
-<li><p>页面样式属性：size、page-break-before、page-break-after</p>
-</li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://www.html.cn/qa/css3/13444.html">https://www.html.cn/qa/css3/13444.html</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css面试</tag>
-        <tag>selector</tag>
       </tags>
   </entry>
   <entry>
@@ -7763,59 +7763,6 @@
       </tags>
   </entry>
   <entry>
-    <title>treeshaking</title>
-    <url>/archives/47c3840f.html</url>
-    <content><![CDATA[<h1 id="面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？"><a href="#面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？" class="headerlink" title="面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？"></a>面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？</h1><p> <img src="https://static.vue-js.com/5e8bf1d0-6097-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>Tree shaking</code> 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 <code>Dead code elimination</code></p>
-<p>简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码</p>
-<p>如果把代码打包比作制作蛋糕，传统的方式是把鸡蛋（带壳）全部丢进去搅拌，然后放入烤箱，最后把（没有用的）蛋壳全部挑选并剔除出去</p>
-<p>而<code>treeshaking</code>则是一开始就把有用的蛋白蛋黄（import）放入搅拌，最后直接作出蛋糕</p>
-<p>也就是说 ，<code>tree shaking</code> 其实是找出使用的代码</p>
-<p>在<code>Vue2</code>中，无论我们使用什么功能，它们最终都会出现在生产代码中。主要原因是<code>Vue</code>实例在项目中是单例的，捆绑程序无法检测到该对象的哪些属性在代码中被使用到</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"> </span><br><span class="line">Vue.nextTick(<span class="function">() =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
-<p>而<code>Vue3</code>源码引入<code>tree shaking</code>特性，将全局 API 进行分块。如果您不使用其某些功能，它们将不会包含在您的基础包中</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; nextTick, observable &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"> </span><br><span class="line">nextTick(<span class="function">() =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="二、如何做"><a href="#二、如何做" class="headerlink" title="二、如何做"></a>二、如何做</h2><p><code>Tree shaking</code>是基于<code>ES6</code>模板语法（<code>import</code>与<code>exports</code>），主要是借助<code>ES6</code>模块的静态编译思想，在编译时就能确定模块的依赖关系，以及输入和输出的变量</p>
-<p><code>Tree shaking</code>无非就是做了两件事：</p>
-<ul>
-<li>编译阶段利用<code>ES6 Module</code>判断哪些模块已经加载</li>
-<li>判断那些模块和变量未被使用或者引用，进而删除对应代码</li>
-</ul>
-<p>下面就来举个例子：</p>
-<p>通过脚手架<code>vue-cli</code>安装<code>Vue2</code>与<code>Vue3</code>项目</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vue create vue-demo</span><br></pre></td></tr></table></figure>
-<h3 id="Vue2-项目"><a href="#Vue2-项目" class="headerlink" title="Vue2 项目"></a>Vue2 项目</h3><p>组件中使用<code>data</code>属性</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data: () =&gt; (&#123;</span><br><span class="line">            count: 1,</span><br><span class="line">        &#125;),</span><br><span class="line">    &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>对项目进行打包，体积如下图</p>
-<p><img src="https://static.vue-js.com/6bd2aff0-6097-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<p>为组件设置其他属性（<code>compted</code>、<code>watch</code>）</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">        <span class="attr">question</span>:<span class="string">&quot;&quot;</span>, </span><br><span class="line">        <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="attr">computed</span>: &#123;</span><br><span class="line">        <span class="attr">double</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.count * <span class="number">2</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">watch</span>: &#123;</span><br><span class="line">        <span class="attr">question</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newQuestion, oldQuestion</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.answer = <span class="string">&#x27;xxxx&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>再一次打包，发现打包出来的体积并没有变化</p>
-<p><img src="https://static.vue-js.com/7c29e260-6097-11eb-ab90-d9ae814b240d.png" alt=""></p>
-<h3 id="Vue3-项目"><a href="#Vue3-项目" class="headerlink" title="Vue3 项目"></a>Vue3 项目</h3><p>组件中简单使用</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>将项目进行打包</p>
-<p><img src="https://static.vue-js.com/95df0000-6097-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<p>在组件中引入<code>computed</code>和<code>watch</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent, computed, watch &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">const</span> double = computed(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.count * <span class="number">2</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    watch(</span><br><span class="line">      <span class="function">() =&gt;</span> state.count,</span><br><span class="line">      <span class="function">(<span class="params">count, preCount</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(count);</span><br><span class="line">        <span class="built_in">console</span>.log(preCount);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">      double,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>再次对项目进行打包，可以看到在引入<code>computer</code>和<code>watch</code>之后，项目整体体积变大了</p>
-<p> <img src="https://static.vue-js.com/b36a7a00-6097-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
-<h2 id="三、作用"><a href="#三、作用" class="headerlink" title="三、作用"></a>三、作用</h2><p>通过<code>Tree shaking</code>，<code>Vue3</code>给我们带来的好处是：</p>
-<ul>
-<li>减少程序体积（更小）</li>
-<li>减少程序执行时间（更快）</li>
-<li>便于将来对程序架构进行优化（更友好）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>vue3</category>
-      </categories>
-      <tags>
-        <tag>vue3</tag>
-        <tag>treeshaking</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>triangle</title>
     <url>/archives/df976d87.html</url>
     <content><![CDATA[<h1 id="面试官：CSS如何画一个三角形？原理是什么？"><a href="#面试官：CSS如何画一个三角形？原理是什么？" class="headerlink" title="面试官：CSS如何画一个三角形？原理是什么？"></a>面试官：CSS如何画一个三角形？原理是什么？</h1><p><img src="https://static.vue-js.com/bd310120-a279-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
@@ -7871,6 +7818,59 @@
       <tags>
         <tag>css面试</tag>
         <tag>triangle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>treeshaking</title>
+    <url>/archives/47c3840f.html</url>
+    <content><![CDATA[<h1 id="面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？"><a href="#面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？" class="headerlink" title="面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？"></a>面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？</h1><p> <img src="https://static.vue-js.com/5e8bf1d0-6097-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>Tree shaking</code> 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 <code>Dead code elimination</code></p>
+<p>简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码</p>
+<p>如果把代码打包比作制作蛋糕，传统的方式是把鸡蛋（带壳）全部丢进去搅拌，然后放入烤箱，最后把（没有用的）蛋壳全部挑选并剔除出去</p>
+<p>而<code>treeshaking</code>则是一开始就把有用的蛋白蛋黄（import）放入搅拌，最后直接作出蛋糕</p>
+<p>也就是说 ，<code>tree shaking</code> 其实是找出使用的代码</p>
+<p>在<code>Vue2</code>中，无论我们使用什么功能，它们最终都会出现在生产代码中。主要原因是<code>Vue</code>实例在项目中是单例的，捆绑程序无法检测到该对象的哪些属性在代码中被使用到</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"> </span><br><span class="line">Vue.nextTick(<span class="function">() =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>而<code>Vue3</code>源码引入<code>tree shaking</code>特性，将全局 API 进行分块。如果您不使用其某些功能，它们将不会包含在您的基础包中</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; nextTick, observable &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"> </span><br><span class="line">nextTick(<span class="function">() =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="二、如何做"><a href="#二、如何做" class="headerlink" title="二、如何做"></a>二、如何做</h2><p><code>Tree shaking</code>是基于<code>ES6</code>模板语法（<code>import</code>与<code>exports</code>），主要是借助<code>ES6</code>模块的静态编译思想，在编译时就能确定模块的依赖关系，以及输入和输出的变量</p>
+<p><code>Tree shaking</code>无非就是做了两件事：</p>
+<ul>
+<li>编译阶段利用<code>ES6 Module</code>判断哪些模块已经加载</li>
+<li>判断那些模块和变量未被使用或者引用，进而删除对应代码</li>
+</ul>
+<p>下面就来举个例子：</p>
+<p>通过脚手架<code>vue-cli</code>安装<code>Vue2</code>与<code>Vue3</code>项目</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vue create vue-demo</span><br></pre></td></tr></table></figure>
+<h3 id="Vue2-项目"><a href="#Vue2-项目" class="headerlink" title="Vue2 项目"></a>Vue2 项目</h3><p>组件中使用<code>data</code>属性</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data: () =&gt; (&#123;</span><br><span class="line">            count: 1,</span><br><span class="line">        &#125;),</span><br><span class="line">    &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>对项目进行打包，体积如下图</p>
+<p><img src="https://static.vue-js.com/6bd2aff0-6097-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<p>为组件设置其他属性（<code>compted</code>、<code>watch</code>）</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">        <span class="attr">question</span>:<span class="string">&quot;&quot;</span>, </span><br><span class="line">        <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="attr">computed</span>: &#123;</span><br><span class="line">        <span class="attr">double</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.count * <span class="number">2</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">watch</span>: &#123;</span><br><span class="line">        <span class="attr">question</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newQuestion, oldQuestion</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.answer = <span class="string">&#x27;xxxx&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>再一次打包，发现打包出来的体积并没有变化</p>
+<p><img src="https://static.vue-js.com/7c29e260-6097-11eb-ab90-d9ae814b240d.png" alt=""></p>
+<h3 id="Vue3-项目"><a href="#Vue3-项目" class="headerlink" title="Vue3 项目"></a>Vue3 项目</h3><p>组件中简单使用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>将项目进行打包</p>
+<p><img src="https://static.vue-js.com/95df0000-6097-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<p>在组件中引入<code>computed</code>和<code>watch</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent, computed, watch &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">const</span> double = computed(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.count * <span class="number">2</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    watch(</span><br><span class="line">      <span class="function">() =&gt;</span> state.count,</span><br><span class="line">      <span class="function">(<span class="params">count, preCount</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(count);</span><br><span class="line">        <span class="built_in">console</span>.log(preCount);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">      double,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>再次对项目进行打包，可以看到在引入<code>computer</code>和<code>watch</code>之后，项目整体体积变大了</p>
+<p> <img src="https://static.vue-js.com/b36a7a00-6097-11eb-85f6-6fac77c0c9b3.png" alt=""></p>
+<h2 id="三、作用"><a href="#三、作用" class="headerlink" title="三、作用"></a>三、作用</h2><p>通过<code>Tree shaking</code>，<code>Vue3</code>给我们带来的好处是：</p>
+<ul>
+<li>减少程序体积（更小）</li>
+<li>减少程序执行时间（更快）</li>
+<li>便于将来对程序架构进行优化（更友好）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>vue3</category>
+      </categories>
+      <tags>
+        <tag>vue3</tag>
+        <tag>treeshaking</tag>
       </tags>
   </entry>
   <entry>
@@ -8525,6 +8525,24 @@
 ]]></content>
       <categories>
         <category>webpack</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>my notes</title>
+    <url>/archives/97a9ab5c.html</url>
+    <content><![CDATA[<div class="tip warning faa-horizontal animated faa-fast"><p>持续更新，记录学习中的历程，愿诸位更优秀</p>
+</div>
+<div class="tag link"><a class="link-card" title="前往woli" href="https://www.wolai.com/freeleader/gSPp69Mq9Aqu16TUwKzHku"><div class="left"><img src="/img/header.svg"/></div><div class="right"><p class="text">前往woli</p><p class="url">https://www.wolai.com/freeleader/gSPp69Mq9Aqu16TUwKzHku</p></div></a></div>
+<div class='checkbox blue checked'><input type="checkbox" checked="checked"/>
+            <p>选用woli，记录学习中的笔记，更方便，效率更高</p>
+            </div>
+<div class='checkbox cyan checked'><input type="checkbox" checked="checked"/>
+            <p>部分截图如下</p>
+            </div>
+<p><a href="https://imgse.com/i/ppwc9W8"><img src="https://s1.ax1x.com/2023/03/23/ppwc9W8.png" alt="ppwc9W8.png"></a></p>
+]]></content>
+      <categories>
+        <category>notes</category>
       </categories>
   </entry>
   <entry>
