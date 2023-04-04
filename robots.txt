@@ -1,0 +1,8 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: http://mail.freelaeder.cn/sitemap.xml
+Sitemap: http://mail.freelaeder.cn/baidusitemap.xml
+
+
