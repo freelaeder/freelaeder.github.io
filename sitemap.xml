@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mail.freelaeder.cn/archives/88d3d46f.html</loc>
+    
+    <lastmod>2023-04-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://mail.freelaeder.cn/archives/a9432027.html</loc>
     
     <lastmod>2023-04-07</lastmod>
@@ -998,13 +1007,6 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/fine/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mail.freelaeder.cn/tags/js/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -1019,14 +1021,7 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/ajax2/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://mail.freelaeder.cn/tags/ajax/</loc>
+    <loc>http://mail.freelaeder.cn/tags/fine/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1061,28 +1056,7 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/es6/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mail.freelaeder.cn/tags/array-api/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://mail.freelaeder.cn/tags/cache/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://mail.freelaeder.cn/tags/box/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1103,7 +1077,35 @@
   </url>
   
   <url>
+    <loc>http://mail.freelaeder.cn/tags/box/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://mail.freelaeder.cn/tags/bind-call-apply/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/cache/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/es6/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/center/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1131,13 +1133,6 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/center/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mail.freelaeder.cn/tags/closure/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -1152,7 +1147,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/context-stack/</loc>
+    <loc>http://mail.freelaeder.cn/tags/ajax2/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/ajax/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1173,7 +1175,7 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/css3-features/</loc>
+    <loc>http://mail.freelaeder.cn/tags/context-stack/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1194,6 +1196,13 @@
   </url>
   
   <url>
+    <loc>http://mail.freelaeder.cn/tags/css3-features/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://mail.freelaeder.cn/tags/css-performance/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -1201,14 +1210,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81/</loc>
+    <loc>http://mail.freelaeder.cn/tags/data-type/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/data-type/</loc>
+    <loc>http://mail.freelaeder.cn/tags/%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1278,14 +1287,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/function-cache/</loc>
+    <loc>http://mail.freelaeder.cn/tags/functional-programming/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/functional-programming/</loc>
+    <loc>http://mail.freelaeder.cn/tags/function-cache/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1334,14 +1343,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/hooks%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://mail.freelaeder.cn/tags/hide-attributes/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/hide-attributes/</loc>
+    <loc>http://mail.freelaeder.cn/tags/hooks%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1390,14 +1399,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/memory-leak/</loc>
+    <loc>http://mail.freelaeder.cn/tags/me/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/me/</loc>
+    <loc>http://mail.freelaeder.cn/tags/memory-leak/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1411,14 +1420,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/my-carousel/</loc>
+    <loc>http://mail.freelaeder.cn/tags/module/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/module/</loc>
+    <loc>http://mail.freelaeder.cn/tags/my-carousel/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1439,13 +1448,6 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/performance/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mail.freelaeder.cn/tags/promise/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -1454,6 +1456,13 @@
   
   <url>
     <loc>http://mail.freelaeder.cn/tags/prototype/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/performance/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1481,13 +1490,6 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/regexp/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mail.freelaeder.cn/tags/responsive-layout/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -1496,6 +1498,13 @@
   
   <url>
     <loc>http://mail.freelaeder.cn/tags/sass-less-stylus/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/regexp/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1586,14 +1595,14 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/ts%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</loc>
+    <loc>http://mail.freelaeder.cn/tags/project/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/project/</loc>
+    <loc>http://mail.freelaeder.cn/tags/ts%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1642,13 +1651,6 @@
   </url>
   
   <url>
-    <loc>http://mail.freelaeder.cn/tags/%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6/</loc>
-    <lastmod>2023-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mail.freelaeder.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -1657,6 +1659,13 @@
   
   <url>
     <loc>http://mail.freelaeder.cn/tags/%E5%8F%8D%E9%97%AE%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2023-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mail.freelaeder.cn/tags/%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6/</loc>
     <lastmod>2023-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
